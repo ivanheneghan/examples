@@ -1,0 +1,357 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SSM Alerts - Slack Notifications</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Slack-Lato, Lato, "Helvetica Neue", Helvetica, Arial, sans-serif;
+            background: #f8f8f8;
+            color: #1d1c1d;
+            line-height: 1.46668;
+            padding: 20px;
+        }
+
+        .slack-container {
+            max-width: 600px;
+            margin: 0 auto 30px auto;
+            background: white;
+            border-radius: 8px;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.12);
+            overflow: hidden;
+        }
+
+        .slack-header {
+            background: #4a154b;
+            color: white;
+            padding: 12px 20px;
+            font-weight: 900;
+            font-size: 18px;
+        }
+
+        .slack-channel {
+            background: #f8f8f8;
+            padding: 8px 20px;
+            font-size: 13px;
+            color: #616061;
+            border-bottom: 1px solid #e1e1e1;
+        }
+
+        .message {
+            padding: 8px 20px;
+            border-bottom: 1px solid #f1f1f1;
+            position: relative;
+        }
+
+        .message:last-child {
+            border-bottom: none;
+        }
+
+        .message-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 4px;
+        }
+
+        .bot-name {
+            font-weight: 900;
+            color: #1d1c1d;
+            margin-right: 8px;
+        }
+
+        .bot-tag {
+            background: #007a5a;
+            color: white;
+            font-size: 10px;
+            padding: 1px 4px;
+            border-radius: 3px;
+            margin-right: 8px;
+        }
+
+        .timestamp {
+            color: #616061;
+            font-size: 12px;
+        }
+
+        .alert-content {
+            margin-top: 4px;
+        }
+
+        .alert-card {
+            border-left: 4px solid #000;
+            background: #f8f9fa;
+            padding: 12px 16px;
+            margin: 8px 0;
+            border-radius: 0 4px 4px 0;
+        }
+
+        .alert-title {
+            font-weight: 700;
+            color: #1d1c1d;
+            margin-bottom: 4px;
+            font-size: 14px;
+        }
+
+        .alert-description {
+            color: #616061;
+            font-size: 13px;
+            margin-bottom: 8px;
+        }
+
+        .alert-actions {
+            display: flex;
+            gap: 8px;
+            margin-top: 8px;
+        }
+
+        .slack-button {
+            background: #007a5a;
+            color: white;
+            border: none;
+            padding: 6px 12px;
+            border-radius: 4px;
+            font-size: 12px;
+            cursor: pointer;
+            text-decoration: none;
+            display: inline-block;
+        }
+
+        .slack-button:hover {
+            background: #006249;
+        }
+
+        .slack-button.secondary {
+            background: transparent;
+            color: #007a5a;
+            border: 1px solid #007a5a;
+        }
+
+        .slack-button.secondary:hover {
+            background: #f0f9ff;
+        }
+
+        .urgent-banner {
+            background: #ff6b6b;
+            color: white;
+            padding: 8px 20px;
+            text-align: center;
+            font-weight: 700;
+            font-size: 13px;
+        }
+
+        .section-header {
+            text-align: center;
+            padding: 20px;
+            background: #34495e;
+            color: white;
+            font-size: 20px;
+            font-weight: 700;
+            margin-bottom: 20px;
+        }
+    </style>
+</head>
+<body>
+    <!-- Section Header for SSM Alerts -->
+    <div class="section-header">
+        SSM Individual Alerts
+    </div>
+
+    <!-- SSM Alert 1: Hot Account -->
+    <div class="slack-container">
+        <div class="urgent-banner">
+            URGENT: Hot Account Alert
+        </div>
+        <div class="slack-header">
+            SSM Signal Matrix
+        </div>
+        <div class="slack-channel">
+            #ssm-alerts • Direct Message to Sarah Johnson
+        </div>
+        <div class="message">
+            <div class="message-header">
+                <span class="bot-name">SSM Signal Bot</span>
+                <span class="bot-tag">BOT</span>
+                <span class="timestamp">Today at 9:23 AM</span>
+            </div>
+            <div class="alert-content">
+                <div class="alert-card">
+                    <div class="alert-title">TechCorp Solutions → Hot Account (92)</div>
+                    <div class="alert-description">
+                        Account reached critical expansion readiness threshold (≥90 points)<br>
+                        <strong>Pipeline Value:</strong> €45K • <strong>Recommended Product:</strong> Conversations – Standard
+                    </div>
+                    <div class="alert-actions">
+                        <a href="#" class="slack-button">Visit Dashboard</a>
+                        <a href="#" class="slack-button secondary">Take Action</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- SSM Alert 2: Signal Surge -->
+    <div class="slack-container">
+        <div class="slack-header">
+            SSM Signal Matrix
+        </div>
+        <div class="slack-channel">
+            #ssm-alerts • Direct Message to Sarah Johnson
+        </div>
+        <div class="message">
+            <div class="message-header">
+                <span class="bot-name">SSM Signal Bot</span>
+                <span class="bot-tag">BOT</span>
+                <span class="timestamp">Today at 8:45 AM</span>
+            </div>
+            <div class="alert-content">
+                <div class="alert-card">
+                    <div class="alert-title">FinTech Forward → Demo Requests Surge</div>
+                    <div class="alert-description">
+                        Demo requests signal hit maximum performance bracket (3+ requests)<br>
+                        <strong>Status:</strong> Ready for expansion conversation
+                    </div>
+                    <div class="alert-actions">
+                        <a href="#" class="slack-button">Visit Dashboard</a>
+                        <a href="#" class="slack-button secondary">Take Action</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- SSM Alert 3: Category Change -->
+    <div class="slack-container">
+        <div class="slack-header">
+            SSM Signal Matrix
+        </div>
+        <div class="slack-channel">
+            #ssm-alerts • Direct Message to Lisa Rodriguez
+        </div>
+        <div class="message">
+            <div class="message-header">
+                <span class="bot-name">SSM Signal Bot</span>
+                <span class="bot-tag">BOT</span>
+                <span class="timestamp">Today at 7:30 AM</span>
+            </div>
+            <div class="alert-content">
+                <div class="alert-card">
+                    <div class="alert-title">Growth Dynamics → Growth Capacity Surge</div>
+                    <div class="alert-description">
+                        Significant category movement detected (+18pts over 30 days: 62→80)<br>
+                        <strong>Trigger:</strong> Hiring activity spike detected
+                    </div>
+                    <div class="alert-actions">
+                        <a href="#" class="slack-button">Visit Dashboard</a>
+                        <a href="#" class="slack-button secondary">Take Action</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Section Header for Leadership Alerts -->
+    <div class="section-header">
+        SSM Leadership Alerts
+    </div>
+
+    <!-- Leadership Alert 1: Capacity Imbalance -->
+    <div class="slack-container">
+        <div class="urgent-banner">
+            LEADERSHIP ALERT: Capacity Imbalance
+        </div>
+        <div class="slack-header">
+            SSM Signal Matrix
+        </div>
+        <div class="slack-channel">
+            #ssm-leadership • Manager Thompson
+        </div>
+        <div class="message">
+            <div class="message-header">
+                <span class="bot-name">SSM Signal Bot</span>
+                <span class="bot-tag">BOT</span>
+                <span class="timestamp">Today at 8:00 AM</span>
+            </div>
+            <div class="alert-content">
+                <div class="alert-card">
+                    <div class="alert-title">Capacity Imbalance Alert</div>
+                    <div class="alert-description">
+                        Uneven high potential account distribution detected (5 account difference)<br>
+                        <strong>Sarah Johnson:</strong> 6 accounts • <strong>David Kumar:</strong> 1 account
+                    </div>
+                    <div class="alert-actions">
+                        <a href="#" class="slack-button">Visit Dashboard</a>
+                        <a href="#" class="slack-button secondary">Take Action</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Leadership Alert 2: Signal Mastery Gap -->
+    <div class="slack-container">
+        <div class="slack-header">
+            SSM Signal Matrix
+        </div>
+        <div class="slack-channel">
+            #ssm-leadership • Manager Thompson
+        </div>
+        <div class="message">
+            <div class="message-header">
+                <span class="bot-name">SSM Signal Bot</span>
+                <span class="bot-tag">BOT</span>
+                <span class="timestamp">Today at 8:15 AM</span>
+            </div>
+            <div class="alert-content">
+                <div class="alert-card">
+                    <div class="alert-title">Signal Mastery Gap - David Kumar</div>
+                    <div class="alert-description">
+                        SSM consistently underperforming in License Utilization (23pts below team avg)<br>
+                        <strong>Performance:</strong> 45% vs team average 68%
+                    </div>
+                    <div class="alert-actions">
+                        <a href="#" class="slack-button">Visit Dashboard</a>
+                        <a href="#" class="slack-button secondary">Take Action</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Leadership Alert 3: Quarter-End Risk -->
+    <div class="slack-container">
+        <div class="slack-header">
+            SSM Signal Matrix
+        </div>
+        <div class="slack-channel">
+            #ssm-leadership • Manager Thompson
+        </div>
+        <div class="message">
+            <div class="message-header">
+                <span class="bot-name">SSM Signal Bot</span>
+                <span class="bot-tag">BOT</span>
+                <span class="timestamp">Today at 8:30 AM</span>
+            </div>
+            <div class="alert-content">
+                <div class="alert-card">
+                    <div class="alert-title">Quarter-End Risk Alert</div>
+                    <div class="alert-description">
+                        Multiple accounts with declining scores approaching renewal (3 accounts within 60 days)<br>
+                        <strong>At Risk:</strong> Alpine Systems (43), Healthcare Innovators (48), MedTech Innovations (41)
+                    </div>
+                    <div class="alert-actions">
+                        <a href="#" class="slack-button">Visit Dashboard</a>
+                        <a href="#" class="slack-button secondary">Take Action</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

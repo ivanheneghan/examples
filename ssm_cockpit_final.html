@@ -1,0 +1,684 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SSM Expansion Cockpit</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: #f5f7fa;
+            color: #333;
+            line-height: 1.6;
+        }
+
+        .header {
+            background: #2c3e50;
+            color: white;
+            padding: 1rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+
+        .header h1 {
+            font-size: 1.5rem;
+            font-weight: 600;
+        }
+
+        .user-info {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .main-container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            grid-template-rows: auto auto auto;
+            gap: 1.5rem;
+            padding: 2rem;
+            max-width: 1600px;
+            margin: 0 auto;
+        }
+
+        .card {
+            background: white;
+            border-radius: 8px;
+            padding: 1.5rem;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            border: 1px solid #e1e8ed;
+        }
+
+        .card h2 {
+            color: #2c3e50;
+            font-size: 1.2rem;
+            margin-bottom: 1rem;
+            border-bottom: 2px solid #3498db;
+            padding-bottom: 0.5rem;
+        }
+
+        .portfolio-overview {
+            grid-column: 1 / -1;
+        }
+
+        .metrics-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 1rem;
+            margin-bottom: 1rem;
+        }
+
+        .metric-card {
+            background: #f8f9fa;
+            padding: 1.5rem;
+            border-radius: 8px;
+            text-align: center;
+            border-left: 4px solid #3498db;
+        }
+
+        .metric-value {
+            font-size: 2rem;
+            font-weight: 600;
+            color: #2c3e50;
+            margin-bottom: 0.5rem;
+        }
+
+        .metric-label {
+            font-size: 0.875rem;
+            color: #7f8c8d;
+        }
+
+        .hot-opportunities {
+            grid-column: 1;
+            max-height: 600px;
+            overflow-y: auto;
+        }
+
+        .opportunity-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem;
+            background: #f8f9fa;
+            border-radius: 6px;
+            margin-bottom: 0.75rem;
+            border-left: 4px solid #3498db;
+            cursor: pointer;
+            transition: background 0.2s;
+        }
+
+        .opportunity-item:hover {
+            background: #e9ecef;
+        }
+
+        .opportunity-item.selected {
+            background: #d4edda;
+            border-left-color: #28a745;
+        }
+
+        .opportunity-info h3 {
+            font-size: 1rem;
+            color: #2c3e50;
+            margin-bottom: 0.25rem;
+        }
+
+        .opportunity-info p {
+            font-size: 0.875rem;
+            color: #7f8c8d;
+        }
+
+        .opportunity-value {
+            text-align: right;
+        }
+
+        .opportunity-value .score {
+            font-size: 1.125rem;
+            font-weight: 600;
+            color: #27ae60;
+        }
+
+        .opportunity-value .amount {
+            font-size: 0.875rem;
+            color: #7f8c8d;
+        }
+
+        .account-deep-dive {
+            grid-column: 2;
+        }
+
+        .action-center {
+            grid-column: 1;
+        }
+
+        .alert-item {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            padding: 0.75rem;
+            border-radius: 6px;
+            margin-bottom: 0.75rem;
+            border-left: 4px solid #333;
+            background: #f8f9fa;
+            border: 1px solid #e1e8ed;
+        }
+
+        .alert-content {
+            flex: 1;
+        }
+
+        .alert-content h4 {
+            font-size: 0.875rem;
+            margin-bottom: 0.25rem;
+            font-weight: 600;
+            color: #2c3e50;
+        }
+
+        .alert-content p {
+            font-size: 0.8rem;
+            color: #7f8c8d;
+        }
+
+        .btn {
+            padding: 0.5rem 1rem;
+            border: none;
+            border-radius: 4px;
+            font-size: 0.875rem;
+            cursor: pointer;
+            transition: background 0.2s;
+        }
+
+        .btn-primary {
+            background: #3498db;
+            color: white;
+        }
+
+        .btn-primary:hover {
+            background: #2980b9;
+        }
+
+        .performance-tracker {
+            grid-column: 2;
+        }
+
+        .metric-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0.75rem 0;
+            border-bottom: 1px solid #ecf0f1;
+        }
+
+        .metric-row-label {
+            font-size: 0.875rem;
+            color: #7f8c8d;
+        }
+
+        .metric-row-value {
+            font-size: 1rem;
+            font-weight: 600;
+            color: #2c3e50;
+        }
+
+        .progress-bar {
+            width: 100%;
+            height: 8px;
+            background: #ecf0f1;
+            border-radius: 4px;
+            overflow: hidden;
+            margin-top: 0.5rem;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: #3498db;
+            transition: width 0.3s ease;
+        }
+
+        .signal-breakdown {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+
+        .signal-category {
+            background: #f8f9fa;
+            padding: 1rem;
+            border-radius: 6px;
+        }
+
+        .signal-category h4 {
+            font-size: 0.9rem;
+            color: #2c3e50;
+            margin-bottom: 0.5rem;
+            text-align: center;
+        }
+
+        .signal-score {
+            font-size: 1.5rem;
+            font-weight: 600;
+            color: #3498db;
+            text-align: center;
+            margin-bottom: 0.5rem;
+        }
+
+        .signal-details {
+            font-size: 0.75rem;
+            color: #7f8c8d;
+        }
+
+        .signal-item {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 0.25rem;
+        }
+
+        .filter-controls {
+            display: flex;
+            gap: 1rem;
+            margin-bottom: 1rem;
+            align-items: center;
+        }
+
+        .filter-select {
+            padding: 0.5rem;
+            border: 1px solid #dee2e6;
+            border-radius: 4px;
+            font-size: 0.875rem;
+        }
+
+        .score-badge {
+            padding: 0.25rem 0.75rem;
+            border-radius: 12px;
+            font-size: 0.875rem;
+            font-weight: 500;
+            color: white;
+        }
+
+        .score-high { background: #27ae60; }
+        .score-medium { background: #f39c12; }
+        .score-low { background: #e74c3c; }
+
+        .stakeholder-map {
+            margin-top: 1rem;
+        }
+
+        .stakeholder-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0.5rem;
+            background: #f8f9fa;
+            border-radius: 4px;
+            margin-bottom: 0.5rem;
+        }
+
+        .stakeholder-name {
+            font-weight: 600;
+            color: #2c3e50;
+            font-size: 0.875rem;
+        }
+
+        .stakeholder-role {
+            font-size: 0.75rem;
+            color: #7f8c8d;
+        }
+
+        .engagement-dot {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+        }
+
+        .engagement-high { background: #27ae60; }
+        .engagement-medium { background: #f39c12; }
+        .engagement-low { background: #e74c3c; }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <h1>🎯 SSM Cockpit</h1>
+        <div class="user-info">
+            <span>Welcome, Sarah Johnson</span>
+            <div style="width: 32px; height: 32px; background: #3498db; border-radius: 50%; display: flex; align-items: center; justify-content: center; color: white; font-weight: bold;">SJ</div>
+        </div>
+    </div>
+
+    <div class="main-container">
+        <!-- Portfolio Overview -->
+        <div class="card portfolio-overview">
+            <h2>📊 High Potential Account Overview</h2>
+            <div class="metrics-grid">
+                <div class="metric-card">
+                    <div class="metric-value">15</div>
+                    <div class="metric-label">Total High Potential Accounts</div>
+                </div>
+                <div class="metric-card">
+                    <div class="metric-value">€3.8M</div>
+                    <div class="metric-label">Potential Pipeline Value</div>
+                </div>
+                <div class="metric-card">
+                    <div class="metric-value">3</div>
+                    <div class="metric-label">High Potential Accounts (>75)</div>
+                </div>
+                <div class="metric-card">
+                    <div class="metric-value">72</div>
+                    <div class="metric-label">Average Score</div>
+                </div>
+            </div>
+            <div class="filter-controls">
+                <label>Filter by Score:</label>
+                <select class="filter-select">
+                    <option value="all">All Accounts</option>
+                    <option value="high">High (76-100)</option>
+                    <option value="medium">Medium (51-75)</option>
+                    <option value="low">Low (0-50)</option>
+                </select>
+                <label>Sort by:</label>
+                <select class="filter-select">
+                    <option value="score">Expansion Score</option>
+                    <option value="name">Company Name</option>
+                    <option value="pipeline">Pipeline Value</option>
+                </select>
+            </div>
+        </div>
+
+        <!-- Hot Opportunities -->
+        <div class="card hot-opportunities">
+            <h2>🔥 Potential Expansion Accounts & Opportunities</h2>
+            <div class="opportunity-item selected">
+                <div class="opportunity-info">
+                    <h3>TechCorp Solutions</h3>
+                    <p>Conversations – Standard • Score: 92</p>
+                </div>
+                <div class="opportunity-value">
+                    <div class="score">92</div>
+                    <div class="amount">Potential Value: €45K</div>
+                </div>
+            </div>
+            <div class="opportunity-item">
+                <div class="opportunity-info">
+                    <h3>Tech Pioneers</h3>
+                    <p>Conversations – Premium • Score: 90</p>
+                </div>
+                <div class="opportunity-value">
+                    <div class="score">90</div>
+                    <div class="amount">Potential Value: €41K</div>
+                </div>
+            </div>
+            <div class="opportunity-item">
+                <div class="opportunity-info">
+                    <h3>FinTech Forward</h3>
+                    <p>Compensation Management • Score: 83</p>
+                </div>
+                <div class="opportunity-value">
+                    <div class="score">83</div>
+                    <div class="amount">Potential Value: €38K</div>
+                </div>
+            </div>
+            <div class="opportunity-item">
+                <div class="opportunity-info">
+                    <h3>Strategy Consultants</h3>
+                    <p>Recruiting - Medium • Score: 78</p>
+                </div>
+                <div class="opportunity-value">
+                    <div class="score">78</div>
+                    <div class="amount">Potential Value: €29K</div>
+                </div>
+            </div>
+            <div class="opportunity-item">
+                <div class="opportunity-info">
+                    <h3>Financial Services Co</h3>
+                    <p>Compensation Management • Score: 74</p>
+                </div>
+                <div class="opportunity-value">
+                    <div class="score">74</div>
+                    <div class="amount">Potential Value: €31K</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Account Deep Dive -->
+        <div class="card account-deep-dive">
+            <h2>🔍 Account Deep Dive</h2>
+            <div>
+                <div style="margin-bottom: 1rem;">
+                    <div style="display: flex; justify-content: space-between; align-items: center;">
+                        <h3>TechCorp Solutions</h3>
+                        <span class="score-badge score-high">92/100</span>
+                    </div>
+                    <p style="color: #7f8c8d; font-size: 0.875rem;">Technology • 450 employees</p>
+                </div>
+                <div class="signal-breakdown">
+                    <div class="signal-category">
+                        <h4>Account Health</h4>
+                        <div class="signal-score">85</div>
+                        <div class="signal-details">
+                            <div class="signal-item">
+                                <span>Licence Util:</span>
+                                <span>89%</span>
+                            </div>
+                            <div class="signal-item">
+                                <span>Support Tickets:</span>
+                                <span>2</span>
+                            </div>
+                            <div class="signal-item">
+                                <span>User Logins:</span>
+                                <span>94%</span>
+                            </div>
+                            <div class="signal-item">
+                                <span>Training:</span>
+                                <span>78%</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="signal-category">
+                        <h4>Contact Intent</h4>
+                        <div class="signal-score">82</div>
+                        <div class="signal-details">
+                            <div class="signal-item">
+                                <span>Comm Engage:</span>
+                                <span>85%</span>
+                            </div>
+                            <div class="signal-item">
+                                <span>Demo Requests:</span>
+                                <span>3</span>
+                            </div>
+                            <div class="signal-item">
+                                <span>Content Eng:</span>
+                                <span>76%</span>
+                            </div>
+                            <div class="signal-item">
+                                <span>Feature Req:</span>
+                                <span>2</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="signal-category">
+                        <h4>Growth Capacity</h4>
+                        <div class="signal-score">81</div>
+                        <div class="signal-details">
+                            <div class="signal-item">
+                                <span>New Users:</span>
+                                <span>+18</span>
+                            </div>
+                            <div class="signal-item">
+                                <span>Hiring:</span>
+                                <span>+15%</span>
+                            </div>
+                            <div class="signal-item">
+                                <span>Funding:</span>
+                                <span>Recent</span>
+                            </div>
+                            <div class="signal-item">
+                                <span>Leadership:</span>
+                                <span>Changes</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="signal-category">
+                        <h4>Timing & Product Fit</h4>
+                        <div class="signal-score">88</div>
+                        <div class="signal-details">
+                            <div class="signal-item">
+                                <span>Renewal:</span>
+                                <span>90%</span>
+                            </div>
+                            <div class="signal-item">
+                                <span>Usage Mat:</span>
+                                <span>85%</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="stakeholder-map">
+                    <h4 style="font-size: 1rem; margin-bottom: 0.5rem;">Key Stakeholders</h4>
+                    <div class="stakeholder-item">
+                        <div>
+                            <div class="stakeholder-name">Marcus Chen</div>
+                            <div class="stakeholder-role">HR Director</div>
+                        </div>
+                        <div class="engagement-dot engagement-high"></div>
+                    </div>
+                    <div class="stakeholder-item">
+                        <div>
+                            <div class="stakeholder-name">Lisa Park</div>
+                            <div class="stakeholder-role">CHRO</div>
+                        </div>
+                        <div class="engagement-dot engagement-medium"></div>
+                    </div>
+                    <div class="stakeholder-item">
+                        <div>
+                            <div class="stakeholder-name">Emma Rodriguez</div>
+                            <div class="stakeholder-role">IT Manager</div>
+                        </div>
+                        <div class="engagement-dot engagement-high"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Action Center -->
+        <div class="card action-center">
+            <h2>⚡ Signal Alerts</h2>
+            
+            <!-- Hot Account Alerts -->
+            <div class="alert-item">
+                <div class="alert-content">
+                    <h4>TechCorp Solutions → Hot Account (92)</h4>
+                    <p>Account reached critical expansion readiness threshold (≥90 points)</p>
+                </div>
+                <button class="btn btn-primary">Take Action</button>
+            </div>
+
+            <div class="alert-item">
+                <div class="alert-content">
+                    <h4>Tech Pioneers → Hot Account (90)</h4>
+                    <p>Account reached critical expansion readiness threshold (≥90 points)</p>
+                </div>
+                <button class="btn btn-primary">Take Action</button>
+            </div>
+            
+            <!-- Signal Surge Alerts -->
+            <div class="alert-item">
+                <div class="alert-content">
+                    <h4>FinTech Forward → Demo Requests Surge</h4>
+                    <p>Demo requests signal hit maximum performance bracket (3+ requests)</p>
+                </div>
+                <button class="btn btn-primary">Take Action</button>
+            </div>
+
+            <div class="alert-item">
+                <div class="alert-content">
+                    <h4>Strategy Consultants → Funding News Confirmed</h4>
+                    <p>Funding signal hit maximum performance bracket - Budget available</p>
+                </div>
+                <button class="btn btn-primary">Take Action</button>
+            </div>
+
+            <div class="alert-item">
+                <div class="alert-content">
+                    <h4>TechCorp Solutions → Leadership Changes Detected</h4>
+                    <p>Leadership change signal hit maximum performance bracket</p>
+                </div>
+                <button class="btn btn-primary">Take Action</button>
+            </div>
+            
+            <!-- Category Change Alerts -->
+            <div class="alert-item">
+                <div class="alert-content">
+                    <h4>Growth Dynamics → Growth Capacity Surge</h4>
+                    <p>Significant category movement detected (+18pts over 30 days: 62→80)</p>
+                </div>
+                <button class="btn btn-primary">Take Action</button>
+            </div>
+
+            <div class="alert-item">
+                <div class="alert-content">
+                    <h4>Scale Ventures → Account Health Decline</h4>
+                    <p>Significant category movement detected (-16pts over 30 days: 78→62)</p>
+                </div>
+                <button class="btn btn-primary">Take Action</button>
+            </div>
+            
+            <!-- Signal Change Alerts -->
+            <div class="alert-item">
+                <div class="alert-content">
+                    <h4>Manufacturing Plus → License Utilization Improved</h4>
+                    <p>Signal moved between performance brackets (68%→78%)</p>
+                </div>
+                <button class="btn btn-primary">Take Action</button>
+            </div>
+
+            <div class="alert-item">
+                <div class="alert-content">
+                    <h4>Healthcare Innovators → Communication Engagement Declined</h4>
+                    <p>Signal moved between performance brackets (52%→48%)</p>
+                </div>
+                <button class="btn btn-primary">Take Action</button>
+            </div>
+        </div>
+
+        <!-- Performance Tracker -->
+        <div class="card performance-tracker">
+            <h2>📈 Performance Tracker</h2>
+            <div class="metric-row">
+                <div class="metric-row-label">Monthly Quota Progress</div>
+                <div class="metric-row-value">€127K / €200K</div>
+            </div>
+            <div class="progress-bar">
+                <div class="progress-fill" style="width: 63.5%;"></div>
+            </div>
+            <div class="metric-row">
+                <div class="metric-row-label">Pipeline by Product</div>
+                <div class="metric-row-value">€400K Total</div>
+            </div>
+            <div style="margin-top: 0.5rem;">
+                <div style="display: flex; justify-content: space-between; margin-bottom: 0.25rem;">
+                    <span style="font-size: 0.875rem;">Payroll: €120K</span>
+                    <span style="font-size: 0.875rem;">Talent Acquisition: €110K</span>
+                </div>
+                <div style="display: flex; justify-content: space-between;">
+                    <span style="font-size: 0.875rem;">Talent Management: €95K</span>
+                    <span style="font-size: 0.875rem;">Employee Experience: €75K</span>
+                </div>
+            </div>
+            <div class="metric-row">
+                <div class="metric-row-label">Activity This Week</div>
+                <div class="metric-row-value">47 touchpoints</div>
+            </div>
+            <div style="margin-top: 0.5rem; font-size: 0.875rem; color: #7f8c8d;">
+                <div>Calls: 12 • Meetings: 8 • Emails: 27</div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
