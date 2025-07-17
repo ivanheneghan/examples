@@ -1,0 +1,1495 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SSM Expansion Cockpit</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: #f5f7fa;
+            color: #333;
+            line-height: 1.6;
+        }
+
+        .header {
+            background: #2c3e50;
+            color: white;
+            padding: 1rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+
+        .header h1 {
+            font-size: 1.5rem;
+            font-weight: 600;
+        }
+
+        .user-info {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .main-container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            grid-template-rows: auto auto auto;
+            gap: 1.5rem;
+            padding: 2rem;
+            max-width: 1600px;
+            margin: 0 auto;
+        }
+
+        .card {
+            background: white;
+            border-radius: 8px;
+            padding: 1.5rem;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            border: 1px solid #e1e8ed;
+        }
+
+        .card h2 {
+            color: #2c3e50;
+            font-size: 1.2rem;
+            margin-bottom: 1rem;
+            border-bottom: 2px solid #3498db;
+            padding-bottom: 0.5rem;
+        }
+
+        .portfolio-overview {
+            grid-column: 1 / -1;
+        }
+
+        .metrics-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 1rem;
+            margin-bottom: 1rem;
+        }
+
+        .metric-card {
+            background: #f8f9fa;
+            padding: 1.5rem;
+            border-radius: 8px;
+            text-align: center;
+            border-left: 4px solid #3498db;
+        }
+
+        .metric-value {
+            font-size: 2rem;
+            font-weight: 600;
+            color: #2c3e50;
+            margin-bottom: 0.5rem;
+        }
+
+        .metric-label {
+            font-size: 0.875rem;
+            color: #7f8c8d;
+        }
+
+        .hot-opportunities {
+            grid-column: 1;
+            max-height: 600px;
+            overflow-y: auto;
+        }
+
+        .opportunity-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem;
+            background: #f8f9fa;
+            border-radius: 6px;
+            margin-bottom: 0.75rem;
+            border-left: 4px solid #3498db;
+            cursor: pointer;
+            transition: background 0.2s;
+        }
+
+        .opportunity-item:hover {
+            background: #e9ecef;
+        }
+
+        .opportunity-item.selected {
+            background: #d4edda;
+            border-left-color: #28a745;
+        }
+
+        .opportunity-info h3 {
+            font-size: 1rem;
+            color: #2c3e50;
+            margin-bottom: 0.25rem;
+        }
+
+        .opportunity-info p {
+            font-size: 0.875rem;
+            color: #7f8c8d;
+        }
+
+        .opportunity-value {
+            text-align: right;
+        }
+
+        .opportunity-value .score {
+            font-size: 1.125rem;
+            font-weight: 600;
+            color: #27ae60;
+        }
+
+        .opportunity-value .amount {
+            font-size: 0.875rem;
+            color: #7f8c8d;
+        }
+
+        .account-deep-dive {
+            grid-column: 2;
+        }
+
+        .signal-breakdown {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+
+        .signal-category {
+            background: #f8f9fa;
+            padding: 1rem;
+            border-radius: 6px;
+        }
+
+        .signal-category h4 {
+            font-size: 0.9rem;
+            color: #2c3e50;
+            margin-bottom: 0.5rem;
+            text-align: center;
+        }
+
+        .signal-score {
+            font-size: 1.5rem;
+            font-weight: 600;
+            color: #3498db;
+            text-align: center;
+            margin-bottom: 0.5rem;
+        }
+
+        .signal-details {
+            font-size: 0.75rem;
+            color: #7f8c8d;
+        }
+
+        .signal-item {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 0.25rem;
+        }
+
+        .action-center {
+            grid-column: 1;
+        }
+
+        .alert-item {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            padding: 0.75rem;
+            background: #fff3cd;
+            border: 1px solid #ffeaa7;
+            border-radius: 6px;
+            margin-bottom: 0.75rem;
+        }
+
+        .alert-icon {
+            font-size: 1.25rem;
+        }
+
+        .alert-content {
+            flex: 1;
+        }
+
+        .alert-content h4 {
+            font-size: 0.875rem;
+            color: #856404;
+            margin-bottom: 0.25rem;
+        }
+
+        .alert-content p {
+            font-size: 0.8rem;
+            color: #856404;
+        }
+
+        .btn {
+            padding: 0.5rem 1rem;
+            border: none;
+            border-radius: 4px;
+            font-size: 0.875rem;
+            cursor: pointer;
+            transition: background 0.2s;
+        }
+
+        .btn-primary {
+            background: #3498db;
+            color: white;
+        }
+
+        .btn-primary:hover {
+            background: #2980b9;
+        }
+
+        .performance-tracker {
+            grid-column: 2;
+        }
+
+        .metric-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0.75rem 0;
+            border-bottom: 1px solid #ecf0f1;
+        }
+
+        .metric-row-label {
+            font-size: 0.875rem;
+            color: #7f8c8d;
+        }
+
+        .metric-row-value {
+            font-size: 1rem;
+            font-weight: 600;
+            color: #2c3e50;
+        }
+
+        .progress-bar {
+            width: 100%;
+            height: 8px;
+            background: #ecf0f1;
+            border-radius: 4px;
+            overflow: hidden;
+            margin-top: 0.5rem;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: #3498db;
+            transition: width 0.3s ease;
+        }
+
+        .score-badge {
+            padding: 0.25rem 0.75rem;
+            border-radius: 12px;
+            font-size: 0.875rem;
+            font-weight: 500;
+            color: white;
+        }
+
+        .score-high { background: #27ae60; }
+        .score-medium { background: #f39c12; }
+        .score-low { background: #e74c3c; }
+
+        .stakeholder-map {
+            margin-top: 1rem;
+        }
+
+        .stakeholder-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0.5rem;
+            background: #f8f9fa;
+            border-radius: 4px;
+            margin-bottom: 0.5rem;
+        }
+
+        .stakeholder-name {
+            font-weight: 600;
+            color: #2c3e50;
+            font-size: 0.875rem;
+        }
+
+        .stakeholder-role {
+            font-size: 0.75rem;
+            color: #7f8c8d;
+        }
+
+        .engagement-dot {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+        }
+
+        .engagement-high { background: #27ae60; }
+        .engagement-medium { background: #f39c12; }
+        .engagement-low { background: #e74c3c; }
+
+        .engagement-legend {
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+            margin-top: 0.75rem;
+            font-size: 0.75rem;
+            color: #7f8c8d;
+            background: #f8f9fa;
+            padding: 0.75rem;
+            border-radius: 4px;
+        }
+
+        .legend-item {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .filter-controls {
+            display: flex;
+            gap: 1rem;
+            margin-bottom: 1rem;
+            align-items: center;
+        }
+
+        .filter-select {
+            padding: 0.5rem;
+            border: 1px solid #dee2e6;
+            border-radius: 4px;
+            font-size: 0.875rem;
+        }
+
+        .signal-editor {
+            grid-column: 1 / -1;
+        }
+
+        .account-selector {
+            display: flex;
+            gap: 1rem;
+            margin-bottom: 1rem;
+            align-items: center;
+        }
+
+        .account-select {
+            padding: 0.5rem;
+            border: 1px solid #dee2e6;
+            border-radius: 4px;
+            font-size: 0.875rem;
+            flex: 1;
+        }
+
+        .update-btn {
+            padding: 0.5rem 1rem;
+            background: #27ae60;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            font-size: 0.875rem;
+            cursor: pointer;
+        }
+
+        .update-btn:hover {
+            background: #219653;
+        }
+
+        .signal-controls {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 1.5rem;
+        }
+
+        .signal-category-editor {
+            background: #f8f9fa;
+            padding: 1rem;
+            border-radius: 6px;
+        }
+
+        .signal-category-editor h4 {
+            font-size: 0.9rem;
+            color: #2c3e50;
+            margin-bottom: 1rem;
+            text-align: center;
+        }
+
+        .signal-input-group {
+            margin-bottom: 1rem;
+        }
+
+        .signal-input-group label {
+            display: block;
+            font-size: 0.8rem;
+            color: #495057;
+            margin-bottom: 0.25rem;
+        }
+
+        .signal-input {
+            width: 100%;
+            padding: 0.5rem;
+            border: 1px solid #dee2e6;
+            border-radius: 4px;
+            font-size: 0.875rem;
+        }
+
+        .score-display {
+            text-align: center;
+            margin-top: 1rem;
+        }
+
+        .current-score {
+            font-size: 2rem;
+            font-weight: 600;
+            color: #3498db;
+        }
+
+        .score-label {
+            font-size: 0.8rem;
+            color: #7f8c8d;
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <h1>🎯 SSM Cockpit</h1>
+        <div class="user-info">
+            <span>Welcome, Sarah Johnson</span>
+            <div style="width: 32px; height: 32px; background: #3498db; border-radius: 50%; display: flex; align-items: center; justify-content: center; color: white; font-weight: bold;">SJ</div>
+        </div>
+    </div>
+
+    <div class="main-container">
+        <!-- Portfolio Overview -->
+        <div class="card portfolio-overview">
+            <h2>📊 High Potential Account Overview</h2>
+            <div class="metrics-grid">
+                <div class="metric-card">
+                    <div class="metric-value" id="totalAccounts">15</div>
+                    <div class="metric-label">Total High Potential Accounts</div>
+                </div>
+                <div class="metric-card">
+                    <div class="metric-value" id="totalPipeline">€3.8M</div>
+                    <div class="metric-label">Potential Pipeline Value</div>
+                </div>
+                <div class="metric-card">
+                    <div class="metric-value" id="hotOpportunities">0</div>
+                    <div class="metric-label">High Potential Accounts (>75)</div>
+                </div>
+                <div class="metric-card">
+                    <div class="metric-value" id="avgScore">0</div>
+                    <div class="metric-label">Average Score</div>
+                </div>
+            </div>
+            <div class="filter-controls">
+                <label>Filter by Score:</label>
+                <select class="filter-select" id="scoreFilter">
+                    <option value="all">All Accounts</option>
+                    <option value="high">High (76-100)</option>
+                    <option value="medium">Medium (51-75)</option>
+                    <option value="low">Low (0-50)</option>
+                </select>
+                <label>Sort by:</label>
+                <select class="filter-select" id="sortBy">
+                    <option value="score">Expansion Score</option>
+                    <option value="name">Company Name</option>
+                    <option value="pipeline">Pipeline Value</option>
+                </select>
+            </div>
+        </div>
+
+        <!-- Hot Opportunities -->
+        <div class="card hot-opportunities">
+            <h2>🔥 Potential Expansion Accounts & Opportunities</h2>
+            <div id="opportunitiesList">
+                <!-- Opportunities will be populated by JavaScript -->
+            </div>
+        </div>
+
+        <!-- Account Deep Dive -->
+        <div class="card account-deep-dive">
+            <h2>🔍 Account Deep Dive</h2>
+            <div id="accountDetails">
+                <p style="text-align: center; color: #7f8c8d; padding: 2rem;">Select an account to view details</p>
+            </div>
+        </div>
+
+        <!-- Action Center -->
+        <div class="card action-center">
+            <h2>⚡ Recent Signal Alerts</h2>
+            <div id="alertsList">
+                <!-- Alerts will be populated by JavaScript -->
+            </div>
+        </div>
+
+        <!-- Performance Tracker -->
+        <div class="card performance-tracker">
+            <h2>📈 Performance Tracker</h2>
+            <div class="metric-row">
+                <div class="metric-row-label">Monthly Quota Progress</div>
+                <div class="metric-row-value">€127K / €200K</div>
+            </div>
+            <div class="progress-bar">
+                <div class="progress-fill" style="width: 63.5%;"></div>
+            </div>
+            <div class="metric-row">
+                <div class="metric-row-label">Pipeline by Product</div>
+                <div class="metric-row-value">€400K Total</div>
+            </div>
+            <div style="margin-top: 0.5rem;">
+                <div style="display: flex; justify-content: space-between; margin-bottom: 0.25rem;">
+                    <span style="font-size: 0.875rem;">Payroll: €120K</span>
+                    <span style="font-size: 0.875rem;">Talent Acquisition: €110K</span>
+                </div>
+                <div style="display: flex; justify-content: space-between;">
+                    <span style="font-size: 0.875rem;">Talent Management: €95K</span>
+                    <span style="font-size: 0.875rem;">Employee Experience: €75K</span>
+                </div>
+            </div>
+            <div class="metric-row">
+                <div class="metric-row-label">Potential Pipeline by Category</div>
+                <div class="metric-row-value" id="totalPipelineTracker">€132K Total</div>
+            </div>
+            <div style="margin-top: 0.5rem;">
+                <div style="display: flex; justify-content: space-between; margin-bottom: 0.25rem;">
+                    <span style="font-size: 0.875rem;">Payroll: <span id="payrollPipeline">€0</span></span>
+                    <span style="font-size: 0.875rem;">Talent Acquisition: <span id="talentAcquisitionPipeline">€0</span></span>
+                </div>
+                <div style="display: flex; justify-content: space-between;">
+                    <span style="font-size: 0.875rem;">Talent Management: <span id="talentManagementPipeline">€0</span></span>
+                    <span style="font-size: 0.875rem;">Employee Experience: <span id="employeeExperiencePipeline">€0</span></span>
+                </div>
+            </div>
+            <div class="metric-row">
+                <div class="metric-row-label">Activity This Week</div>
+                <div class="metric-row-value">47 touchpoints</div>
+            </div>
+            <div style="margin-top: 0.5rem; font-size: 0.875rem; color: #7f8c8d;">
+                <div>Calls: 12 • Meetings: 8 • Emails: 27</div>
+            </div>
+        </div>
+
+        <!-- Signal Editor -->
+        <div class="card signal-editor">
+            <h2>🔧 Signal Editor - Test Framework</h2>
+            <div class="account-selector">
+                <label>Edit Signals for:</label>
+                <select class="account-select" id="editorAccountSelect">
+                    <option value="">Select an account to edit</option>
+                </select>
+                <button class="update-btn" onclick="updateSignals()">Update Signals</button>
+            </div>
+            <div class="signal-controls" id="signalControls">
+                <div class="signal-category-editor">
+                    <h4>Account Health Signals</h4>
+                    <div class="signal-input-group">
+                        <label>Licence Utilisation (%)</label>
+                        <input type="number" class="signal-input" id="licenseUtilization" min="0" max="100">
+                    </div>
+                    <div class="signal-input-group">
+                        <label>Support Ticket Volume</label>
+                        <input type="number" class="signal-input" id="supportTicketVolume" min="0" max="50">
+                    </div>
+                    <div class="signal-input-group">
+                        <label>User Login Frequency (%)</label>
+                        <input type="number" class="signal-input" id="userLoginFrequency" min="0" max="100">
+                    </div>
+                    <div class="signal-input-group">
+                        <label>Training Completion (%)</label>
+                        <input type="number" class="signal-input" id="trainingCompletion" min="0" max="100">
+                    </div>
+                </div>
+                
+                <div class="signal-category-editor">
+                    <h4>Contact Intent Signals</h4>
+                    <div class="signal-input-group">
+                        <label>Communication Engagement (%)</label>
+                        <input type="number" class="signal-input" id="communicationEngagement" min="0" max="100">
+                    </div>
+                    <div class="signal-input-group">
+                        <label>Demo Requests</label>
+                        <input type="number" class="signal-input" id="demoRequests" min="0" max="10">
+                    </div>
+                    <div class="signal-input-group">
+                        <label>Content Engagement (%)</label>
+                        <input type="number" class="signal-input" id="contentEngagement" min="0" max="100">
+                    </div>
+                    <div class="signal-input-group">
+                        <label>Feature Requests</label>
+                        <input type="number" class="signal-input" id="featureRequests" min="0" max="20">
+                    </div>
+                </div>
+                
+                <div class="signal-category-editor">
+                    <h4>Growth Capacity Signals</h4>
+                    <div class="signal-input-group">
+                        <label>New Users Added</label>
+                        <input type="number" class="signal-input" id="newUsersAdded" min="0" max="50">
+                    </div>
+                    <div class="signal-input-group">
+                        <label>Hiring Activity (%)</label>
+                        <input type="number" class="signal-input" id="hiringActivity" min="0" max="30">
+                    </div>
+                    <div class="signal-input-group">
+                        <label>Funding News (%)</label>
+                        <input type="number" class="signal-input" id="fundingNews" min="0" max="100">
+                    </div>
+                    <div class="signal-input-group">
+                        <label>Leadership Changes (%)</label>
+                        <input type="number" class="signal-input" id="leadershipChanges" min="0" max="100">
+                    </div>
+                </div>
+                
+                <div class="signal-category-editor">
+                    <h4>Timing & Product Fit Signals</h4>
+                    <div class="signal-input-group">
+                        <label>Renewal Window (%)</label>
+                        <input type="number" class="signal-input" id="renewalWindow" min="0" max="100">
+                    </div>
+                    <div class="signal-input-group">
+                        <label>Usage Maturity (%)</label>
+                        <input type="number" class="signal-input" id="usageMaturity" min="0" max="100">
+                    </div>
+                    <div class="score-display">
+                        <div class="current-score" id="liveScore">--</div>
+                        <div class="score-label">Live Score Preview</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Mock data for accounts using our updated 14 signals - 15 accounts total
+        const accounts = [
+            {
+                name: "TechCorp Solutions",
+                industry: "Technology",
+                employees: 450,
+                signals: {
+                    account: { licenseUtilization: 89, supportTicketVolume: 2, userLoginFrequency: 94, trainingCompletion: 78 },
+                    contact: { communicationEngagement: 85, demoRequests: 3, contentEngagement: 76, featureRequests: 2 },
+                    growth: { newUsersAdded: 18, hiringActivity: 15, fundingNews: 85, leadershipChanges: 75 },
+                    timing: { renewalWindow: 90, usageMaturity: 85 }
+                },
+                pipelineValue: 45000,
+                recommendedProduct: "Conversations – Standard",
+                stakeholders: [
+                    { name: "Marcus Chen", role: "HR Director", engagement: "high" },
+                    { name: "Lisa Park", role: "CHRO", engagement: "medium" },
+                    { name: "David Kumar", role: "Finance", engagement: "low" },
+                    { name: "Emma Rodriguez", role: "IT Manager", engagement: "high" }
+                ]
+            },
+            {
+                name: "Growth Dynamics",
+                industry: "Manufacturing",
+                employees: 320,
+                signals: {
+                    account: { licenseUtilization: 92, supportTicketVolume: 1, userLoginFrequency: 88, trainingCompletion: 85 },
+                    contact: { communicationEngagement: 78, demoRequests: 2, contentEngagement: 82, featureRequests: 1 },
+                    growth: { newUsersAdded: 12, hiringActivity: 18, fundingNews: 70, leadershipChanges: 80 },
+                    timing: { renewalWindow: 75, usageMaturity: 88 }
+                },
+                pipelineValue: 32000,
+                recommendedProduct: "Personio Payroll",
+                stakeholders: [
+                    { name: "Sarah Williams", role: "Operations Director", engagement: "high" },
+                    { name: "James Thompson", role: "HR Manager", engagement: "medium" }
+                ]
+            },
+            {
+                name: "Digital Innovations",
+                industry: "Consulting",
+                employees: 180,
+                signals: {
+                    account: { licenseUtilization: 75, supportTicketVolume: 4, userLoginFrequency: 82, trainingCompletion: 70 },
+                    contact: { communicationEngagement: 88, demoRequests: 1, contentEngagement: 79, featureRequests: 2 },
+                    growth: { newUsersAdded: 8, hiringActivity: 12, fundingNews: 65, leadershipChanges: 85 },
+                    timing: { renewalWindow: 85, usageMaturity: 80 }
+                },
+                pipelineValue: 28000,
+                recommendedProduct: "Recruiting - Medium",
+                stakeholders: [
+                    { name: "Anna Martinez", role: "CEO", engagement: "medium" },
+                    { name: "Tom Wilson", role: "Head of People", engagement: "high" }
+                ]
+            },
+            {
+                name: "Scale Ventures",
+                industry: "Fintech",
+                employees: 125,
+                signals: {
+                    account: { licenseUtilization: 68, supportTicketVolume: 8, userLoginFrequency: 76, trainingCompletion: 82 },
+                    contact: { communicationEngagement: 71, demoRequests: 1, contentEngagement: 85, featureRequests: 1 },
+                    growth: { newUsersAdded: 15, hiringActivity: 20, fundingNews: 95, leadershipChanges: 70 },
+                    timing: { renewalWindow: 65, usageMaturity: 75 }
+                },
+                pipelineValue: 19000,
+                recommendedProduct: "Compensation Management",
+                stakeholders: [
+                    { name: "Michael Zhang", role: "CFO", engagement: "low" },
+                    { name: "Rachel Green", role: "People Ops", engagement: "high" }
+                ]
+            },
+            {
+                name: "Alpine Systems",
+                industry: "Healthcare",
+                employees: 275,
+                signals: {
+                    account: { licenseUtilization: 45, supportTicketVolume: 12, userLoginFrequency: 65, trainingCompletion: 45 },
+                    contact: { communicationEngagement: 42, demoRequests: 0, contentEngagement: 38, featureRequests: 0 },
+                    growth: { newUsersAdded: 3, hiringActivity: 4, fundingNews: 30, leadershipChanges: 25 },
+                    timing: { renewalWindow: 40, usageMaturity: 30 }
+                },
+                pipelineValue: 8000,
+                recommendedProduct: "Surveys",
+                stakeholders: [
+                    { name: "Dr. Patricia Lee", role: "HR Director", engagement: "low" },
+                    { name: "Robert Kim", role: "Administrator", engagement: "low" }
+                ]
+            },
+            {
+                name: "Innovate Labs",
+                industry: "Technology",
+                employees: 380,
+                signals: {
+                    account: { licenseUtilization: 91, supportTicketVolume: 1, userLoginFrequency: 89, trainingCompletion: 82 },
+                    contact: { communicationEngagement: 79, demoRequests: 2, contentEngagement: 84, featureRequests: 3 },
+                    growth: { newUsersAdded: 22, hiringActivity: 25, fundingNews: 85, leadershipChanges: 80 },
+                    timing: { renewalWindow: 88, usageMaturity: 87 }
+                },
+                pipelineValue: 52000,
+                recommendedProduct: "Recruiting - Large",
+                stakeholders: [
+                    { name: "Alex Thompson", role: "CTO", engagement: "high" },
+                    { name: "Maya Patel", role: "VP People", engagement: "high" }
+                ]
+            },
+            {
+                name: "Manufacturing Plus",
+                industry: "Manufacturing",
+                employees: 245,
+                signals: {
+                    account: { licenseUtilization: 78, supportTicketVolume: 3, userLoginFrequency: 85, trainingCompletion: 76 },
+                    contact: { communicationEngagement: 82, demoRequests: 1, contentEngagement: 77, featureRequests: 2 },
+                    growth: { newUsersAdded: 11, hiringActivity: 14, fundingNews: 75, leadershipChanges: 25 },
+                    timing: { renewalWindow: 92, usageMaturity: 79 }
+                },
+                pipelineValue: 34000,
+                recommendedProduct: "Personio Payroll",
+                stakeholders: [
+                    { name: "Carlos Rodriguez", role: "Plant Manager", engagement: "medium" },
+                    { name: "Sophie Chen", role: "HR Director", engagement: "high" }
+                ]
+            },
+            {
+                name: "Consulting Edge",
+                industry: "Consulting",
+                employees: 195,
+                signals: {
+                    account: { licenseUtilization: 73, supportTicketVolume: 5, userLoginFrequency: 79, trainingCompletion: 68 },
+                    contact: { communicationEngagement: 76, demoRequests: 2, contentEngagement: 81, featureRequests: 1 },
+                    growth: { newUsersAdded: 9, hiringActivity: 18, fundingNews: 25, leadershipChanges: 75 },
+                    timing: { renewalWindow: 78, usageMaturity: 74 }
+                },
+                pipelineValue: 26000,
+                recommendedProduct: "Talent Management",
+                stakeholders: [
+                    { name: "Jennifer Walsh", role: "Managing Partner", engagement: "medium" },
+                    { name: "Ryan Lee", role: "Operations Manager", engagement: "high" }
+                ]
+            },
+            {
+                name: "FinTech Forward",
+                industry: "Fintech",
+                employees: 156,
+                signals: {
+                    account: { licenseUtilization: 81, supportTicketVolume: 2, userLoginFrequency: 88, trainingCompletion: 79 },
+                    contact: { communicationEngagement: 84, demoRequests: 3, contentEngagement: 78, featureRequests: 2 },
+                    growth: { newUsersAdded: 19, hiringActivity: 22, fundingNews: 90, leadershipChanges: 85 },
+                    timing: { renewalWindow: 85, usageMaturity: 83 }
+                },
+                pipelineValue: 38000,
+                recommendedProduct: "Compensation Management",
+                stakeholders: [
+                    { name: "David Park", role: "Head of Operations", engagement: "high" },
+                    { name: "Lisa Kumar", role: "People Lead", engagement: "medium" }
+                ]
+            },
+            {
+                name: "Healthcare Innovators",
+                industry: "Healthcare",
+                employees: 312,
+                signals: {
+                    account: { licenseUtilization: 52, supportTicketVolume: 9, userLoginFrequency: 67, trainingCompletion: 58 },
+                    contact: { communicationEngagement: 48, demoRequests: 0, contentEngagement: 45, featureRequests: 1 },
+                    growth: { newUsersAdded: 5, hiringActivity: 8, fundingNews: 40, leadershipChanges: 25 },
+                    timing: { renewalWindow: 45, usageMaturity: 42 }
+                },
+                pipelineValue: 12000,
+                recommendedProduct: "Core HR",
+                stakeholders: [
+                    { name: "Dr. Sarah Mitchell", role: "Chief Medical Officer", engagement: "low" },
+                    { name: "James Wilson", role: "Administrative Director", engagement: "medium" }
+                ]
+            },
+            {
+                name: "Tech Pioneers",
+                industry: "Technology",
+                employees: 287,
+                signals: {
+                    account: { licenseUtilization: 86, supportTicketVolume: 2, userLoginFrequency: 91, trainingCompletion: 84 },
+                    contact: { communicationEngagement: 87, demoRequests: 2, contentEngagement: 89, featureRequests: 3 },
+                    growth: { newUsersAdded: 16, hiringActivity: 19, fundingNews: 80, leadershipChanges: 75 },
+                    timing: { renewalWindow: 89, usageMaturity: 86 }
+                },
+                pipelineValue: 41000,
+                recommendedProduct: "Conversations – Premium",
+                stakeholders: [
+                    { name: "Emma Thompson", role: "VP Engineering", engagement: "high" },
+                    { name: "Michael Chen", role: "Head of People", engagement: "high" }
+                ]
+            },
+            {
+                name: "Industrial Solutions",
+                industry: "Manufacturing",
+                employees: 198,
+                signals: {
+                    account: { licenseUtilization: 69, supportTicketVolume: 6, userLoginFrequency: 72, trainingCompletion: 65 },
+                    contact: { communicationEngagement: 65, demoRequests: 1, contentEngagement: 68, featureRequests: 1 },
+                    growth: { newUsersAdded: 7, hiringActivity: 11, fundingNews: 25, leadershipChanges: 25 },
+                    timing: { renewalWindow: 72, usageMaturity: 67 }
+                },
+                pipelineValue: 22000,
+                recommendedProduct: "Performance Management",
+                stakeholders: [
+                    { name: "Robert Martinez", role: "Production Director", engagement: "medium" },
+                    { name: "Angela Davis", role: "HR Manager", engagement: "medium" }
+                ]
+            },
+            {
+                name: "Strategy Consultants",
+                industry: "Consulting",
+                employees: 142,
+                signals: {
+                    account: { licenseUtilization: 77, supportTicketVolume: 4, userLoginFrequency: 83, trainingCompletion: 72 },
+                    contact: { communicationEngagement: 81, demoRequests: 2, contentEngagement: 85, featureRequests: 2 },
+                    growth: { newUsersAdded: 12, hiringActivity: 16, fundingNews: 70, leadershipChanges: 80 },
+                    timing: { renewalWindow: 81, usageMaturity: 78 }
+                },
+                pipelineValue: 29000,
+                recommendedProduct: "Recruiting - Medium",
+                stakeholders: [
+                    { name: "Laura Williams", role: "Senior Partner", engagement: "high" },
+                    { name: "Kevin Zhang", role: "Business Manager", engagement: "medium" }
+                ]
+            },
+            {
+                name: "Financial Services Co",
+                industry: "Fintech",
+                employees: 234,
+                signals: {
+                    account: { licenseUtilization: 74, supportTicketVolume: 5, userLoginFrequency: 80, trainingCompletion: 71 },
+                    contact: { communicationEngagement: 73, demoRequests: 1, contentEngagement: 76, featureRequests: 2 },
+                    growth: { newUsersAdded: 10, hiringActivity: 13, fundingNews: 60, leadershipChanges: 25 },
+                    timing: { renewalWindow: 76, usageMaturity: 73 }
+                },
+                pipelineValue: 31000,
+                recommendedProduct: "Compensation Management",
+                stakeholders: [
+                    { name: "Diana Rodriguez", role: "VP Operations", engagement: "medium" },
+                    { name: "Thomas Kim", role: "People Director", engagement: "high" }
+                ]
+            },
+            {
+                name: "MedTech Innovations",
+                industry: "Healthcare",
+                employees: 289,
+                signals: {
+                    account: { licenseUtilization: 48, supportTicketVolume: 11, userLoginFrequency: 62, trainingCompletion: 51 },
+                    contact: { communicationEngagement: 44, demoRequests: 0, contentEngagement: 41, featureRequests: 0 },
+                    growth: { newUsersAdded: 4, hiringActivity: 6, fundingNews: 35, leadershipChanges: 25 },
+                    timing: { renewalWindow: 38, usageMaturity: 36 }
+                },
+                pipelineValue: 9500,
+                recommendedProduct: "Employee Surveys",
+                stakeholders: [
+                    { name: "Dr. Mark Johnson", role: "R&D Director", engagement: "low" },
+                    { name: "Susan Lee", role: "VP Administration", engagement: "low" }
+                ]
+            }
+        ];
+
+        // Calculate expansion score using new 14-signal model
+        function calculateScore(signals) {
+            // Account Health Signals (25% weight)
+            const licenseScore = getLicenseUtilizationScore(signals.account.licenseUtilization);
+            const supportScore = getSupportTicketScore(signals.account.supportTicketVolume);
+            const loginScore = getLoginFrequencyScore(signals.account.userLoginFrequency);
+            const trainingScore = getTrainingCompletionScore(signals.account.trainingCompletion);
+            const accountScore = (licenseScore + supportScore + loginScore + trainingScore) / 4;
+            
+            // Contact Intent Signals (25% weight)
+            const commEngagementScore = getCommunicationEngagementScore(signals.contact.communicationEngagement);
+            const demoScore = getDemoRequestScore(signals.contact.demoRequests);
+            const contentScore = getContentEngagementScore(signals.contact.contentEngagement);
+            const featureScore = getFeatureRequestScore(signals.contact.featureRequests);
+            const contactScore = (commEngagementScore + demoScore + contentScore + featureScore) / 4;
+            
+            // Growth Capacity Signals (25% weight)
+            const newUsersScore = getNewUsersScore(signals.growth.newUsersAdded);
+            const hiringScore = getHiringActivityScore(signals.growth.hiringActivity);
+            const fundingScore = getFundingNewsScore(signals.growth.fundingNews);
+            const leadershipScore = getLeadershipChangeScore(signals.growth.leadershipChanges);
+            const growthScore = (newUsersScore + hiringScore + fundingScore + leadershipScore) / 4;
+            
+            // Timing & Product Fit Signals (25% weight) - 2 signals
+            const renewalScore = getRenewalWindowScore(signals.timing.renewalWindow);
+            const maturityScore = getUsageMaturityScore(signals.timing.usageMaturity);
+            const timingScore = (renewalScore + maturityScore) / 2;
+            
+            return Math.round((accountScore + contactScore + growthScore + timingScore) / 4);
+        }
+
+        // Individual signal scoring functions
+        function getLicenseUtilizationScore(value) {
+            if (value >= 76) return 100;
+            if (value >= 51) return 75;
+            if (value >= 26) return 50;
+            return 25;
+        }
+
+        function getSupportTicketScore(value) {
+            if (value <= 3) return 100;
+            if (value <= 6) return 75;
+            if (value <= 9) return 50;
+            return 25;
+        }
+
+        function getLoginFrequencyScore(value) {
+            if (value >= 76) return 100;
+            if (value >= 51) return 75;
+            if (value >= 26) return 50;
+            return 25;
+        }
+
+        function getTrainingCompletionScore(value) {
+            if (value >= 76) return 100;
+            if (value >= 51) return 75;
+            if (value >= 26) return 50;
+            return 25;
+        }
+
+        function getCommunicationEngagementScore(value) {
+            if (value >= 76) return 100;
+            if (value >= 51) return 75;
+            if (value >= 26) return 50;
+            return 25;
+        }
+
+        function getDemoRequestScore(value) {
+            if (value >= 3) return 100;
+            if (value >= 2) return 75;
+            if (value >= 1) return 50;
+            return 25;
+        }
+
+        function getContentEngagementScore(value) {
+            if (value >= 76) return 100;
+            if (value >= 51) return 75;
+            if (value >= 26) return 50;
+            return 25;
+        }
+
+        function getFeatureRequestScore(value) {
+            if (value >= 3) return 100;
+            if (value >= 2) return 75;
+            if (value >= 1) return 50;
+            return 25;
+        }
+
+        function getNewUsersScore(value) {
+            if (value >= 16) return 100;
+            if (value >= 11) return 75;
+            if (value >= 6) return 50;
+            return 25;
+        }
+
+        function getHiringActivityScore(value) {
+            if (value >= 16) return 100;
+            if (value >= 11) return 75;
+            if (value >= 6) return 50;
+            return 25;
+        }
+
+        function getFundingNewsScore(value) {
+            // Binary scoring: 25 for no/old funding, 100 for recent funding
+            return value >= 75 ? 100 : 25;
+        }
+
+        function getLeadershipChangeScore(value) {
+            // Binary scoring: 25 for no changes, 100 for leadership changes
+            return value >= 75 ? 100 : 25;
+        }
+
+        function getRenewalWindowScore(value) {
+            if (value >= 90) return 100;
+            if (value >= 75) return 75;
+            if (value >= 50) return 50;
+            return 25;
+        }
+
+        function getUsageMaturityScore(value) {
+            if (value >= 76) return 100;
+            if (value >= 51) return 75;
+            if (value >= 26) return 50;
+            return 25;
+        }
+
+        // Add calculated scores to accounts
+        accounts.forEach(account => {
+            account.expansionScore = calculateScore(account.signals);
+        });
+
+        let selectedAccount = null;
+        let filteredAccounts = [...accounts];
+        let editingAccount = null;
+
+        function getScoreBadgeClass(score) {
+            if (score >= 76) return 'score-high';
+            if (score >= 51) return 'score-medium';
+            return 'score-low';
+        }
+
+        function updatePortfolioMetrics() {
+            const hotOps = filteredAccounts.filter(acc => acc.expansionScore > 75).length;
+            const avgScore = Math.round(filteredAccounts.reduce((sum, acc) => sum + acc.expansionScore, 0) / filteredAccounts.length);
+            const totalPipeline = filteredAccounts.reduce((sum, acc) => sum + acc.pipelineValue, 0);
+            
+            document.getElementById('totalAccounts').textContent = filteredAccounts.length;
+            document.getElementById('hotOpportunities').textContent = hotOps;
+            document.getElementById('avgScore').textContent = avgScore;
+            document.getElementById('totalPipeline').textContent = `€${(totalPipeline / 1000).toFixed(1)}K`;
+            
+            // Update potential pipeline breakdown
+            const productPipeline = {
+                payroll: 0,
+                talentAcquisition: 0,
+                talentManagement: 0,
+                employeeExperience: 0
+            };
+            
+            filteredAccounts.forEach(acc => {
+                const product = acc.recommendedProduct.toLowerCase();
+                if (product.includes('payroll')) {
+                    productPipeline.payroll += acc.pipelineValue;
+                } else if (product.includes('recruiting')) {
+                    productPipeline.talentAcquisition += acc.pipelineValue;
+                } else if (product.includes('compensation')) {
+                    productPipeline.talentManagement += acc.pipelineValue;
+                } else if (product.includes('conversations') || product.includes('surveys')) {
+                    productPipeline.employeeExperience += acc.pipelineValue;
+                }
+            });
+            
+            document.getElementById('payrollPipeline').textContent = `€${(productPipeline.payroll / 1000).toFixed(0)}K`;
+            document.getElementById('talentAcquisitionPipeline').textContent = `€${(productPipeline.talentAcquisition / 1000).toFixed(0)}K`;
+            document.getElementById('talentManagementPipeline').textContent = `€${(productPipeline.talentManagement / 1000).toFixed(0)}K`;
+            document.getElementById('employeeExperiencePipeline').textContent = `€${(productPipeline.employeeExperience / 1000).toFixed(0)}K`;
+            document.getElementById('totalPipelineTracker').textContent = `€${(totalPipeline / 1000).toFixed(1)}K Total`;
+        }
+
+        function renderOpportunities() {
+            const sortBy = document.getElementById('sortBy').value;
+            const sorted = [...filteredAccounts].sort((a, b) => {
+                if (sortBy === 'score') return b.expansionScore - a.expansionScore;
+                if (sortBy === 'name') return a.name.localeCompare(b.name);
+                if (sortBy === 'pipeline') return b.pipelineValue - a.pipelineValue;
+                return 0;
+            });
+
+            const html = sorted.map(account => `
+                <div class="opportunity-item ${selectedAccount?.name === account.name ? 'selected' : ''}" 
+                     onclick="selectAccount('${account.name}')">
+                    <div class="opportunity-info">
+                        <h3>${account.name}</h3>
+                        <p>${account.recommendedProduct} • Score: ${account.expansionScore}</p>
+                    </div>
+                    <div class="opportunity-value">
+                        <div class="score">${account.expansionScore}</div>
+                        <div class="amount">Potential Value: €${(account.pipelineValue / 1000).toFixed(0)}K</div>
+                    </div>
+                </div>
+            `).join('');
+            
+            document.getElementById('opportunitiesList').innerHTML = html;
+        }
+
+        function selectAccount(accountName) {
+            selectedAccount = accounts.find(acc => acc.name === accountName);
+            renderOpportunities();
+            renderAccountDetails();
+            generateAlerts();
+        }
+
+        function renderAccountDetails() {
+            if (!selectedAccount) return;
+            
+            // Calculate individual category scores using new model
+            const accountScore = Math.round((
+                getLicenseUtilizationScore(selectedAccount.signals.account.licenseUtilization) +
+                getSupportTicketScore(selectedAccount.signals.account.supportTicketVolume) +
+                getLoginFrequencyScore(selectedAccount.signals.account.userLoginFrequency) +
+                getTrainingCompletionScore(selectedAccount.signals.account.trainingCompletion)
+            ) / 4);
+            
+            const contactScore = Math.round((
+                getCommunicationEngagementScore(selectedAccount.signals.contact.communicationEngagement) +
+                getDemoRequestScore(selectedAccount.signals.contact.demoRequests) +
+                getContentEngagementScore(selectedAccount.signals.contact.contentEngagement) +
+                getFeatureRequestScore(selectedAccount.signals.contact.featureRequests)
+            ) / 4);
+            
+            const growthScore = Math.round((
+                getNewUsersScore(selectedAccount.signals.growth.newUsersAdded) +
+                getHiringActivityScore(selectedAccount.signals.growth.hiringActivity) +
+                getFundingNewsScore(selectedAccount.signals.growth.fundingNews) +
+                getLeadershipChangeScore(selectedAccount.signals.growth.leadershipChanges)
+            ) / 4);
+            
+            const timingScore = Math.round((
+                getRenewalWindowScore(selectedAccount.signals.timing.renewalWindow) +
+                getUsageMaturityScore(selectedAccount.signals.timing.usageMaturity)
+            ) / 2);
+
+            const stakeholdersHtml = selectedAccount.stakeholders.map(stakeholder => `
+                <div class="stakeholder-item">
+                    <div>
+                        <div class="stakeholder-name">${stakeholder.name}</div>
+                        <div class="stakeholder-role">${stakeholder.role}</div>
+                    </div>
+                    <div class="engagement-dot engagement-${stakeholder.engagement}"></div>
+                </div>
+            `).join('');
+
+            const html = `
+                <div style="margin-bottom: 1rem;">
+                    <div style="display: flex; justify-content: space-between; align-items: center;">
+                        <h3>${selectedAccount.name}</h3>
+                        <span class="score-badge ${getScoreBadgeClass(selectedAccount.expansionScore)}">${selectedAccount.expansionScore}/100</span>
+                    </div>
+                    <p style="color: #7f8c8d; font-size: 0.875rem;">${selectedAccount.industry} • ${selectedAccount.employees} employees</p>
+                </div>
+                <div class="signal-breakdown">
+                    <div class="signal-category">
+                        <h4>Account Health</h4>
+                        <div class="signal-score">${accountScore}</div>
+                        <div class="signal-details">
+                            <div class="signal-item">
+                                <span>Licence Util:</span>
+                                <span>${selectedAccount.signals.account.licenseUtilization}%</span>
+                            </div>
+                            <div class="signal-item">
+                                <span>Support Tickets:</span>
+                                <span>${selectedAccount.signals.account.supportTicketVolume}</span>
+                            </div>
+                            <div class="signal-item">
+                                <span>User Logins:</span>
+                                <span>${selectedAccount.signals.account.userLoginFrequency}%</span>
+                            </div>
+                            <div class="signal-item">
+                                <span>Training:</span>
+                                <span>${selectedAccount.signals.account.trainingCompletion}%</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="signal-category">
+                        <h4>Contact Intent</h4>
+                        <div class="signal-score">${contactScore}</div>
+                        <div class="signal-details">
+                            <div class="signal-item">
+                                <span>Comm Engage:</span>
+                                <span>${selectedAccount.signals.contact.communicationEngagement}%</span>
+                            </div>
+                            <div class="signal-item">
+                                <span>Demo Requests:</span>
+                                <span>${selectedAccount.signals.contact.demoRequests}</span>
+                            </div>
+                            <div class="signal-item">
+                                <span>Content Eng:</span>
+                                <span>${selectedAccount.signals.contact.contentEngagement}%</span>
+                            </div>
+                            <div class="signal-item">
+                                <span>Feature Req:</span>
+                                <span>${selectedAccount.signals.contact.featureRequests}</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="signal-category">
+                        <h4>Growth Capacity</h4>
+                        <div class="signal-score">${growthScore}</div>
+                        <div class="signal-details">
+                            <div class="signal-item">
+                                <span>New Users:</span>
+                                <span>+${selectedAccount.signals.growth.newUsersAdded}</span>
+                            </div>
+                            <div class="signal-item">
+                                <span>Hiring:</span>
+                                <span>+${selectedAccount.signals.growth.hiringActivity}%</span>
+                            </div>
+                            <div class="signal-item">
+                                <span>Funding:</span>
+                                <span>${selectedAccount.signals.growth.fundingNews >= 75 ? 'Recent' : 'None'}</span>
+                            </div>
+                            <div class="signal-item">
+                                <span>Leadership:</span>
+                                <span>${selectedAccount.signals.growth.leadershipChanges >= 75 ? 'Changes' : 'Stable'}</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="signal-category">
+                        <h4>Timing & Product Fit</h4>
+                        <div class="signal-score">${timingScore}</div>
+                        <div class="signal-details">
+                            <div class="signal-item">
+                                <span>Renewal:</span>
+                                <span>${selectedAccount.signals.timing.renewalWindow}%</span>
+                            </div>
+                            <div class="signal-item">
+                                <span>Usage Mat:</span>
+                                <span>${selectedAccount.signals.timing.usageMaturity}%</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="stakeholder-map">
+                    <h4 style="font-size: 1rem; margin-bottom: 0.5rem;">Key Stakeholders</h4>
+                    ${stakeholdersHtml}
+                    <div class="engagement-legend">
+                        <div class="legend-item">
+                            <div class="engagement-dot engagement-high"></div>
+                            <span>High Engagement: Active engager, regular contact</span>
+                        </div>
+                        <div class="legend-item">
+                            <div class="engagement-dot engagement-medium"></div>
+                            <span>Medium Engagement: Periodic engager, semi-regular contact</span>
+                        </div>
+                        <div class="legend-item">
+                            <div class="engagement-dot engagement-low"></div>
+                            <span>Low Engagement: Minimal engager, little to no contact</span>
+                        </div>
+                    </div>
+                </div>
+            `;
+            
+            document.getElementById('accountDetails').innerHTML = html;
+        }
+
+        function generateAlerts() {
+            // Get TechCorp actual score
+            const techCorp = accounts.find(acc => acc.name === "TechCorp Solutions");
+            const techCorpScore = techCorp ? techCorp.expansionScore : 77;
+            
+            // Find lowest signal for Digital Innovations to improve
+            const digitalInnovations = accounts.find(acc => acc.name === "Digital Innovations");
+            let lowestSignal = { name: "Training Completion", score: 70, category: "Account Health" };
+            if (digitalInnovations) {
+                const signals = digitalInnovations.signals;
+                if (signals.account.trainingCompletion < lowestSignal.score) {
+                    lowestSignal = { name: "Training Completion", score: signals.account.trainingCompletion, category: "Account Health" };
+                }
+            }
+            
+            // Find lowest signal for Growth Dynamics to improve
+            const growthDynamics = accounts.find(acc => acc.name === "Growth Dynamics");
+            let growthLowestSignal = { name: "Funding News", score: 70, category: "Growth Capacity" };
+            if (growthDynamics) {
+                const signals = growthDynamics.signals;
+                if (signals.growth.fundingNews < growthLowestSignal.score) {
+                    growthLowestSignal = { name: "Funding News", score: signals.growth.fundingNews, category: "Growth Capacity" };
+                }
+            }
+
+            const alerts = [
+                {
+                    icon: '🚨',
+                    title: 'TechCorp Solutions - Threshold Alert',
+                    description: `Account scored ${techCorpScore} - moved to hot opportunities`,
+                    action: 'Take Action'
+                },
+                {
+                    icon: '📊',
+                    title: 'Digital Innovations - Signal Improvement',
+                    description: `Recommend focusing on ${lowestSignal.name} (${lowestSignal.score}) to increase ${lowestSignal.category} score`,
+                    action: 'Take Action'
+                },
+                {
+                    icon: '🎯',
+                    title: 'Growth Dynamics - Signal Improvement',
+                    description: `Recommend focusing on ${growthLowestSignal.name} (${growthLowestSignal.score}) to increase ${growthLowestSignal.category} score`,
+                    action: 'Take Action'
+                }
+            ];
+
+            const html = alerts.map(alert => `
+                <div class="alert-item">
+                    <div class="alert-icon">${alert.icon}</div>
+                    <div class="alert-content">
+                        <h4>${alert.title}</h4>
+                        <p>${alert.description}</p>
+                    </div>
+                    <button class="btn btn-primary">${alert.action}</button>
+                </div>
+            `).join('');
+            
+            document.getElementById('alertsList').innerHTML = html;
+        }
+
+        function applyFilters() {
+            const scoreFilter = document.getElementById('scoreFilter').value;
+            
+            filteredAccounts = accounts.filter(account => {
+                if (scoreFilter === 'high') return account.expansionScore >= 76;
+                if (scoreFilter === 'medium') return account.expansionScore >= 51 && account.expansionScore <= 75;
+                if (scoreFilter === 'low') return account.expansionScore <= 50;
+                return true;
+            });
+            
+            updatePortfolioMetrics();
+            renderOpportunities();
+        }
+
+        // Signal Editor Functions
+        function populateAccountSelector() {
+            const selector = document.getElementById('editorAccountSelect');
+            selector.innerHTML = '<option value="">Select an account to edit</option>';
+            
+            accounts.forEach(account => {
+                const option = document.createElement('option');
+                option.value = account.name;
+                option.textContent = `${account.name} (Current Score: ${account.expansionScore})`;
+                selector.appendChild(option);
+            });
+        }
+
+        function loadAccountSignals(accountName) {
+            const account = accounts.find(acc => acc.name === accountName);
+            if (!account) return;
+
+            editingAccount = account;
+            
+            // Populate all signal inputs
+            document.getElementById('licenseUtilization').value = account.signals.account.licenseUtilization;
+            document.getElementById('supportTicketVolume').value = account.signals.account.supportTicketVolume;
+            document.getElementById('userLoginFrequency').value = account.signals.account.userLoginFrequency;
+            document.getElementById('trainingCompletion').value = account.signals.account.trainingCompletion;
+            
+            document.getElementById('communicationEngagement').value = account.signals.contact.communicationEngagement;
+            document.getElementById('demoRequests').value = account.signals.contact.demoRequests;
+            document.getElementById('contentEngagement').value = account.signals.contact.contentEngagement;
+            document.getElementById('featureRequests').value = account.signals.contact.featureRequests;
+            
+            document.getElementById('newUsersAdded').value = account.signals.growth.newUsersAdded;
+            document.getElementById('hiringActivity').value = account.signals.growth.hiringActivity;
+            document.getElementById('fundingNews').value = account.signals.growth.fundingNews;
+            document.getElementById('leadershipChanges').value = account.signals.growth.leadershipChanges;
+            
+            document.getElementById('renewalWindow').value = account.signals.timing.renewalWindow;
+            document.getElementById('usageMaturity').value = account.signals.timing.usageMaturity;
+            
+            updateLiveScore();
+        }
+
+        function updateLiveScore() {
+            if (!editingAccount) return;
+            
+            // Get current values from inputs
+            const signals = {
+                account: {
+                    licenseUtilization: parseInt(document.getElementById('licenseUtilization').value) || 0,
+                    supportTicketVolume: parseInt(document.getElementById('supportTicketVolume').value) || 0,
+                    userLoginFrequency: parseInt(document.getElementById('userLoginFrequency').value) || 0,
+                    trainingCompletion: parseInt(document.getElementById('trainingCompletion').value) || 0
+                },
+                contact: {
+                    communicationEngagement: parseInt(document.getElementById('communicationEngagement').value) || 0,
+                    demoRequests: parseInt(document.getElementById('demoRequests').value) || 0,
+                    contentEngagement: parseInt(document.getElementById('contentEngagement').value) || 0,
+                    featureRequests: parseInt(document.getElementById('featureRequests').value) || 0
+                },
+                growth: {
+                    newUsersAdded: parseInt(document.getElementById('newUsersAdded').value) || 0,
+                    hiringActivity: parseInt(document.getElementById('hiringActivity').value) || 0,
+                    fundingNews: parseInt(document.getElementById('fundingNews').value) || 0,
+                    leadershipChanges: parseInt(document.getElementById('leadershipChanges').value) || 0
+                },
+                timing: {
+                    renewalWindow: parseInt(document.getElementById('renewalWindow').value) || 0,
+                    usageMaturity: parseInt(document.getElementById('usageMaturity').value) || 0
+                }
+            };
+            
+            const liveScore = calculateScore(signals);
+            document.getElementById('liveScore').textContent = liveScore;
+        }
+
+        function updateSignals() {
+            if (!editingAccount) {
+                alert('Please select an account first');
+                return;
+            }
+            
+            // Update the account's signals
+            editingAccount.signals.account.licenseUtilization = parseInt(document.getElementById('licenseUtilization').value) || 0;
+            editingAccount.signals.account.supportTicketVolume = parseInt(document.getElementById('supportTicketVolume').value) || 0;
+            editingAccount.signals.account.userLoginFrequency = parseInt(document.getElementById('userLoginFrequency').value) || 0;
+            editingAccount.signals.account.trainingCompletion = parseInt(document.getElementById('trainingCompletion').value) || 0;
+            
+            editingAccount.signals.contact.communicationEngagement = parseInt(document.getElementById('communicationEngagement').value) || 0;
+            editingAccount.signals.contact.demoRequests = parseInt(document.getElementById('demoRequests').value) || 0;
+            editingAccount.signals.contact.contentEngagement = parseInt(document.getElementById('contentEngagement').value) || 0;
+            editingAccount.signals.contact.featureRequests = parseInt(document.getElementById('featureRequests').value) || 0;
+            
+            editingAccount.signals.growth.newUsersAdded = parseInt(document.getElementById('newUsersAdded').value) || 0;
+            editingAccount.signals.growth.hiringActivity = parseInt(document.getElementById('hiringActivity').value) || 0;
+            editingAccount.signals.growth.fundingNews = parseInt(document.getElementById('fundingNews').value) || 0;
+            editingAccount.signals.growth.leadershipChanges = parseInt(document.getElementById('leadershipChanges').value) || 0;
+            
+            editingAccount.signals.timing.renewalWindow = parseInt(document.getElementById('renewalWindow').value) || 0;
+            editingAccount.signals.timing.usageMaturity = parseInt(document.getElementById('usageMaturity').value) || 0;
+            
+            // Recalculate expansion score
+            editingAccount.expansionScore = calculateScore(editingAccount.signals);
+            
+            // Update all displays
+            applyFilters();
+            if (selectedAccount && selectedAccount.name === editingAccount.name) {
+                renderAccountDetails();
+            }
+            generateAlerts();
+            populateAccountSelector();
+            
+            alert(`${editingAccount.name} updated! New score: ${editingAccount.expansionScore}`);
+        }
+
+        // Event listeners
+        document.getElementById('scoreFilter').addEventListener('change', applyFilters);
+        document.getElementById('sortBy').addEventListener('change', renderOpportunities);
+        document.getElementById('editorAccountSelect').addEventListener('change', function() {
+            loadAccountSignals(this.value);
+        });
+        
+        // Add live score update listeners to all signal inputs
+        document.querySelectorAll('.signal-input').forEach(input => {
+            input.addEventListener('input', updateLiveScore);
+        });
+
+        // Initialize dashboard
+        updatePortfolioMetrics();
+        renderOpportunities();
+        generateAlerts();
+        populateAccountSelector();
+    </script>
+</body>
+</html>
