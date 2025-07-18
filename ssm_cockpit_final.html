@@ -650,23 +650,160 @@
     </div>
 
     <script>
-        // Sample data for opportunities
+        // Sample data for opportunities with detailed breakdown
         const opportunities = [
-            { name: "TechCorp Solutions", product: "Conversations – Standard", score: 92, value: 45000, industry: "Technology", employees: 450 },
-            { name: "Tech Pioneers", product: "Conversations – Premium", score: 90, value: 41000, industry: "Technology", employees: 320 },
-            { name: "FinTech Forward", product: "Compensation Management", score: 83, value: 38000, industry: "Financial Services", employees: 280 },
-            { name: "Strategy Consultants", product: "Recruiting - Medium", score: 78, value: 29000, industry: "Consulting", employees: 150 },
-            { name: "Financial Services Co", product: "Compensation Management", score: 74, value: 31000, industry: "Financial Services", employees: 520 },
-            { name: "Growth Dynamics", product: "Personio Payroll", score: 70, value: 25000, industry: "Technology", employees: 180 },
-            { name: "Manufacturing Plus", product: "Personio Payroll", score: 68, value: 22000, industry: "Manufacturing", employees: 850 },
-            { name: "Healthcare Innovators", product: "Employee Experience", score: 65, value: 28000, industry: "Healthcare", employees: 400 },
-            { name: "Scale Ventures", product: "Talent Management", score: 62, value: 19000, industry: "Venture Capital", employees: 80 },
-            { name: "Retail Chain Co", product: "Payroll", score: 58, value: 35000, industry: "Retail", employees: 1200 },
-            { name: "Legal Partners", product: "Talent Acquisition", score: 55, value: 18000, industry: "Legal Services", employees: 120 },
-            { name: "Education Corp", product: "Employee Experience", score: 52, value: 16000, industry: "Education", employees: 300 },
-            { name: "MedTech Innovations", product: "Payroll", score: 48, value: 21000, industry: "Healthcare", employees: 250 },
-            { name: "Alpine Systems", product: "Talent Management", score: 45, value: 14000, industry: "Software", employees: 90 },
-            { name: "Startup Hub", product: "Recruiting - Small", score: 42, value: 12000, industry: "Technology", employees: 60 }
+            { 
+                name: "TechCorp Solutions", 
+                product: "Conversations – Standard", 
+                score: 84, 
+                value: 45000, 
+                industry: "Technology", 
+                employees: 450,
+                signals: {
+                    accountHealth: { score: 85, licenseUtil: 89, supportTickets: 2, userLogins: 94, training: 78 },
+                    contactIntent: { score: 82, commEngage: 85, demoRequests: 3, contentEng: 76, featureReq: 2 },
+                    growthCapacity: { score: 81, newUsers: 18, hiring: 15, funding: "Recent", leadership: "Changes" },
+                    timingFit: { score: 88, renewal: 90, usageMat: 85 }
+                },
+                stakeholders: [
+                    { name: "Marcus Chen", role: "HR Director", engagement: "high" },
+                    { name: "Lisa Park", role: "CHRO", engagement: "medium" },
+                    { name: "Emma Rodriguez", role: "IT Manager", engagement: "high" }
+                ]
+            },
+            { 
+                name: "Tech Pioneers", 
+                product: "Conversations – Premium", 
+                score: 85, 
+                value: 41000, 
+                industry: "Technology", 
+                employees: 320,
+                signals: {
+                    accountHealth: { score: 88, licenseUtil: 92, supportTickets: 1, userLogins: 89, training: 85 },
+                    contactIntent: { score: 89, commEngage: 91, demoRequests: 4, contentEng: 88, featureReq: 3 },
+                    growthCapacity: { score: 78, newUsers: 12, hiring: 8, funding: "Series B", leadership: "Stable" },
+                    timingFit: { score: 85, renewal: 88, usageMat: 82 }
+                },
+                stakeholders: [
+                    { name: "Sarah Kim", role: "VP People", engagement: "high" },
+                    { name: "James Wilson", role: "CTO", engagement: "high" },
+                    { name: "Maria Garcia", role: "Head of Ops", engagement: "medium" }
+                ]
+            },
+            { 
+                name: "FinTech Forward", 
+                product: "Compensation Management", 
+                score: 79, 
+                value: 38000, 
+                industry: "Financial Services", 
+                employees: 280,
+                signals: {
+                    accountHealth: { score: 76, licenseUtil: 78, supportTickets: 3, userLogins: 82, training: 65 },
+                    contactIntent: { score: 95, commEngage: 94, demoRequests: 5, contentEng: 92, featureReq: 4 },
+                    growthCapacity: { score: 72, newUsers: 8, hiring: 12, funding: "None", leadership: "New CMO" },
+                    timingFit: { score: 74, renewal: 75, usageMat: 73 }
+                },
+                stakeholders: [
+                    { name: "David Chen", role: "CHRO", engagement: "high" },
+                    { name: "Alex Thompson", role: "Finance Director", engagement: "medium" },
+                    { name: "Jennifer Lee", role: "HR Manager", engagement: "high" }
+                ]
+            },
+            { 
+                name: "Strategy Consultants", 
+                product: "Recruiting - Medium", 
+                score: 78, 
+                value: 29000, 
+                industry: "Consulting", 
+                employees: 150,
+                signals: {
+                    accountHealth: { score: 82, licenseUtil: 85, supportTickets: 1, userLogins: 91, training: 72 },
+                    contactIntent: { score: 71, commEngage: 68, demoRequests: 2, contentEng: 74, featureReq: 1 },
+                    growthCapacity: { score: 85, newUsers: 22, hiring: 25, funding: "Series A", leadership: "Stable" },
+                    timingFit: { score: 74, renewal: 78, usageMat: 70 }
+                },
+                stakeholders: [
+                    { name: "Robert Johnson", role: "Managing Partner", engagement: "medium" },
+                    { name: "Lisa Chang", role: "Head of Talent", engagement: "high" },
+                    { name: "Michael Brown", role: "Operations Lead", engagement: "low" }
+                ]
+            },
+            { 
+                name: "Financial Services Co", 
+                product: "Compensation Management", 
+                score: 74, 
+                value: 31000, 
+                industry: "Financial Services", 
+                employees: 520,
+                signals: {
+                    accountHealth: { score: 79, licenseUtil: 82, supportTickets: 2, userLogins: 85, training: 71 },
+                    contactIntent: { score: 68, commEngage: 65, demoRequests: 1, contentEng: 70, featureReq: 2 },
+                    growthCapacity: { score: 69, newUsers: 5, hiring: 3, funding: "None", leadership: "Stable" },
+                    timingFit: { score: 81, renewal: 85, usageMat: 77 }
+                },
+                stakeholders: [
+                    { name: "Amanda Foster", role: "HR Director", engagement: "medium" },
+                    { name: "Kevin Martinez", role: "VP Operations", engagement: "low" },
+                    { name: "Rachel Green", role: "Compliance Lead", engagement: "medium" }
+                ]
+            },
+            { 
+                name: "Growth Dynamics", 
+                product: "Personio Payroll", 
+                score: 70, 
+                value: 25000, 
+                industry: "Technology", 
+                employees: 180,
+                signals: {
+                    accountHealth: { score: 72, licenseUtil: 75, supportTickets: 4, userLogins: 78, training: 58 },
+                    contactIntent: { score: 65, commEngage: 62, demoRequests: 1, contentEng: 68, featureReq: 1 },
+                    growthCapacity: { score: 80, newUsers: 18, hiring: 22, funding: "Seed", leadership: "New CEO" },
+                    timingFit: { score: 63, renewal: 60, usageMat: 66 }
+                },
+                stakeholders: [
+                    { name: "Tom Wilson", role: "Founder", engagement: "high" },
+                    { name: "Sarah Davis", role: "Head of People", engagement: "medium" },
+                    { name: "Chris Taylor", role: "CFO", engagement: "low" }
+                ]
+            },
+            { 
+                name: "Manufacturing Plus", 
+                product: "Personio Payroll", 
+                score: 68, 
+                value: 22000, 
+                industry: "Manufacturing", 
+                employees: 850,
+                signals: {
+                    accountHealth: { score: 78, licenseUtil: 78, supportTickets: 2, userLogins: 82, training: 72 },
+                    contactIntent: { score: 58, commEngage: 55, demoRequests: 0, contentEng: 61, featureReq: 1 },
+                    growthCapacity: { score: 62, newUsers: 3, hiring: 5, funding: "None", leadership: "Stable" },
+                    timingFit: { score: 74, renewal: 78, usageMat: 70 }
+                },
+                stakeholders: [
+                    { name: "Frank Miller", role: "Plant Manager", engagement: "low" },
+                    { name: "Susan Clark", role: "HR Manager", engagement: "medium" },
+                    { name: "Bob Anderson", role: "Operations Dir", engagement: "medium" }
+                ]
+            },
+            { 
+                name: "Healthcare Innovators", 
+                product: "Employee Experience", 
+                score: 64, 
+                value: 28000, 
+                industry: "Healthcare", 
+                employees: 400,
+                signals: {
+                    accountHealth: { score: 68, licenseUtil: 70, supportTickets: 3, userLogins: 75, training: 55 },
+                    contactIntent: { score: 48, commEngage: 45, demoRequests: 0, contentEng: 51, featureReq: 0 },
+                    growthCapacity: { score: 71, newUsers: 8, hiring: 10, funding: "None", leadership: "Stable" },
+                    timingFit: { score: 69, renewal: 75, usageMat: 63 }
+                },
+                stakeholders: [
+                    { name: "Dr. Emily White", role: "Chief Medical Officer", engagement: "low" },
+                    { name: "Nancy Rodriguez", role: "HR Director", engagement: "medium" },
+                    { name: "Paul Jackson", role: "Administrator", engagement: "low" }
+                ]
+            }
         ];
 
         let filteredOpportunities = [...opportunities];
@@ -751,6 +888,116 @@
             // Update score badge color
             const scoreBadge = document.getElementById('selectedAccountScore');
             scoreBadge.className = `score-badge score-${getScoreCategory(selectedAccount.score)}`;
+
+            // Update signal breakdown
+            const signals = selectedAccount.signals;
+            if (signals) {
+                // Update Account Health
+                const accountHealthSection = document.querySelector('.signal-category:nth-child(1)');
+                accountHealthSection.querySelector('.signal-score').textContent = signals.accountHealth.score;
+                const healthDetails = accountHealthSection.querySelector('.signal-details');
+                healthDetails.innerHTML = `
+                    <div class="signal-item">
+                        <span>Licence Util:</span>
+                        <span>${signals.accountHealth.licenseUtil}%</span>
+                    </div>
+                    <div class="signal-item">
+                        <span>Support Tickets:</span>
+                        <span>${signals.accountHealth.supportTickets}</span>
+                    </div>
+                    <div class="signal-item">
+                        <span>User Logins:</span>
+                        <span>${signals.accountHealth.userLogins}%</span>
+                    </div>
+                    <div class="signal-item">
+                        <span>Training:</span>
+                        <span>${signals.accountHealth.training}%</span>
+                    </div>
+                `;
+
+                // Update Contact Intent
+                const contactIntentSection = document.querySelector('.signal-category:nth-child(2)');
+                contactIntentSection.querySelector('.signal-score').textContent = signals.contactIntent.score;
+                const intentDetails = contactIntentSection.querySelector('.signal-details');
+                intentDetails.innerHTML = `
+                    <div class="signal-item">
+                        <span>Comm Engage:</span>
+                        <span>${signals.contactIntent.commEngage}%</span>
+                    </div>
+                    <div class="signal-item">
+                        <span>Demo Requests:</span>
+                        <span>${signals.contactIntent.demoRequests}</span>
+                    </div>
+                    <div class="signal-item">
+                        <span>Content Eng:</span>
+                        <span>${signals.contactIntent.contentEng}%</span>
+                    </div>
+                    <div class="signal-item">
+                        <span>Feature Req:</span>
+                        <span>${signals.contactIntent.featureReq}</span>
+                    </div>
+                `;
+
+                // Update Growth Capacity
+                const growthCapacitySection = document.querySelector('.signal-category:nth-child(3)');
+                growthCapacitySection.querySelector('.signal-score').textContent = signals.growthCapacity.score;
+                const growthDetails = growthCapacitySection.querySelector('.signal-details');
+                growthDetails.innerHTML = `
+                    <div class="signal-item">
+                        <span>New Users:</span>
+                        <span>+${signals.growthCapacity.newUsers}</span>
+                    </div>
+                    <div class="signal-item">
+                        <span>Hiring:</span>
+                        <span>+${signals.growthCapacity.hiring}%</span>
+                    </div>
+                    <div class="signal-item">
+                        <span>Funding:</span>
+                        <span>${signals.growthCapacity.funding}</span>
+                    </div>
+                    <div class="signal-item">
+                        <span>Leadership:</span>
+                        <span>${signals.growthCapacity.leadership}</span>
+                    </div>
+                `;
+
+                // Update Timing & Product Fit
+                const timingFitSection = document.querySelector('.signal-category:nth-child(4)');
+                timingFitSection.querySelector('.signal-score').textContent = signals.timingFit.score;
+                const timingDetails = timingFitSection.querySelector('.signal-details');
+                timingDetails.innerHTML = `
+                    <div class="signal-item">
+                        <span>Renewal:</span>
+                        <span>${signals.timingFit.renewal}%</span>
+                    </div>
+                    <div class="signal-item">
+                        <span>Usage Mat:</span>
+                        <span>${signals.timingFit.usageMat}%</span>
+                    </div>
+                `;
+
+                // Update stakeholders
+                const stakeholderMap = document.querySelector('.stakeholder-map');
+                const stakeholderContainer = stakeholderMap.querySelector('div:last-child').parentNode;
+                
+                // Remove existing stakeholder items (keep the h4)
+                const existingItems = stakeholderContainer.querySelectorAll('.stakeholder-item');
+                existingItems.forEach(item => item.remove());
+                
+                // Add new stakeholder items
+                selectedAccount.stakeholders.forEach(stakeholder => {
+                    const stakeholderItem = document.createElement('div');
+                    stakeholderItem.className = 'stakeholder-item';
+                    stakeholderItem.innerHTML = `
+                        <div>
+                            <div class="stakeholder-name">${stakeholder.name}</div>
+                            <div class="stakeholder-role">${stakeholder.role}</div>
+                        </div>
+                        <div class="engagement-dot engagement-${stakeholder.engagement}"></div>
+                    `;
+                    stakeholderContainer.appendChild(stakeholderItem);
+                });
+            }
         }
 
         function applyFilters() {

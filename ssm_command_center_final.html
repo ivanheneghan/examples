@@ -658,32 +658,22 @@
             <div id="opportunitiesList">
                 <div class="opportunity-item" data-owner="Sarah Johnson">
                     <div class="opportunity-info">
-                        <h4>TechCorp Solutions</h4>
-                        <p>Sarah Johnson • Conversations – Standard</p>
-                    </div>
-                    <div class="opportunity-value">
-                        <div class="score">92</div>
-                        <div class="amount">€45K</div>
-                    </div>
-                </div>
-                <div class="opportunity-item" data-owner="Sarah Johnson">
-                    <div class="opportunity-info">
                         <h4>Tech Pioneers</h4>
                         <p>Sarah Johnson • Conversations – Premium</p>
                     </div>
                     <div class="opportunity-value">
-                        <div class="score">90</div>
+                        <div class="score">85</div>
                         <div class="amount">€41K</div>
                     </div>
                 </div>
-                <div class="opportunity-item" data-owner="Lisa Rodriguez">
+                <div class="opportunity-item" data-owner="Sarah Johnson">
                     <div class="opportunity-info">
-                        <h4>Growth Dynamics</h4>
-                        <p>Lisa Rodriguez • Personio Payroll</p>
+                        <h4>TechCorp Solutions</h4>
+                        <p>Sarah Johnson • Conversations – Standard</p>
                     </div>
                     <div class="opportunity-value">
                         <div class="score">84</div>
-                        <div class="amount">€32K</div>
+                        <div class="amount">€45K</div>
                     </div>
                 </div>
                 <div class="opportunity-item" data-owner="Sarah Johnson">
@@ -692,18 +682,28 @@
                         <p>Sarah Johnson • Compensation Management</p>
                     </div>
                     <div class="opportunity-value">
-                        <div class="score">83</div>
+                        <div class="score">79</div>
                         <div class="amount">€38K</div>
                     </div>
                 </div>
                 <div class="opportunity-item" data-owner="Lisa Rodriguez">
                     <div class="opportunity-info">
-                        <h4>Manufacturing Plus</h4>
-                        <p>Lisa Rodriguez • Personio Payroll</p>
+                        <h4>Strategy Consultants</h4>
+                        <p>Lisa Rodriguez • Recruiting - Medium</p>
                     </div>
                     <div class="opportunity-value">
-                        <div class="score">79</div>
-                        <div class="amount">€34K</div>
+                        <div class="score">78</div>
+                        <div class="amount">€29K</div>
+                    </div>
+                </div>
+                <div class="opportunity-item" data-owner="Lisa Rodriguez">
+                    <div class="opportunity-info">
+                        <h4>Financial Services Co</h4>
+                        <p>Lisa Rodriguez • Compensation Management</p>
+                    </div>
+                    <div class="opportunity-value">
+                        <div class="score">74</div>
+                        <div class="amount">€31K</div>
                     </div>
                 </div>
             </div>
@@ -734,31 +734,31 @@
                     </tr>
                 </thead>
                 <tbody id="capacityTableBody">
-                    <tr data-capacity="high-capacity">
+                    <tr>
                         <td>Sarah Johnson</td>
                         <td>6</td>
                         <td>€236K</td>
                         <td>81</td>
                     </tr>
-                    <tr data-capacity="medium-capacity">
+                    <tr>
                         <td>Lisa Rodriguez</td>
                         <td>4</td>
                         <td>€114K</td>
                         <td>76</td>
                     </tr>
-                    <tr data-capacity="low-capacity">
+                    <tr>
                         <td>Emma Park</td>
                         <td>2</td>
                         <td>€40K</td>
                         <td>69</td>
                     </tr>
-                    <tr data-capacity="low-capacity">
+                    <tr>
                         <td>Marcus Chen</td>
                         <td>2</td>
                         <td>€28K</td>
                         <td>54</td>
                     </tr>
-                    <tr data-capacity="low-capacity">
+                    <tr>
                         <td>David Kumar</td>
                         <td>1</td>
                         <td>€8K</td>
@@ -790,23 +790,23 @@
                 </div>
             </h2>
             <div id="conversionList">
-                <div class="conversion-item" data-conversion="high-conversion">
+                <div class="conversion-item">
                     <div class="conversion-rep">Sarah Johnson</div>
                     <div class="conversion-rate">89%</div>
                 </div>
-                <div class="conversion-item" data-conversion="high-conversion">
+                <div class="conversion-item">
                     <div class="conversion-rep">Emma Park</div>
                     <div class="conversion-rate">84%</div>
                 </div>
-                <div class="conversion-item" data-conversion="medium-conversion">
+                <div class="conversion-item">
                     <div class="conversion-rep">Lisa Rodriguez</div>
                     <div class="conversion-rate">78%</div>
                 </div>
-                <div class="conversion-item" data-conversion="medium-conversion">
+                <div class="conversion-item">
                     <div class="conversion-rep">Marcus Chen</div>
                     <div class="conversion-rate">71%</div>
                 </div>
-                <div class="conversion-item" data-conversion="low-conversion">
+                <div class="conversion-item">
                     <div class="conversion-rep">David Kumar</div>
                     <div class="conversion-rate">63%</div>
                 </div>
@@ -834,7 +834,19 @@
             
             rows.forEach(row => {
                 const status = row.dataset.status;
-                if (filter === 'all' || status === filter) {
+                let shouldShow = false;
+                
+                if (filter === 'all') {
+                    shouldShow = true;
+                } else if (filter === 'on-track' && status === 'on-track') {
+                    shouldShow = true;
+                } else if (filter === 'at-risk' && status === 'at-risk') {
+                    shouldShow = true;
+                } else if (filter === 'needs-attention' && status === 'needs-attention') {
+                    shouldShow = true;
+                }
+                
+                if (shouldShow) {
                     row.classList.remove('hidden');
                     visibleCount++;
                 } else {
@@ -872,4 +884,69 @@
             const noResults = document.getElementById('capacityNoResults');
             
             let visibleCount = 0;
+            
+            rows.forEach(row => {
+                const accountCount = parseInt(row.cells[1].textContent); // Get account count from second column
+                let shouldShow = false;
+                
+                if (filter === 'all') {
+                    shouldShow = true;
+                } else if (filter === 'high-capacity' && accountCount >= 5) {
+                    shouldShow = true;
+                } else if (filter === 'low-capacity' && accountCount <= 2) {
+                    shouldShow = true;
+                }
+                
+                if (shouldShow) {
+                    row.classList.remove('hidden');
+                    visibleCount++;
+                } else {
+                    row.classList.add('hidden');
+                }
+            });
+            
+            noResults.style.display = visibleCount === 0 ? 'block' : 'none';
+        }
+
+        function filterConversionRates() {
+            const filter = document.getElementById('conversionFilter').value;
+            const items = document.querySelectorAll('#conversionList .conversion-item');
+            const noResults = document.getElementById('conversionNoResults');
+            
+            let visibleCount = 0;
+            
+            items.forEach(item => {
+                const rateText = item.querySelector('.conversion-rate').textContent;
+                const rate = parseInt(rateText.replace('%', ''));
+                let shouldShow = false;
+                
+                if (filter === 'all') {
+                    shouldShow = true;
+                } else if (filter === 'high-conversion' && rate > 80) {
+                    shouldShow = true;
+                } else if (filter === 'medium-conversion' && rate >= 70 && rate <= 80) {
+                    shouldShow = true;
+                } else if (filter === 'low-conversion' && rate < 70) {
+                    shouldShow = true;
+                }
+                
+                if (shouldShow) {
+                    item.classList.remove('hidden');
+                    visibleCount++;
+                } else {
+                    item.classList.add('hidden');
+                }
+            });
+            
+            noResults.style.display = visibleCount === 0 ? 'block' : 'none';
+        }
+
+        // Initialize filters when page loads
+        document.addEventListener('DOMContentLoaded', () => {
+            // Add event listeners to all filter dropdowns
+            document.getElementById('teamStatusFilter').addEventListener('change', filterTeamTable);
+            document.getElementById('opportunityOwnerFilter').addEventListener('change', filterOpportunities);
+            document.getElementById('capacityFilter').addEventListener('change', filterCapacityTable);
+            document.getElementById('conversionFilter').addEventListener('change', filterConversionRates);
+        });
             
