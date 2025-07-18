@@ -124,6 +124,10 @@
             border-left-color: #28a745;
         }
 
+        .opportunity-item.hidden {
+            display: none;
+        }
+
         .opportunity-info h3 {
             font-size: 1rem;
             color: #2c3e50;
@@ -293,6 +297,7 @@
             border: 1px solid #dee2e6;
             border-radius: 4px;
             font-size: 0.875rem;
+            cursor: pointer;
         }
 
         .score-badge {
@@ -341,6 +346,13 @@
         .engagement-high { background: #27ae60; }
         .engagement-medium { background: #f39c12; }
         .engagement-low { background: #e74c3c; }
+
+        .no-results {
+            text-align: center;
+            padding: 2rem;
+            color: #7f8c8d;
+            font-style: italic;
+        }
     </style>
 </head>
 <body>
@@ -358,32 +370,32 @@
             <h2>📊 High Potential Account Overview</h2>
             <div class="metrics-grid">
                 <div class="metric-card">
-                    <div class="metric-value">15</div>
+                    <div class="metric-value" id="totalAccounts">15</div>
                     <div class="metric-label">Total High Potential Accounts</div>
                 </div>
                 <div class="metric-card">
-                    <div class="metric-value">€3.8M</div>
+                    <div class="metric-value" id="pipelineValue">€3.8M</div>
                     <div class="metric-label">Potential Pipeline Value</div>
                 </div>
                 <div class="metric-card">
-                    <div class="metric-value">3</div>
+                    <div class="metric-value" id="highPotentialCount">3</div>
                     <div class="metric-label">High Potential Accounts (>75)</div>
                 </div>
                 <div class="metric-card">
-                    <div class="metric-value">72</div>
+                    <div class="metric-value" id="averageScore">72</div>
                     <div class="metric-label">Average Score</div>
                 </div>
             </div>
             <div class="filter-controls">
                 <label>Filter by Score:</label>
-                <select class="filter-select">
+                <select class="filter-select" id="scoreFilter">
                     <option value="all">All Accounts</option>
                     <option value="high">High (76-100)</option>
                     <option value="medium">Medium (51-75)</option>
                     <option value="low">Low (0-50)</option>
                 </select>
                 <label>Sort by:</label>
-                <select class="filter-select">
+                <select class="filter-select" id="sortFilter">
                     <option value="score">Expansion Score</option>
                     <option value="name">Company Name</option>
                     <option value="pipeline">Pipeline Value</option>
@@ -394,68 +406,24 @@
         <!-- Hot Opportunities -->
         <div class="card hot-opportunities">
             <h2>🔥 Potential Expansion Accounts & Opportunities</h2>
-            <div class="opportunity-item selected">
-                <div class="opportunity-info">
-                    <h3>TechCorp Solutions</h3>
-                    <p>Conversations – Standard • Score: 92</p>
-                </div>
-                <div class="opportunity-value">
-                    <div class="score">92</div>
-                    <div class="amount">Potential Value: €45K</div>
-                </div>
+            <div id="opportunitiesList">
+                <!-- Opportunities will be populated by JavaScript -->
             </div>
-            <div class="opportunity-item">
-                <div class="opportunity-info">
-                    <h3>Tech Pioneers</h3>
-                    <p>Conversations – Premium • Score: 90</p>
-                </div>
-                <div class="opportunity-value">
-                    <div class="score">90</div>
-                    <div class="amount">Potential Value: €41K</div>
-                </div>
-            </div>
-            <div class="opportunity-item">
-                <div class="opportunity-info">
-                    <h3>FinTech Forward</h3>
-                    <p>Compensation Management • Score: 83</p>
-                </div>
-                <div class="opportunity-value">
-                    <div class="score">83</div>
-                    <div class="amount">Potential Value: €38K</div>
-                </div>
-            </div>
-            <div class="opportunity-item">
-                <div class="opportunity-info">
-                    <h3>Strategy Consultants</h3>
-                    <p>Recruiting - Medium • Score: 78</p>
-                </div>
-                <div class="opportunity-value">
-                    <div class="score">78</div>
-                    <div class="amount">Potential Value: €29K</div>
-                </div>
-            </div>
-            <div class="opportunity-item">
-                <div class="opportunity-info">
-                    <h3>Financial Services Co</h3>
-                    <p>Compensation Management • Score: 74</p>
-                </div>
-                <div class="opportunity-value">
-                    <div class="score">74</div>
-                    <div class="amount">Potential Value: €31K</div>
-                </div>
+            <div id="noResults" class="no-results" style="display: none;">
+                No accounts match your current filters.
             </div>
         </div>
 
         <!-- Account Deep Dive -->
         <div class="card account-deep-dive">
             <h2>🔍 Account Deep Dive</h2>
-            <div>
+            <div id="accountDetails">
                 <div style="margin-bottom: 1rem;">
                     <div style="display: flex; justify-content: space-between; align-items: center;">
-                        <h3>TechCorp Solutions</h3>
-                        <span class="score-badge score-high">92/100</span>
+                        <h3 id="selectedAccountName">TechCorp Solutions</h3>
+                        <span class="score-badge score-high" id="selectedAccountScore">92/100</span>
                     </div>
-                    <p style="color: #7f8c8d; font-size: 0.875rem;">Technology • 450 employees</p>
+                    <p style="color: #7f8c8d; font-size: 0.875rem;" id="selectedAccountInfo">Technology • 450 employees</p>
                 </div>
                 <div class="signal-breakdown">
                     <div class="signal-category">
@@ -680,5 +648,146 @@
             </div>
         </div>
     </div>
+
+    <script>
+        // Sample data for opportunities
+        const opportunities = [
+            { name: "TechCorp Solutions", product: "Conversations – Standard", score: 92, value: 45000, industry: "Technology", employees: 450 },
+            { name: "Tech Pioneers", product: "Conversations – Premium", score: 90, value: 41000, industry: "Technology", employees: 320 },
+            { name: "FinTech Forward", product: "Compensation Management", score: 83, value: 38000, industry: "Financial Services", employees: 280 },
+            { name: "Strategy Consultants", product: "Recruiting - Medium", score: 78, value: 29000, industry: "Consulting", employees: 150 },
+            { name: "Financial Services Co", product: "Compensation Management", score: 74, value: 31000, industry: "Financial Services", employees: 520 },
+            { name: "Growth Dynamics", product: "Personio Payroll", score: 70, value: 25000, industry: "Technology", employees: 180 },
+            { name: "Manufacturing Plus", product: "Personio Payroll", score: 68, value: 22000, industry: "Manufacturing", employees: 850 },
+            { name: "Healthcare Innovators", product: "Employee Experience", score: 65, value: 28000, industry: "Healthcare", employees: 400 },
+            { name: "Scale Ventures", product: "Talent Management", score: 62, value: 19000, industry: "Venture Capital", employees: 80 },
+            { name: "Retail Chain Co", product: "Payroll", score: 58, value: 35000, industry: "Retail", employees: 1200 },
+            { name: "Legal Partners", product: "Talent Acquisition", score: 55, value: 18000, industry: "Legal Services", employees: 120 },
+            { name: "Education Corp", product: "Employee Experience", score: 52, value: 16000, industry: "Education", employees: 300 },
+            { name: "MedTech Innovations", product: "Payroll", score: 48, value: 21000, industry: "Healthcare", employees: 250 },
+            { name: "Alpine Systems", product: "Talent Management", score: 45, value: 14000, industry: "Software", employees: 90 },
+            { name: "Startup Hub", product: "Recruiting - Small", score: 42, value: 12000, industry: "Technology", employees: 60 }
+        ];
+
+        let filteredOpportunities = [...opportunities];
+        let selectedAccount = opportunities[0];
+
+        function getScoreCategory(score) {
+            if (score >= 76) return 'high';
+            if (score >= 51) return 'medium';
+            return 'low';
+        }
+
+        function formatCurrency(value) {
+            return `€${(value / 1000).toFixed(0)}K`;
+        }
+
+        function updateMetrics() {
+            const totalAccounts = filteredOpportunities.length;
+            const totalValue = filteredOpportunities.reduce((sum, opp) => sum + opp.value, 0);
+            const highPotentialCount = filteredOpportunities.filter(opp => opp.score > 75).length;
+            const averageScore = Math.round(filteredOpportunities.reduce((sum, opp) => sum + opp.score, 0) / totalAccounts) || 0;
+
+            document.getElementById('totalAccounts').textContent = totalAccounts;
+            document.getElementById('pipelineValue').textContent = formatCurrency(totalValue);
+            document.getElementById('highPotentialCount').textContent = highPotentialCount;
+            document.getElementById('averageScore').textContent = averageScore;
+        }
+
+        function renderOpportunities() {
+            const container = document.getElementById('opportunitiesList');
+            const noResults = document.getElementById('noResults');
+            
+            if (filteredOpportunities.length === 0) {
+                container.innerHTML = '';
+                noResults.style.display = 'block';
+                return;
+            }
+
+            noResults.style.display = 'none';
+            
+            container.innerHTML = filteredOpportunities.map((opp, index) => `
+                <div class="opportunity-item ${index === 0 ? 'selected' : ''}" data-account="${opp.name}">
+                    <div class="opportunity-info">
+                        <h3>${opp.name}</h3>
+                        <p>${opp.product} • Score: ${opp.score}</p>
+                    </div>
+                    <div class="opportunity-value">
+                        <div class="score">${opp.score}</div>
+                        <div class="amount">Potential Value: ${formatCurrency(opp.value)}</div>
+                    </div>
+                </div>
+            `).join('');
+
+            // Add click handlers
+            container.querySelectorAll('.opportunity-item').forEach(item => {
+                item.addEventListener('click', () => {
+                    // Remove selected class from all items
+                    container.querySelectorAll('.opportunity-item').forEach(i => i.classList.remove('selected'));
+                    // Add selected class to clicked item
+                    item.classList.add('selected');
+                    
+                    // Update account details
+                    const accountName = item.dataset.account;
+                    selectedAccount = opportunities.find(opp => opp.name === accountName);
+                    updateAccountDetails();
+                });
+            });
+
+            // Update selected account if it's not in filtered results
+            if (!filteredOpportunities.find(opp => opp.name === selectedAccount.name)) {
+                selectedAccount = filteredOpportunities[0];
+                updateAccountDetails();
+            }
+        }
+
+        function updateAccountDetails() {
+            if (!selectedAccount) return;
+
+            document.getElementById('selectedAccountName').textContent = selectedAccount.name;
+            document.getElementById('selectedAccountScore').textContent = `${selectedAccount.score}/100`;
+            document.getElementById('selectedAccountInfo').textContent = `${selectedAccount.industry} • ${selectedAccount.employees} employees`;
+            
+            // Update score badge color
+            const scoreBadge = document.getElementById('selectedAccountScore');
+            scoreBadge.className = `score-badge score-${getScoreCategory(selectedAccount.score)}`;
+        }
+
+        function applyFilters() {
+            const scoreFilter = document.getElementById('scoreFilter').value;
+            const sortFilter = document.getElementById('sortFilter').value;
+
+            // Apply score filter
+            filteredOpportunities = opportunities.filter(opp => {
+                if (scoreFilter === 'all') return true;
+                return getScoreCategory(opp.score) === scoreFilter;
+            });
+
+            // Apply sorting
+            filteredOpportunities.sort((a, b) => {
+                switch (sortFilter) {
+                    case 'name':
+                        return a.name.localeCompare(b.name);
+                    case 'pipeline':
+                        return b.value - a.value;
+                    case 'score':
+                    default:
+                        return b.score - a.score;
+                }
+            });
+
+            updateMetrics();
+            renderOpportunities();
+        }
+
+        // Initialize
+        document.addEventListener('DOMContentLoaded', () => {
+            applyFilters();
+            
+            // Add event listeners for filters
+            document.getElementById('scoreFilter').addEventListener('change', applyFilters);
+            document.getElementById('sortFilter').addEventListener('change', applyFilters);
+        });
+    </script>
 </body>
 </html>

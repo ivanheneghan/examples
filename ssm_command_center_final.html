@@ -62,6 +62,9 @@
             margin-bottom: 1rem;
             border-bottom: 2px solid #3498db;
             padding-bottom: 0.5rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
         }
 
         .full-width {
@@ -204,6 +207,10 @@
             border-left: 4px solid #3498db;
         }
 
+        .opportunity-item.hidden {
+            display: none;
+        }
+
         .opportunity-info h4 {
             font-size: 0.875rem;
             color: #2c3e50;
@@ -252,6 +259,10 @@
             background: #f8f9fa;
             font-weight: 600;
             color: #2c3e50;
+        }
+
+        .team-table tbody tr.hidden {
+            display: none;
         }
 
         .status-badge {
@@ -324,6 +335,10 @@
             border-bottom: none;
         }
 
+        .conversion-item.hidden {
+            display: none;
+        }
+
         .conversion-rep {
             font-size: 0.875rem;
             color: #2c3e50;
@@ -333,6 +348,28 @@
             font-size: 0.875rem;
             font-weight: 600;
             color: #27ae60;
+        }
+
+        .filter-controls {
+            display: flex;
+            gap: 0.5rem;
+            align-items: center;
+        }
+
+        .filter-select {
+            padding: 0.25rem 0.5rem;
+            border: 1px solid #dee2e6;
+            border-radius: 4px;
+            font-size: 0.75rem;
+            cursor: pointer;
+        }
+
+        .no-results {
+            text-align: center;
+            padding: 1rem;
+            color: #7f8c8d;
+            font-style: italic;
+            font-size: 0.875rem;
         }
     </style>
 </head>
@@ -389,7 +426,17 @@
 
         <!-- Team Performance -->
         <div class="card">
-            <h2>👥 Team Performance</h2>
+            <h2>
+                👥 Team Performance
+                <div class="filter-controls">
+                    <select class="filter-select" id="teamStatusFilter">
+                        <option value="all">All</option>
+                        <option value="on-track">On Track</option>
+                        <option value="at-risk">At Risk</option>
+                        <option value="needs-attention">Needs Attention</option>
+                    </select>
+                </div>
+            </h2>
             <table class="team-table">
                 <thead>
                     <tr>
@@ -401,8 +448,8 @@
                         <th>Status</th>
                     </tr>
                 </thead>
-                <tbody>
-                    <tr>
+                <tbody id="teamTableBody">
+                    <tr data-status="on-track">
                         <td>Sarah Johnson</td>
                         <td>€600K</td>
                         <td>€630K</td>
@@ -410,7 +457,7 @@
                         <td>6</td>
                         <td><span class="status-badge status-on-track">Exceed</span></td>
                     </tr>
-                    <tr>
+                    <tr data-status="on-track">
                         <td>Lisa Rodriguez</td>
                         <td>€600K</td>
                         <td>€540K</td>
@@ -418,7 +465,7 @@
                         <td>4</td>
                         <td><span class="status-badge status-on-track">Track</span></td>
                     </tr>
-                    <tr>
+                    <tr data-status="on-track">
                         <td>Emma Park</td>
                         <td>€600K</td>
                         <td>€510K</td>
@@ -426,7 +473,7 @@
                         <td>2</td>
                         <td><span class="status-badge status-on-track">Track</span></td>
                     </tr>
-                    <tr>
+                    <tr data-status="at-risk">
                         <td>Marcus Chen</td>
                         <td>€600K</td>
                         <td>€480K</td>
@@ -434,7 +481,7 @@
                         <td>2</td>
                         <td><span class="status-badge status-at-risk">Risk</span></td>
                     </tr>
-                    <tr>
+                    <tr data-status="needs-attention">
                         <td>David Kumar</td>
                         <td>€600K</td>
                         <td>€390K</td>
@@ -444,6 +491,9 @@
                     </tr>
                 </tbody>
             </table>
+            <div id="teamNoResults" class="no-results" style="display: none;">
+                No team members match the selected filter.
+            </div>
         </div>
 
         <!-- Pipeline Section -->
@@ -592,62 +642,88 @@
 
         <!-- Top Opportunities by SSM -->
         <div class="card">
-            <h2>🔥 Top Opportunities by SSM</h2>
-            <div class="opportunity-item">
-                <div class="opportunity-info">
-                    <h4>TechCorp Solutions</h4>
-                    <p>Sarah Johnson • Conversations – Standard</p>
+            <h2>
+                🔥 Top Opportunities by SSM
+                <div class="filter-controls">
+                    <select class="filter-select" id="opportunityOwnerFilter">
+                        <option value="all">All SSMs</option>
+                        <option value="Sarah Johnson">Sarah Johnson</option>
+                        <option value="Lisa Rodriguez">Lisa Rodriguez</option>
+                        <option value="Emma Park">Emma Park</option>
+                        <option value="Marcus Chen">Marcus Chen</option>
+                        <option value="David Kumar">David Kumar</option>
+                    </select>
                 </div>
-                <div class="opportunity-value">
-                    <div class="score">92</div>
-                    <div class="amount">€45K</div>
+            </h2>
+            <div id="opportunitiesList">
+                <div class="opportunity-item" data-owner="Sarah Johnson">
+                    <div class="opportunity-info">
+                        <h4>TechCorp Solutions</h4>
+                        <p>Sarah Johnson • Conversations – Standard</p>
+                    </div>
+                    <div class="opportunity-value">
+                        <div class="score">92</div>
+                        <div class="amount">€45K</div>
+                    </div>
+                </div>
+                <div class="opportunity-item" data-owner="Sarah Johnson">
+                    <div class="opportunity-info">
+                        <h4>Tech Pioneers</h4>
+                        <p>Sarah Johnson • Conversations – Premium</p>
+                    </div>
+                    <div class="opportunity-value">
+                        <div class="score">90</div>
+                        <div class="amount">€41K</div>
+                    </div>
+                </div>
+                <div class="opportunity-item" data-owner="Lisa Rodriguez">
+                    <div class="opportunity-info">
+                        <h4>Growth Dynamics</h4>
+                        <p>Lisa Rodriguez • Personio Payroll</p>
+                    </div>
+                    <div class="opportunity-value">
+                        <div class="score">84</div>
+                        <div class="amount">€32K</div>
+                    </div>
+                </div>
+                <div class="opportunity-item" data-owner="Sarah Johnson">
+                    <div class="opportunity-info">
+                        <h4>FinTech Forward</h4>
+                        <p>Sarah Johnson • Compensation Management</p>
+                    </div>
+                    <div class="opportunity-value">
+                        <div class="score">83</div>
+                        <div class="amount">€38K</div>
+                    </div>
+                </div>
+                <div class="opportunity-item" data-owner="Lisa Rodriguez">
+                    <div class="opportunity-info">
+                        <h4>Manufacturing Plus</h4>
+                        <p>Lisa Rodriguez • Personio Payroll</p>
+                    </div>
+                    <div class="opportunity-value">
+                        <div class="score">79</div>
+                        <div class="amount">€34K</div>
+                    </div>
                 </div>
             </div>
-            <div class="opportunity-item">
-                <div class="opportunity-info">
-                    <h4>Tech Pioneers</h4>
-                    <p>Sarah Johnson • Conversations – Premium</p>
-                </div>
-                <div class="opportunity-value">
-                    <div class="score">90</div>
-                    <div class="amount">€41K</div>
-                </div>
-            </div>
-            <div class="opportunity-item">
-                <div class="opportunity-info">
-                    <h4>Growth Dynamics</h4>
-                    <p>Lisa Rodriguez • Personio Payroll</p>
-                </div>
-                <div class="opportunity-value">
-                    <div class="score">84</div>
-                    <div class="amount">€32K</div>
-                </div>
-            </div>
-            <div class="opportunity-item">
-                <div class="opportunity-info">
-                    <h4>FinTech Forward</h4>
-                    <p>Sarah Johnson • Compensation Management</p>
-                </div>
-                <div class="opportunity-value">
-                    <div class="score">83</div>
-                    <div class="amount">€38K</div>
-                </div>
-            </div>
-            <div class="opportunity-item">
-                <div class="opportunity-info">
-                    <h4>Manufacturing Plus</h4>
-                    <p>Lisa Rodriguez • Personio Payroll</p>
-                </div>
-                <div class="opportunity-value">
-                    <div class="score">79</div>
-                    <div class="amount">€34K</div>
-                </div>
+            <div id="opportunitiesNoResults" class="no-results" style="display: none;">
+                No opportunities match the selected filter.
             </div>
         </div>
 
         <!-- Team Capacity Analysis -->
         <div class="card">
-            <h2>⚖️ Team Capacity Analysis</h2>
+            <h2>
+                ⚖️ Team Capacity Analysis
+                <div class="filter-controls">
+                    <select class="filter-select" id="capacityFilter">
+                        <option value="all">All Team</option>
+                        <option value="high-capacity">High Capacity (5+ accounts)</option>
+                        <option value="low-capacity">Low Capacity (1-2 accounts)</option>
+                    </select>
+                </div>
+            </h2>
             <table class="team-table">
                 <thead>
                     <tr>
@@ -657,32 +733,32 @@
                         <th>Avg Score</th>
                     </tr>
                 </thead>
-                <tbody>
-                    <tr>
+                <tbody id="capacityTableBody">
+                    <tr data-capacity="high-capacity">
                         <td>Sarah Johnson</td>
                         <td>6</td>
                         <td>€236K</td>
                         <td>81</td>
                     </tr>
-                    <tr>
+                    <tr data-capacity="medium-capacity">
                         <td>Lisa Rodriguez</td>
                         <td>4</td>
                         <td>€114K</td>
                         <td>76</td>
                     </tr>
-                    <tr>
+                    <tr data-capacity="low-capacity">
                         <td>Emma Park</td>
                         <td>2</td>
                         <td>€40K</td>
                         <td>69</td>
                     </tr>
-                    <tr>
+                    <tr data-capacity="low-capacity">
                         <td>Marcus Chen</td>
                         <td>2</td>
                         <td>€28K</td>
                         <td>54</td>
                     </tr>
-                    <tr>
+                    <tr data-capacity="low-capacity">
                         <td>David Kumar</td>
                         <td>1</td>
                         <td>€8K</td>
@@ -690,6 +766,9 @@
                     </tr>
                 </tbody>
             </table>
+            <div id="capacityNoResults" class="no-results" style="display: none;">
+                No team members match the selected capacity filter.
+            </div>
             <div style="margin-top: 1rem; padding: 0.75rem; background: #e9ecef; border-radius: 4px; text-align: center;">
                 <div style="font-size: 0.875rem; color: #495057;">
                     <strong>Imbalance Detected:</strong> Sarah at max capacity (6), David has room for 5 more high potential accounts
@@ -699,26 +778,41 @@
 
         <!-- Conversion Rates -->
         <div class="card">
-            <h2>📊 High Potential → Opportunity Conversion</h2>
-            <div class="conversion-item">
-                <div class="conversion-rep">Sarah Johnson</div>
-                <div class="conversion-rate">89%</div>
+            <h2>
+                📊 High Potential → Opportunity Conversion
+                <div class="filter-controls">
+                    <select class="filter-select" id="conversionFilter">
+                        <option value="all">All Rates</option>
+                        <option value="high-conversion">High (>80%)</option>
+                        <option value="medium-conversion">Medium (70-80%)</option>
+                        <option value="low-conversion">Low (<70%)</option>
+                    </select>
+                </div>
+            </h2>
+            <div id="conversionList">
+                <div class="conversion-item" data-conversion="high-conversion">
+                    <div class="conversion-rep">Sarah Johnson</div>
+                    <div class="conversion-rate">89%</div>
+                </div>
+                <div class="conversion-item" data-conversion="high-conversion">
+                    <div class="conversion-rep">Emma Park</div>
+                    <div class="conversion-rate">84%</div>
+                </div>
+                <div class="conversion-item" data-conversion="medium-conversion">
+                    <div class="conversion-rep">Lisa Rodriguez</div>
+                    <div class="conversion-rate">78%</div>
+                </div>
+                <div class="conversion-item" data-conversion="medium-conversion">
+                    <div class="conversion-rep">Marcus Chen</div>
+                    <div class="conversion-rate">71%</div>
+                </div>
+                <div class="conversion-item" data-conversion="low-conversion">
+                    <div class="conversion-rep">David Kumar</div>
+                    <div class="conversion-rate">63%</div>
+                </div>
             </div>
-            <div class="conversion-item">
-                <div class="conversion-rep">Emma Park</div>
-                <div class="conversion-rate">84%</div>
-            </div>
-            <div class="conversion-item">
-                <div class="conversion-rep">Lisa Rodriguez</div>
-                <div class="conversion-rate">78%</div>
-            </div>
-            <div class="conversion-item">
-                <div class="conversion-rep">Marcus Chen</div>
-                <div class="conversion-rate">71%</div>
-            </div>
-            <div class="conversion-item">
-                <div class="conversion-rep">David Kumar</div>
-                <div class="conversion-rate">63%</div>
+            <div id="conversionNoResults" class="no-results" style="display: none;">
+                No conversion rates match the selected filter.
             </div>
             <div style="margin-top: 1rem; padding: 0.75rem; background: #f8f9fa; border-radius: 4px;">
                 <div style="font-size: 0.875rem; color: #495057; text-align: center;">
@@ -727,5 +821,55 @@
             </div>
         </div>
     </div>
-</body>
-</html>
+
+    <script>
+        // Filter functions
+        function filterTeamTable() {
+            const filter = document.getElementById('teamStatusFilter').value;
+            const tbody = document.getElementById('teamTableBody');
+            const rows = tbody.querySelectorAll('tr');
+            const noResults = document.getElementById('teamNoResults');
+            
+            let visibleCount = 0;
+            
+            rows.forEach(row => {
+                const status = row.dataset.status;
+                if (filter === 'all' || status === filter) {
+                    row.classList.remove('hidden');
+                    visibleCount++;
+                } else {
+                    row.classList.add('hidden');
+                }
+            });
+            
+            noResults.style.display = visibleCount === 0 ? 'block' : 'none';
+        }
+
+        function filterOpportunities() {
+            const filter = document.getElementById('opportunityOwnerFilter').value;
+            const opportunities = document.querySelectorAll('#opportunitiesList .opportunity-item');
+            const noResults = document.getElementById('opportunitiesNoResults');
+            
+            let visibleCount = 0;
+            
+            opportunities.forEach(item => {
+                const owner = item.dataset.owner;
+                if (filter === 'all' || owner === filter) {
+                    item.classList.remove('hidden');
+                    visibleCount++;
+                } else {
+                    item.classList.add('hidden');
+                }
+            });
+            
+            noResults.style.display = visibleCount === 0 ? 'block' : 'none';
+        }
+
+        function filterCapacityTable() {
+            const filter = document.getElementById('capacityFilter').value;
+            const tbody = document.getElementById('capacityTableBody');
+            const rows = tbody.querySelectorAll('tr');
+            const noResults = document.getElementById('capacityNoResults');
+            
+            let visibleCount = 0;
+            
