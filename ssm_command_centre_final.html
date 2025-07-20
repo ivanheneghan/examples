@@ -1,0 +1,1003 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SSM Command Centre</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: #f5f7fa;
+            color: #333;
+            line-height: 1.6;
+        }
+
+        .header {
+            background: #34495e;
+            color: white;
+            padding: 1rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+
+        .header h1 {
+            font-size: 1.5rem;
+            font-weight: 600;
+        }
+
+        .user-info {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .main-container {
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr;
+            gap: 1.5rem;
+            padding: 2rem;
+            max-width: 1800px;
+            margin: 0 auto;
+        }
+
+        .card {
+            background: white;
+            border-radius: 8px;
+            padding: 1.5rem;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            border: 1px solid #e1e8ed;
+        }
+
+        .card h2 {
+            color: #2c3e50;
+            font-size: 1.1rem;
+            margin-bottom: 1rem;
+            border-bottom: 2px solid #3498db;
+            padding-bottom: 0.5rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .full-width {
+            grid-column: 1 / -1;
+        }
+
+        .two-thirds {
+            grid-column: span 2;
+        }
+
+        .metric-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0.75rem 0;
+            border-bottom: 1px solid #ecf0f1;
+        }
+
+        .metric-row:last-child {
+            border-bottom: none;
+        }
+
+        .metric-label {
+            font-size: 0.875rem;
+            color: #7f8c8d;
+        }
+
+        .metric-value {
+            font-size: 1rem;
+            font-weight: 600;
+            color: #2c3e50;
+        }
+
+        .metric-change {
+            font-size: 0.875rem;
+            font-weight: 500;
+        }
+
+        .metric-change.positive {
+            color: #27ae60;
+        }
+
+        .metric-change.negative {
+            color: #e74c3c;
+        }
+
+        .pipeline-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0.75rem;
+            background: #f8f9fa;
+            border-radius: 6px;
+            margin-bottom: 0.5rem;
+            border-left: 4px solid;
+        }
+
+        .pipeline-item.payroll {
+            border-left-color: #3498db;
+        }
+
+        .pipeline-item.talent-acquisition {
+            border-left-color: #e74c3c;
+        }
+
+        .pipeline-item.talent-management {
+            border-left-color: #f39c12;
+        }
+
+        .pipeline-item.employee-experience {
+            border-left-color: #9b59b6;
+        }
+
+        .pipeline-info h4 {
+            font-size: 0.9rem;
+            color: #2c3e50;
+            margin-bottom: 0.25rem;
+        }
+
+        .pipeline-info p {
+            font-size: 0.8rem;
+            color: #7f8c8d;
+        }
+
+        .pipeline-value {
+            text-align: right;
+        }
+
+        .pipeline-value .amount {
+            font-size: 1rem;
+            font-weight: 600;
+            color: #2c3e50;
+        }
+
+        .pipeline-value .confidence {
+            font-size: 0.8rem;
+            color: #7f8c8d;
+        }
+
+        .signal-overview {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 1rem;
+            margin-bottom: 1rem;
+        }
+
+        .signal-summary {
+            background: #f8f9fa;
+            padding: 1rem;
+            border-radius: 6px;
+            text-align: center;
+        }
+
+        .signal-summary h4 {
+            font-size: 0.8rem;
+            color: #2c3e50;
+            margin-bottom: 0.5rem;
+        }
+
+        .signal-score-avg {
+            font-size: 1.25rem;
+            font-weight: 600;
+            color: #3498db;
+        }
+
+        .signal-trend {
+            font-size: 0.7rem;
+            color: #7f8c8d;
+            margin-top: 0.25rem;
+        }
+
+        .opportunity-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0.75rem;
+            background: #f8f9fa;
+            border-radius: 6px;
+            margin-bottom: 0.5rem;
+            border-left: 4px solid #3498db;
+        }
+
+        .opportunity-item.hidden {
+            display: none;
+        }
+
+        .opportunity-info h4 {
+            font-size: 0.875rem;
+            color: #2c3e50;
+            margin-bottom: 0.25rem;
+        }
+
+        .opportunity-info p {
+            font-size: 0.75rem;
+            color: #7f8c8d;
+        }
+
+        .opportunity-value {
+            text-align: right;
+        }
+
+        .opportunity-value .score {
+            font-size: 1rem;
+            font-weight: 600;
+            color: #27ae60;
+        }
+
+        .opportunity-value .amount {
+            font-size: 0.8rem;
+            color: #7f8c8d;
+        }
+
+        .team-table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        .team-table th,
+        .team-table td {
+            padding: 0.5rem;
+            text-align: center;
+            border-bottom: 1px solid #ecf0f1;
+            font-size: 0.75rem;
+        }
+
+        .team-table th:first-child,
+        .team-table td:first-child {
+            text-align: left;
+        }
+
+        .team-table th {
+            background: #f8f9fa;
+            font-weight: 600;
+            color: #2c3e50;
+        }
+
+        .team-table tbody tr.hidden {
+            display: none;
+        }
+
+        .status-badge {
+            padding: 0.2rem 0.5rem;
+            border-radius: 10px;
+            font-size: 0.7rem;
+            font-weight: 500;
+            color: white;
+        }
+
+        .status-on-track { background: #27ae60; }
+        .status-at-risk { background: #f39c12; }
+        .status-needs-attention { background: #e74c3c; }
+
+        .alert-item {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            padding: 0.75rem;
+            border-radius: 6px;
+            margin-bottom: 0.75rem;
+            border-left: 4px solid #333;
+            background: #f8f9fa;
+            border: 1px solid #e1e8ed;
+        }
+
+        .alert-content {
+            flex: 1;
+        }
+
+        .alert-content h4 {
+            font-size: 0.875rem;
+            color: #2c3e50;
+            margin-bottom: 0.25rem;
+            font-weight: 600;
+        }
+
+        .alert-content p {
+            font-size: 0.8rem;
+            color: #7f8c8d;
+        }
+
+        .btn {
+            padding: 0.5rem 1rem;
+            border: none;
+            border-radius: 4px;
+            font-size: 0.875rem;
+            cursor: pointer;
+            transition: background 0.2s;
+        }
+
+        .btn-primary {
+            background: #3498db;
+            color: white;
+        }
+
+        .btn-primary:hover {
+            background: #2980b9;
+        }
+
+        .conversion-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0.5rem 0;
+            border-bottom: 1px solid #ecf0f1;
+        }
+
+        .conversion-item:last-child {
+            border-bottom: none;
+        }
+
+        .conversion-item.hidden {
+            display: none;
+        }
+
+        .conversion-rep {
+            font-size: 0.875rem;
+            color: #2c3e50;
+        }
+
+        .conversion-rate {
+            font-size: 0.875rem;
+            font-weight: 600;
+            color: #27ae60;
+        }
+
+        .filter-controls {
+            display: flex;
+            gap: 0.5rem;
+            align-items: center;
+        }
+
+        .filter-select {
+            padding: 0.25rem 0.5rem;
+            border: 1px solid #dee2e6;
+            border-radius: 4px;
+            font-size: 0.75rem;
+            cursor: pointer;
+        }
+
+        .no-results {
+            text-align: center;
+            padding: 1rem;
+            color: #7f8c8d;
+            font-style: italic;
+            font-size: 0.875rem;
+        }
+
+        .scrollable {
+            max-height: 400px;
+            overflow-y: auto;
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <h1>🎯 SSM Command Centre</h1>
+        <div class="user-info">
+            <span>Welcome, Manager Thompson</span>
+            <div style="width: 32px; height: 32px; background: #3498db; border-radius: 50%; display: flex; align-items: center; justify-content: center; color: white; font-weight: bold;">MT</div>
+        </div>
+    </div>
+
+    <div class="main-container">
+        <!-- Performance Section -->
+        <div class="card">
+            <h2>📈 Performance</h2>
+            <div class="metric-row">
+                <div class="metric-label">Team Quota</div>
+                <div class="metric-value">€5.0M</div>
+            </div>
+            <div class="metric-row">
+                <div class="metric-label">Team Actual</div>
+                <div class="metric-value">€4.2M</div>
+            </div>
+            <div class="metric-row">
+                <div class="metric-label">% to Quota</div>
+                <div>
+                    <span class="metric-value">84%</span>
+                    <span class="metric-change positive">+6% vs Q3</span>
+                </div>
+            </div>
+            <div class="metric-row">
+                <div class="metric-label">Avg Deal Size</div>
+                <div>
+                    <span class="metric-value">€42K</span>
+                    <span class="metric-change positive">+5% vs Q3</span>
+                </div>
+            </div>
+            <div class="metric-row">
+                <div class="metric-label">Win Rate</div>
+                <div>
+                    <span class="metric-value">73%</span>
+                    <span class="metric-change positive">+4% vs Q3</span>
+                </div>
+            </div>
+            <div class="metric-row">
+                <div class="metric-label">Time to Close</div>
+                <div>
+                    <span class="metric-value">72 days</span>
+                    <span class="metric-change negative">+5 vs Q3</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Team Performance -->
+        <div class="card">
+            <h2>
+                👥 Team Performance
+                <div class="filter-controls">
+                    <select class="filter-select" id="teamStatusFilter">
+                        <option value="all">All</option>
+                        <option value="on-track">On Track</option>
+                        <option value="at-risk">At Risk</option>
+                        <option value="needs-attention">Needs Attention</option>
+                    </select>
+                </div>
+            </h2>
+            <div class="scrollable">
+                <table class="team-table">
+                    <thead>
+                        <tr>
+                            <th>SSM</th>
+                            <th>Quota</th>
+                            <th>Actual</th>
+                            <th>% to Quota</th>
+                            <th>High Potential</th>
+                            <th>Status</th>
+                        </tr>
+                    </thead>
+                    <tbody id="teamTableBody">
+                        <tr data-status="on-track">
+                            <td>Sarah Johnson</td>
+                            <td>€1.0M</td>
+                            <td>€1.05M</td>
+                            <td>105%</td>
+                            <td>10</td>
+                            <td><span class="status-badge status-on-track">Exceed</span></td>
+                        </tr>
+                        <tr data-status="on-track">
+                            <td>Lisa Rodriguez</td>
+                            <td>€1.0M</td>
+                            <td>€890K</td>
+                            <td>89%</td>
+                            <td>8</td>
+                            <td><span class="status-badge status-on-track">Track</span></td>
+                        </tr>
+                        <tr data-status="on-track">
+                            <td>Emma Park</td>
+                            <td>€1.0M</td>
+                            <td>€850K</td>
+                            <td>85%</td>
+                            <td>6</td>
+                            <td><span class="status-badge status-on-track">Track</span></td>
+                        </tr>
+                        <tr data-status="at-risk">
+                            <td>Marcus Chen</td>
+                            <td>€1.0M</td>
+                            <td>€780K</td>
+                            <td>78%</td>
+                            <td>4</td>
+                            <td><span class="status-badge status-at-risk">Risk</span></td>
+                        </tr>
+                        <tr data-status="needs-attention">
+                            <td>David Kumar</td>
+                            <td>€1.0M</td>
+                            <td>€625K</td>
+                            <td>63%</td>
+                            <td>2</td>
+                            <td><span class="status-badge status-needs-attention">Alert</span></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div id="teamNoResults" class="no-results" style="display: none;">
+                No team members match the selected filter.
+            </div>
+        </div>
+
+        <!-- Pipeline Section -->
+        <div class="card">
+            <h2>🔮 Open Pipeline</h2>
+            <div class="metric-row">
+                <div class="metric-label">Total Open Pipeline</div>
+                <div class="metric-value">€1.2M</div>
+            </div>
+            <div class="metric-row">
+                <div class="metric-label">Expected to Close This Quarter</div>
+                <div>
+                    <span class="metric-value">€720K</span>
+                    <span class="metric-change positive">+22% vs Q4</span>
+                </div>
+            </div>
+            <div class="metric-row">
+                <div class="metric-label">High Potential Accounts</div>
+                <div class="metric-value">30 total</div>
+            </div>
+            <div class="metric-row">
+                <div class="metric-label">Potential Pipeline Value</div>
+                <div class="metric-value">€1.2M</div>
+            </div>
+        </div>
+
+        <!-- Leadership Alerts -->
+        <div class="card full-width">
+            <h2>🚨 Leadership Alerts</h2>
+            
+            <div class="alert-item">
+                <div class="alert-content">
+                    <h4>Capacity Imbalance Alert</h4>
+                    <p>Uneven high potential account distribution: Sarah Johnson (10), David Kumar (2) - 8 account difference detected</p>
+                </div>
+                <button class="btn btn-primary">Take Action</button>
+            </div>
+
+            <div class="alert-item">
+                <div class="alert-content">
+                    <h4>Signal Mastery Gap - David Kumar</h4>
+                    <p>SSM consistently underperforming in License Utilization (28pts below team avg: 42% vs 70%)</p>
+                </div>
+                <button class="btn btn-primary">Take Action</button>
+            </div>
+
+            <div class="alert-item">
+                <div class="alert-content">
+                    <h4>Signal Mastery Gap - Marcus Chen</h4>
+                    <p>SSM consistently underperforming in Communication Engagement (18pts below team avg: 55% vs 73%)</p>
+                </div>
+                <button class="btn btn-primary">Take Action</button>
+            </div>
+
+            <div class="alert-item">
+                <div class="alert-content">
+                    <h4>Quarter-End Risk Alert</h4>
+                    <p>Multiple accounts with declining scores approaching renewal: Mining Solutions (49), Chemical Dynamics (47), Utilities Corp (45)</p>
+                </div>
+                <button class="btn btn-primary">Take Action</button>
+            </div>
+
+            <div class="alert-item">
+                <div class="alert-content">
+                    <h4>Account Distribution Optimization</h4>
+                    <p>5 high-potential accounts (76+ score) could be redistributed from high-capacity SSMs to improve team balance</p>
+                </div>
+                <button class="btn btn-primary">Take Action</button>
+            </div>
+        </div>
+
+        <!-- Signal Matrix Team Overview -->
+        <div class="card">
+            <h2>🔍 Signal Matrix - Team Overview</h2>
+            <div class="signal-overview">
+                <div class="signal-summary">
+                    <h4>Account Health</h4>
+                    <div class="signal-score-avg">70</div>
+                    <div class="signal-trend">+4 vs last month</div>
+                </div>
+                <div class="signal-summary">
+                    <h4>Contact Intent</h4>
+                    <div class="signal-score-avg">68</div>
+                    <div class="signal-trend">+6 vs last month</div>
+                </div>
+                <div class="signal-summary">
+                    <h4>Growth Capacity</h4>
+                    <div class="signal-score-avg">65</div>
+                    <div class="signal-trend">-1 vs last month</div>
+                </div>
+                <div class="signal-summary">
+                    <h4>Timing & Product Fit</h4>
+                    <div class="signal-score-avg">71</div>
+                    <div class="signal-trend">+2 vs last month</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Potential Pipeline by Category -->
+        <div class="card">
+            <h2>🎯 Potential Pipeline by Category</h2>
+            <div class="pipeline-item payroll">
+                <div class="pipeline-info">
+                    <h4>Payroll</h4>
+                    <p>8 potential • €48K avg</p>
+                </div>
+                <div class="pipeline-value">
+                    <div class="amount">€380K</div>
+                    <div class="confidence">High signal</div>
+                </div>
+            </div>
+            <div class="pipeline-item talent-acquisition">
+                <div class="pipeline-info">
+                    <h4>Talent Acquisition</h4>
+                    <p>9 potential • €38K avg</p>
+                </div>
+                <div class="pipeline-value">
+                    <div class="amount">€340K</div>
+                    <div class="confidence">High signal</div>
+                </div>
+            </div>
+            <div class="pipeline-item talent-management">
+                <div class="pipeline-info">
+                    <h4>Talent Management</h4>
+                    <p>7 potential • €41K avg</p>
+                </div>
+                <div class="pipeline-value">
+                    <div class="amount">€285K</div>
+                    <div class="confidence">Medium signal</div>
+                </div>
+            </div>
+            <div class="pipeline-item employee-experience">
+                <div class="pipeline-info">
+                    <h4>Employee Experience</h4>
+                    <p>6 potential • €33K avg</p>
+                </div>
+                <div class="pipeline-value">
+                    <div class="amount">€195K</div>
+                    <div class="confidence">Medium signal</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Top Opportunities -->
+        <div class="card">
+            <h2>
+                🔥 Top Opportunities by SSM
+                <div class="filter-controls">
+                    <select class="filter-select" id="opportunityOwnerFilter">
+                        <option value="all">All SSMs</option>
+                        <option value="Sarah Johnson">Sarah Johnson</option>
+                        <option value="Lisa Rodriguez">Lisa Rodriguez</option>
+                        <option value="Emma Park">Emma Park</option>
+                        <option value="Marcus Chen">Marcus Chen</option>
+                        <option value="David Kumar">David Kumar</option>
+                    </select>
+                </div>
+            </h2>
+            <div class="scrollable">
+                <div id="opportunitiesList">
+                    <div class="opportunity-item" data-owner="Sarah Johnson">
+                        <div class="opportunity-info">
+                            <h4>Tech Pioneers</h4>
+                            <p>Sarah Johnson • Conversations – Premium</p>
+                        </div>
+                        <div class="opportunity-value">
+                            <div class="score">91</div>
+                            <div class="amount">€41K</div>
+                        </div>
+                    </div>
+                    <div class="opportunity-item" data-owner="Sarah Johnson">
+                        <div class="opportunity-info">
+                            <h4>Global Manufacturing</h4>
+                            <p>Sarah Johnson • Talent Management Suite</p>
+                        </div>
+                        <div class="opportunity-value">
+                            <div class="score">88</div>
+                            <div class="amount">€62K</div>
+                        </div>
+                    </div>
+                    <div class="opportunity-item" data-owner="Sarah Johnson">
+                        <div class="opportunity-info">
+                            <h4>CloudTech Solutions</h4>
+                            <p>Sarah Johnson • Recruiting Platform</p>
+                        </div>
+                        <div class="opportunity-value">
+                            <div class="score">86</div>
+                            <div class="amount">€54K</div>
+                        </div>
+                    </div>
+                    <div class="opportunity-item" data-owner="Lisa Rodriguez">
+                        <div class="opportunity-info">
+                            <h4>Digital Innovation Lab</h4>
+                            <p>Lisa Rodriguez • Employee Experience Platform</p>
+                        </div>
+                        <div class="opportunity-value">
+                            <div class="score">84</div>
+                            <div class="amount">€48K</div>
+                        </div>
+                    </div>
+                    <div class="opportunity-item" data-owner="Lisa Rodriguez">
+                        <div class="opportunity-info">
+                            <h4>Strategy Consultants</h4>
+                            <p>Lisa Rodriguez • Recruiting - Medium</p>
+                        </div>
+                        <div class="opportunity-value">
+                            <div class="score">83</div>
+                            <div class="amount">€39K</div>
+                        </div>
+                    </div>
+                    <div class="opportunity-item" data-owner="Sarah Johnson">
+                        <div class="opportunity-info">
+                            <h4>Financial Services Plus</h4>
+                            <p>Sarah Johnson • Compensation Management</p>
+                        </div>
+                        <div class="opportunity-value">
+                            <div class="score">82</div>
+                            <div class="amount">€56K</div>
+                        </div>
+                    </div>
+                    <div class="opportunity-item" data-owner="Emma Park">
+                        <div class="opportunity-info">
+                            <h4>Growth Dynamics</h4>
+                            <p>Emma Park • Personio Payroll</p>
+                        </div>
+                        <div class="opportunity-value">
+                            <div class="score">81</div>
+                            <div class="amount">€35K</div>
+                        </div>
+                    </div>
+                    <div class="opportunity-item" data-owner="Sarah Johnson">
+                        <div class="opportunity-info">
+                            <h4>FinTech Forward</h4>
+                            <p>Sarah Johnson • Compensation Management</p>
+                        </div>
+                        <div class="opportunity-value">
+                            <div class="score">79</div>
+                            <div class="amount">€42K</div>
+                        </div>
+                    </div>
+                    <div class="opportunity-item" data-owner="Lisa Rodriguez">
+                        <div class="opportunity-info">
+                            <h4>Healthcare Innovation</h4>
+                            <p>Lisa Rodriguez • Employee Experience Platform</p>
+                        </div>
+                        <div class="opportunity-value">
+                            <div class="score">78</div>
+                            <div class="amount">€51K</div>
+                        </div>
+                    </div>
+                    <div class="opportunity-item" data-owner="Emma Park">
+                        <div class="opportunity-info">
+                            <h4>Retail Revolution</h4>
+                            <p>Emma Park • Talent Management Suite</p>
+                        </div>
+                        <div class="opportunity-value">
+                            <div class="score">77</div>
+                            <div class="amount">€68K</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div id="opportunitiesNoResults" class="no-results" style="display: none;">
+                No opportunities match the selected filter.
+            </div>
+        </div>
+
+        <!-- Team Capacity Analysis -->
+        <div class="card">
+            <h2>
+                ⚖️ Team Capacity Analysis
+                <div class="filter-controls">
+                    <select class="filter-select" id="capacityFilter">
+                        <option value="all">All Team</option>
+                        <option value="high-capacity">High Capacity (8+ accounts)</option>
+                        <option value="low-capacity">Low Capacity (1-4 accounts)</option>
+                    </select>
+                </div>
+            </h2>
+            <table class="team-table">
+                <thead>
+                    <tr>
+                        <th>SSM</th>
+                        <th>High Potential Accounts</th>
+                        <th>Pipeline Value</th>
+                    </tr>
+                </thead>
+                <tbody id="capacityTableBody">
+                    <tr>
+                        <td>Sarah Johnson</td>
+                        <td>10</td>
+                        <td>€564K</td>
+                    </tr>
+                    <tr>
+                        <td>Lisa Rodriguez</td>
+                        <td>8</td>
+                        <td>€285K</td>
+                    </tr>
+                    <tr>
+                        <td>Emma Park</td>
+                        <td>6</td>
+                        <td>€264K</td>
+                    </tr>
+                    <tr>
+                        <td>Marcus Chen</td>
+                        <td>4</td>
+                        <td>€243K</td>
+                    </tr>
+                    <tr>
+                        <td>David Kumar</td>
+                        <td>2</td>
+                        <td>€105K</td>
+                    </tr>
+                </tbody>
+            </table>
+            <div id="capacityNoResults" class="no-results" style="display: none;">
+                No team members match the selected capacity filter.
+            </div>
+            <div style="margin-top: 1rem; padding: 0.75rem; background: #e9ecef; border-radius: 4px; text-align: center;">
+                <div style="font-size: 0.875rem; color: #495057;">
+                    <strong>Imbalance Detected:</strong> Sarah at max capacity (10), David has room for 8 more high potential accounts
+                </div>
+            </div>
+        </div>
+
+        <!-- Conversion Rates -->
+        <div class="card">
+            <h2>
+                📊 High Potential → Opportunity Conversion
+                <div class="filter-controls">
+                    <select class="filter-select" id="conversionFilter">
+                        <option value="all">All Rates</option>
+                        <option value="high-conversion">High (>80%)</option>
+                        <option value="medium-conversion">Medium (70-80%)</option>
+                        <option value="low-conversion">Low (<70%)</option>
+                    </select>
+                </div>
+            </h2>
+            <div id="conversionList">
+                <div class="conversion-item">
+                    <div class="conversion-rep">Sarah Johnson</div>
+                    <div class="conversion-rate">87%</div>
+                </div>
+                <div class="conversion-item">
+                    <div class="conversion-rep">Lisa Rodriguez</div>
+                    <div class="conversion-rate">83%</div>
+                </div>
+                <div class="conversion-item">
+                    <div class="conversion-rep">Emma Park</div>
+                    <div class="conversion-rate">79%</div>
+                </div>
+                <div class="conversion-item">
+                    <div class="conversion-rep">Marcus Chen</div>
+                    <div class="conversion-rate">68%</div>
+                </div>
+                <div class="conversion-item">
+                    <div class="conversion-rep">David Kumar</div>
+                    <div class="conversion-rate">58%</div>
+                </div>
+            </div>
+            <div id="conversionNoResults" class="no-results" style="display: none;">
+                No conversion rates match the selected filter.
+            </div>
+            <div style="margin-top: 1rem; padding: 0.75rem; background: #f8f9fa; border-radius: 4px;">
+                <div style="font-size: 0.875rem; color: #495057; text-align: center;">
+                    <strong>Team Average:</strong> 75% conversion rate from signal-identified high potential accounts
+                </div>
+            </div>
+        </div>
+
+
+    </div>
+
+    <script>
+        function filterTeamTable() {
+            const filter = document.getElementById('teamStatusFilter').value;
+            const tbody = document.getElementById('teamTableBody');
+            const rows = tbody.querySelectorAll('tr');
+            const noResults = document.getElementById('teamNoResults');
+            
+            let visibleCount = 0;
+            
+            rows.forEach(row => {
+                const status = row.dataset.status;
+                let shouldShow = false;
+                
+                if (filter === 'all') {
+                    shouldShow = true;
+                } else if (filter === 'on-track' && status === 'on-track') {
+                    shouldShow = true;
+                } else if (filter === 'at-risk' && status === 'at-risk') {
+                    shouldShow = true;
+                } else if (filter === 'needs-attention' && status === 'needs-attention') {
+                    shouldShow = true;
+                }
+                
+                if (shouldShow) {
+                    row.classList.remove('hidden');
+                    visibleCount++;
+                } else {
+                    row.classList.add('hidden');
+                }
+            });
+            
+            noResults.style.display = visibleCount === 0 ? 'block' : 'none';
+        }
+
+        function filterOpportunities() {
+            const filter = document.getElementById('opportunityOwnerFilter').value;
+            const opportunities = document.querySelectorAll('#opportunitiesList .opportunity-item');
+            const noResults = document.getElementById('opportunitiesNoResults');
+            
+            let visibleCount = 0;
+            
+            opportunities.forEach(item => {
+                const owner = item.dataset.owner;
+                if (filter === 'all' || owner === filter) {
+                    item.classList.remove('hidden');
+                    visibleCount++;
+                } else {
+                    item.classList.add('hidden');
+                }
+            });
+            
+            noResults.style.display = visibleCount === 0 ? 'block' : 'none';
+        }
+
+        function filterCapacityTable() {
+            const filter = document.getElementById('capacityFilter').value;
+            const tbody = document.getElementById('capacityTableBody');
+            const rows = tbody.querySelectorAll('tr');
+            const noResults = document.getElementById('capacityNoResults');
+            
+            let visibleCount = 0;
+            
+            rows.forEach(row => {
+                const accountCount = parseInt(row.cells[1].textContent);
+                let shouldShow = false;
+                
+                if (filter === 'all') {
+                    shouldShow = true;
+                } else if (filter === 'high-capacity' && accountCount >= 8) {
+                    shouldShow = true;
+                } else if (filter === 'low-capacity' && accountCount <= 4) {
+                    shouldShow = true;
+                }
+                
+                if (shouldShow) {
+                    row.classList.remove('hidden');
+                    visibleCount++;
+                } else {
+                    row.classList.add('hidden');
+                }
+            });
+            
+            noResults.style.display = visibleCount === 0 ? 'block' : 'none';
+        }
+
+        function filterConversionRates() {
+            const filter = document.getElementById('conversionFilter').value;
+            const items = document.querySelectorAll('#conversionList .conversion-item');
+            const noResults = document.getElementById('conversionNoResults');
+            
+            let visibleCount = 0;
+            
+            items.forEach(item => {
+                const rateText = item.querySelector('.conversion-rate').textContent;
+                const rate = parseInt(rateText.replace('%', ''));
+                let shouldShow = false;
+                
+                if (filter === 'all') {
+                    shouldShow = true;
+                } else if (filter === 'high-conversion' && rate > 80) {
+                    shouldShow = true;
+                } else if (filter === 'medium-conversion' && rate >= 70 && rate <= 80) {
+                    shouldShow = true;
+                } else if (filter === 'low-conversion' && rate < 70) {
+                    shouldShow = true;
+                }
+                
+                if (shouldShow) {
+                    item.classList.remove('hidden');
+                    visibleCount++;
+                } else {
+                    item.classList.add('hidden');
+                }
+            });
+            
+            noResults.style.display = visibleCount === 0 ? 'block' : 'none';
+        }
+
+        document.addEventListener('DOMContentLoaded', () => {
+            document.getElementById('teamStatusFilter').addEventListener('change', filterTeamTable);
+            document.getElementById('opportunityOwnerFilter').addEventListener('change', filterOpportunities);
+            document.getElementById('capacityFilter').addEventListener('change', filterCapacityTable);
+            document.getElementById('conversionFilter').addEventListener('change', filterConversionRates);
+        });
+    </script>
+</body>
+</html>

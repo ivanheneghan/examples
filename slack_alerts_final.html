@@ -146,6 +146,24 @@
             font-size: 13px;
         }
 
+        .warning-banner {
+            background: #f39c12;
+            color: white;
+            padding: 8px 20px;
+            text-align: center;
+            font-weight: 700;
+            font-size: 13px;
+        }
+
+        .info-banner {
+            background: #3498db;
+            color: white;
+            padding: 8px 20px;
+            text-align: center;
+            font-weight: 700;
+            font-size: 13px;
+        }
+
         .section-header {
             text-align: center;
             padding: 20px;
@@ -155,12 +173,36 @@
             font-weight: 700;
             margin-bottom: 20px;
         }
+
+        .alert-card.hot-account {
+            border-left-color: #e74c3c;
+        }
+
+        .alert-card.signal-surge {
+            border-left-color: #f39c12;
+        }
+
+        .alert-card.category-change {
+            border-left-color: #9b59b6;
+        }
+
+        .alert-card.capacity-alert {
+            border-left-color: #2c3e50;
+        }
+
+        .alert-card.mastery-gap {
+            border-left-color: #e67e22;
+        }
+
+        .alert-card.quarter-risk {
+            border-left-color: #c0392b;
+        }
     </style>
 </head>
 <body>
-    <!-- Section Header for SSM Alerts -->
+    <!-- Section Header for SSM Individual Alerts -->
     <div class="section-header">
-        SSM Individual Alerts
+        SSM Individual Alerts - Sarah Johnson
     </div>
 
     <!-- SSM Alert 1: Hot Account -->
@@ -181,11 +223,11 @@
                 <span class="timestamp">Today at 9:23 AM</span>
             </div>
             <div class="alert-content">
-                <div class="alert-card">
-                    <div class="alert-title">TechCorp Solutions → Hot Account (92)</div>
+                <div class="alert-card hot-account">
+                    <div class="alert-title">Tech Pioneers → Hot Account (91)</div>
                     <div class="alert-description">
-                        Account reached critical expansion readiness threshold (≥90 points)<br>
-                        <strong>Pipeline Value:</strong> €45K • <strong>Recommended Product:</strong> Conversations – Standard
+                        Account reached critical expansion readiness threshold (≥85 points)<br>
+                        <strong>Pipeline Value:</strong> €41K • <strong>Recommended Product:</strong> Conversations – Premium
                     </div>
                     <div class="alert-actions">
                         <a href="#" class="slack-button">Visit Dashboard</a>
@@ -196,8 +238,11 @@
         </div>
     </div>
 
-    <!-- SSM Alert 2: Signal Surge -->
+    <!-- SSM Alert 2: Another Hot Account -->
     <div class="slack-container">
+        <div class="urgent-banner">
+            URGENT: Hot Account Alert
+        </div>
         <div class="slack-header">
             SSM Signal Matrix
         </div>
@@ -211,11 +256,11 @@
                 <span class="timestamp">Today at 8:45 AM</span>
             </div>
             <div class="alert-content">
-                <div class="alert-card">
-                    <div class="alert-title">FinTech Forward → Demo Requests Surge</div>
+                <div class="alert-card hot-account">
+                    <div class="alert-title">Global Manufacturing → Hot Account (88)</div>
                     <div class="alert-description">
-                        Demo requests signal hit maximum performance bracket (3+ requests)<br>
-                        <strong>Status:</strong> Ready for expansion conversation
+                        Account reached critical expansion readiness threshold (≥85 points)<br>
+                        <strong>Pipeline Value:</strong> €62K • <strong>Recommended Product:</strong> Talent Management Suite
                     </div>
                     <div class="alert-actions">
                         <a href="#" class="slack-button">Visit Dashboard</a>
@@ -226,8 +271,49 @@
         </div>
     </div>
 
-    <!-- SSM Alert 3: Category Change -->
+    <!-- SSM Alert 3: Demo Requests Surge -->
     <div class="slack-container">
+        <div class="warning-banner">
+            SIGNAL SURGE ALERT
+        </div>
+        <div class="slack-header">
+            SSM Signal Matrix
+        </div>
+        <div class="slack-channel">
+            #ssm-alerts • Direct Message to Sarah Johnson
+        </div>
+        <div class="message">
+            <div class="message-header">
+                <span class="bot-name">SSM Signal Bot</span>
+                <span class="bot-tag">BOT</span>
+                <span class="timestamp">Today at 8:15 AM</span>
+            </div>
+            <div class="alert-content">
+                <div class="alert-card signal-surge">
+                    <div class="alert-title">CloudTech Solutions → Demo Requests Surge</div>
+                    <div class="alert-description">
+                        Demo requests signal hit maximum performance bracket (5+ requests)<br>
+                        <strong>Status:</strong> Ready for expansion conversation • <strong>Score:</strong> 86
+                    </div>
+                    <div class="alert-actions">
+                        <a href="#" class="slack-button">Visit Dashboard</a>
+                        <a href="#" class="slack-button secondary">Take Action</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Section Header for Lisa Rodriguez Alerts -->
+    <div class="section-header">
+        SSM Individual Alerts - Lisa Rodriguez
+    </div>
+
+    <!-- Lisa Alert 1: Category Change -->
+    <div class="slack-container">
+        <div class="info-banner">
+            CATEGORY MOVEMENT ALERT
+        </div>
         <div class="slack-header">
             SSM Signal Matrix
         </div>
@@ -241,11 +327,158 @@
                 <span class="timestamp">Today at 7:30 AM</span>
             </div>
             <div class="alert-content">
-                <div class="alert-card">
-                    <div class="alert-title">Growth Dynamics → Growth Capacity Surge</div>
+                <div class="alert-card category-change">
+                    <div class="alert-title">Digital Innovation Lab → Growth Capacity Surge</div>
                     <div class="alert-description">
-                        Significant category movement detected (+18pts over 30 days: 62→80)<br>
-                        <strong>Trigger:</strong> Hiring activity spike detected
+                        Significant category movement detected (+25pts over 30 days: 69→94)<br>
+                        <strong>Trigger:</strong> Perfect Growth signals - New CTO + Growth funding + 25% hiring
+                    </div>
+                    <div class="alert-actions">
+                        <a href="#" class="slack-button">Visit Dashboard</a>
+                        <a href="#" class="slack-button secondary">Take Action</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Lisa Alert 2: Hot Account -->
+    <div class="slack-container">
+        <div class="urgent-banner">
+            URGENT: Hot Account Alert
+        </div>
+        <div class="slack-header">
+            SSM Signal Matrix
+        </div>
+        <div class="slack-channel">
+            #ssm-alerts • Direct Message to Lisa Rodriguez
+        </div>
+        <div class="message">
+            <div class="message-header">
+                <span class="bot-name">SSM Signal Bot</span>
+                <span class="bot-tag">BOT</span>
+                <span class="timestamp">Today at 7:00 AM</span>
+            </div>
+            <div class="alert-content">
+                <div class="alert-card hot-account">
+                    <div class="alert-title">Strategy Consultants → Hot Account (83)</div>
+                    <div class="alert-description">
+                        Account crossed hot threshold with funding news confirmed<br>
+                        <strong>Pipeline Value:</strong> €39K • <strong>Funding:</strong> Series A completed
+                    </div>
+                    <div class="alert-actions">
+                        <a href="#" class="slack-button">Visit Dashboard</a>
+                        <a href="#" class="slack-button secondary">Take Action</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Section Header for Emma Park Alerts -->
+    <div class="section-header">
+        SSM Individual Alerts - Emma Park
+    </div>
+
+    <!-- Emma Alert 1: Renewal Window Alert -->
+    <div class="slack-container">
+        <div class="warning-banner">
+            RENEWAL WINDOW ALERT
+        </div>
+        <div class="slack-header">
+            SSM Signal Matrix
+        </div>
+        <div class="slack-channel">
+            #ssm-alerts • Direct Message to Emma Park
+        </div>
+        <div class="message">
+            <div class="message-header">
+                <span class="bot-name">SSM Signal Bot</span>
+                <span class="bot-tag">BOT</span>
+                <span class="timestamp">Today at 6:45 AM</span>
+            </div>
+            <div class="alert-content">
+                <div class="alert-card signal-surge">
+                    <div class="alert-title">Retail Revolution → Optimal Renewal Window</div>
+                    <div class="alert-description">
+                        Account entering optimal expansion window (72 days to renewal)<br>
+                        <strong>Score:</strong> 77 • <strong>Pipeline Value:</strong> €68K
+                    </div>
+                    <div class="alert-actions">
+                        <a href="#" class="slack-button">Visit Dashboard</a>
+                        <a href="#" class="slack-button secondary">Take Action</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Section Header for Marcus Chen Alerts -->
+    <div class="section-header">
+        SSM Individual Alerts - Marcus Chen
+    </div>
+
+    <!-- Marcus Alert 1: Leadership Change -->
+    <div class="slack-container">
+        <div class="info-banner">
+            LEADERSHIP CHANGE ALERT
+        </div>
+        <div class="slack-header">
+            SSM Signal Matrix
+        </div>
+        <div class="slack-channel">
+            #ssm-alerts • Direct Message to Marcus Chen
+        </div>
+        <div class="message">
+            <div class="message-header">
+                <span class="bot-name">SSM Signal Bot</span>
+                <span class="bot-tag">BOT</span>
+                <span class="timestamp">Today at 6:15 AM</span>
+            </div>
+            <div class="alert-content">
+                <div class="alert-card category-change">
+                    <div class="alert-title">Energy Solutions → New CEO Appointed</div>
+                    <div class="alert-description">
+                        Leadership change detected - new expansion opportunity window<br>
+                        <strong>Score:</strong> 66 • <strong>New Leader:</strong> Michael Chen (CEO)
+                    </div>
+                    <div class="alert-actions">
+                        <a href="#" class="slack-button">Visit Dashboard</a>
+                        <a href="#" class="slack-button secondary">Take Action</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Section Header for David Kumar Alerts -->
+    <div class="section-header">
+        SSM Individual Alerts - David Kumar
+    </div>
+
+    <!-- David Alert 1: Account Health Warning -->
+    <div class="slack-container">
+        <div class="warning-banner">
+            ACCOUNT HEALTH WARNING
+        </div>
+        <div class="slack-header">
+            SSM Signal Matrix
+        </div>
+        <div class="slack-channel">
+            #ssm-alerts • Direct Message to David Kumar
+        </div>
+        <div class="message">
+            <div class="message-header">
+                <span class="bot-name">SSM Signal Bot</span>
+                <span class="bot-tag">BOT</span>
+                <span class="timestamp">Today at 5:45 AM</span>
+            </div>
+            <div class="alert-content">
+                <div class="alert-card quarter-risk">
+                    <div class="alert-title">Mining Solutions → Health Score Declining</div>
+                    <div class="alert-description">
+                        Account health dropped to 44 - requires immediate attention<br>
+                        <strong>Issues:</strong> Low utilization (42%), high tickets (20/mo)
                     </div>
                     <div class="alert-actions">
                         <a href="#" class="slack-button">Visit Dashboard</a>
@@ -279,11 +512,12 @@
                 <span class="timestamp">Today at 8:00 AM</span>
             </div>
             <div class="alert-content">
-                <div class="alert-card">
+                <div class="alert-card capacity-alert">
                     <div class="alert-title">Capacity Imbalance Alert</div>
                     <div class="alert-description">
-                        Uneven high potential account distribution detected (5 account difference)<br>
-                        <strong>Sarah Johnson:</strong> 6 accounts • <strong>David Kumar:</strong> 1 account
+                        Severe workload imbalance detected across team (8 account difference)<br>
+                        <strong>Sarah Johnson:</strong> 10 accounts • <strong>David Kumar:</strong> 2 accounts<br>
+                        <strong>Recommendation:</strong> Redistribute 4 accounts for optimal performance
                     </div>
                     <div class="alert-actions">
                         <a href="#" class="slack-button">Visit Dashboard</a>
@@ -296,6 +530,9 @@
 
     <!-- Leadership Alert 2: Signal Mastery Gap -->
     <div class="slack-container">
+        <div class="warning-banner">
+            SIGNAL MASTERY GAP ALERT
+        </div>
         <div class="slack-header">
             SSM Signal Matrix
         </div>
@@ -309,11 +546,12 @@
                 <span class="timestamp">Today at 8:15 AM</span>
             </div>
             <div class="alert-content">
-                <div class="alert-card">
+                <div class="alert-card mastery-gap">
                     <div class="alert-title">Signal Mastery Gap - David Kumar</div>
                     <div class="alert-description">
-                        SSM consistently underperforming in License Utilization (23pts below team avg)<br>
-                        <strong>Performance:</strong> 45% vs team average 68%
+                        SSM consistently underperforming in License Utilization (28pts below team avg)<br>
+                        <strong>Performance:</strong> 42% vs team average 70%<br>
+                        <strong>Impact:</strong> €261K pipeline at risk
                     </div>
                     <div class="alert-actions">
                         <a href="#" class="slack-button">Visit Dashboard</a>
@@ -326,6 +564,9 @@
 
     <!-- Leadership Alert 3: Quarter-End Risk -->
     <div class="slack-container">
+        <div class="urgent-banner">
+            QUARTER-END RISK ALERT
+        </div>
         <div class="slack-header">
             SSM Signal Matrix
         </div>
@@ -339,15 +580,191 @@
                 <span class="timestamp">Today at 8:30 AM</span>
             </div>
             <div class="alert-content">
-                <div class="alert-card">
+                <div class="alert-card quarter-risk">
                     <div class="alert-title">Quarter-End Risk Alert</div>
                     <div class="alert-description">
-                        Multiple accounts with declining scores approaching renewal (3 accounts within 60 days)<br>
-                        <strong>At Risk:</strong> Alpine Systems (43), Healthcare Innovators (48), MedTech Innovations (41)
+                        Multiple accounts with declining scores approaching renewal (5 accounts within 60 days)<br>
+                        <strong>Critical:</strong> Mining Solutions (49), Chemical Dynamics (47), Utilities Corp (45)<br>
+                        <strong>At Risk Pipeline:</strong> €173K
                     </div>
                     <div class="alert-actions">
                         <a href="#" class="slack-button">Visit Dashboard</a>
                         <a href="#" class="slack-button secondary">Take Action</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Leadership Alert 4: Team Performance Variance -->
+    <div class="slack-container">
+        <div class="warning-banner">
+            TEAM PERFORMANCE VARIANCE
+        </div>
+        <div class="slack-header">
+            SSM Signal Matrix
+        </div>
+        <div class="slack-channel">
+            #ssm-leadership • Manager Thompson
+        </div>
+        <div class="message">
+            <div class="message-header">
+                <span class="bot-name">SSM Signal Bot</span>
+                <span class="bot-tag">BOT</span>
+                <span class="timestamp">Today at 7:45 AM</span>
+            </div>
+            <div class="alert-content">
+                <div class="alert-card mastery-gap">
+                    <div class="alert-title">Conversion Rate Performance Gap</div>
+                    <div class="alert-description">
+                        Wide performance variance in High Potential → Opportunity conversion<br>
+                        <strong>Top Performer:</strong> Sarah Johnson (87%) • <strong>Needs Support:</strong> David Kumar (58%)<br>
+                        <strong>Opportunity:</strong> 29% performance gap indicates coaching potential
+                    </div>
+                    <div class="alert-actions">
+                        <a href="#" class="slack-button">Visit Dashboard</a>
+                        <a href="#" class="slack-button secondary">Take Action</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Leadership Alert 5: Industry Performance Insights -->
+    <div class="slack-container">
+        <div class="info-banner">
+            INDUSTRY PERFORMANCE INSIGHT
+        </div>
+        <div class="slack-header">
+            SSM Signal Matrix
+        </div>
+        <div class="slack-channel">
+            #ssm-leadership • Manager Thompson
+        </div>
+        <div class="message">
+            <div class="message-header">
+                <span class="bot-name">SSM Signal Bot</span>
+                <span class="bot-tag">BOT</span>
+                <span class="timestamp">Today at 7:00 AM</span>
+            </div>
+            <div class="alert-content">
+                <div class="alert-card category-change">
+                    <div class="alert-title">Technology Sector Outperforming</div>
+                    <div class="alert-description">
+                        Technology accounts (11 total) showing 22% higher average pipeline vs other industries<br>
+                        <strong>Tech Avg:</strong> €412K pipeline • <strong>Other Industries:</strong> €337K avg<br>
+                        <strong>Recommendation:</strong> Consider tech sector specialization for David Kumar
+                    </div>
+                    <div class="alert-actions">
+                        <a href="#" class="slack-button">Visit Dashboard</a>
+                        <a href="#" class="slack-button secondary">Take Action</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Leadership Alert 6: Account Health Distribution -->
+    <div class="slack-container">
+        <div class="info-banner">
+            ACCOUNT HEALTH UPDATE
+        </div>
+        <div class="slack-header">
+            SSM Signal Matrix
+        </div>
+        <div class="slack-channel">
+            #ssm-leadership • Manager Thompson
+        </div>
+        <div class="message">
+            <div class="message-header">
+                <span class="bot-name">SSM Signal Bot</span>
+                <span class="bot-tag">BOT</span>
+                <span class="timestamp">Today at 6:30 AM</span>
+            </div>
+            <div class="alert-content">
+                <div class="alert-card capacity-alert">
+                    <div class="alert-title">Portfolio Health Status - Positive Trend</div>
+                    <div class="alert-description">
+                        Overall portfolio health improved: 90% of accounts in good or excellent health<br>
+                        <strong>Excellent (76-100):</strong> 18 accounts • <strong>Good (51-75):</strong> 9 accounts<br>
+                        <strong>At Risk (26-50):</strong> 3 accounts • <strong>Action:</strong> Focus on David Kumar's at-risk accounts
+                    </div>
+                    <div class="alert-actions">
+                        <a href="#" class="slack-button">Visit Dashboard</a>
+                        <a href="#" class="slack-button secondary">Take Action</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Additional Specific Account Alerts -->
+    <div class="section-header">
+        Priority Account Alerts
+    </div>
+
+    <!-- High Value Account Alert -->
+    <div class="slack-container">
+        <div class="urgent-banner">
+            HIGH VALUE ACCOUNT ALERT
+        </div>
+        <div class="slack-header">
+            SSM Signal Matrix
+        </div>
+        <div class="slack-channel">
+            #ssm-leadership • Manager Thompson
+        </div>
+        <div class="message">
+            <div class="message-header">
+                <span class="bot-name">SSM Signal Bot</span>
+                <span class="bot-tag">BOT</span>
+                <span class="timestamp">Today at 6:00 AM</span>
+            </div>
+            <div class="alert-content">
+                <div class="alert-card hot-account">
+                    <div class="alert-title">Energy Solutions → High-Value Low-Score Opportunity</div>
+                    <div class="alert-description">
+                        Large account (1200 employees) with significant pipeline potential but low score (66)<br>
+                        <strong>Pipeline Value:</strong> €78K • <strong>Owner:</strong> Marcus Chen<br>
+                        <strong>Opportunity:</strong> Score improvement could unlock major expansion
+                    </div>
+                    <div class="alert-actions">
+                        <a href="#" class="slack-button">Visit Dashboard</a>
+                        <a href="#" class="slack-button secondary">Take Action</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Positive Momentum Alert -->
+    <div class="slack-container">
+        <div class="info-banner">
+            POSITIVE MOMENTUM ALERT
+        </div>
+        <div class="slack-header">
+            SSM Signal Matrix
+        </div>
+        <div class="slack-channel">
+            #ssm-alerts • Team Broadcast
+        </div>
+        <div class="message">
+            <div class="message-header">
+                <span class="bot-name">SSM Signal Bot</span>
+                <span class="bot-tag">BOT</span>
+                <span class="timestamp">Today at 5:30 AM</span>
+            </div>
+            <div class="alert-content">
+                <div class="alert-card category-change">
+                    <div class="alert-title">Team Performance - Exceeding Targets</div>
+                    <div class="alert-description">
+                        Team hitting 84% of quota with strong pipeline momentum<br>
+                        <strong>Pipeline Value:</strong> €1.2M total • <strong>High Potential Accounts:</strong> 30<br>
+                        <strong>Team Conversion Rate:</strong> 75% (above target of 70%)
+                    </div>
+                    <div class="alert-actions">
+                        <a href="#" class="slack-button">Visit Dashboard</a>
+                        <a href="#" class="slack-button secondary">Celebrate Success</a>
                     </div>
                 </div>
             </div>

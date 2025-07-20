@@ -42,7 +42,7 @@
         .main-container {
             display: grid;
             grid-template-columns: 1fr 1fr;
-            grid-template-rows: auto auto auto;
+            grid-template-rows: auto auto auto auto;
             gap: 1.5rem;
             padding: 2rem;
             max-width: 1600px;
@@ -158,6 +158,107 @@
             grid-column: 2;
         }
 
+        .signal-breakdown {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+
+        .signal-category {
+            background: #f8f9fa;
+            padding: 1rem;
+            border-radius: 6px;
+        }
+
+        .signal-category h4 {
+            font-size: 0.9rem;
+            color: #2c3e50;
+            margin-bottom: 0.5rem;
+            text-align: center;
+        }
+
+        .signal-score {
+            font-size: 1.5rem;
+            font-weight: 600;
+            color: #3498db;
+            text-align: center;
+            margin-bottom: 0.5rem;
+        }
+
+        .signal-details {
+            font-size: 0.75rem;
+            color: #7f8c8d;
+        }
+
+        .signal-item {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 0.25rem;
+        }
+
+        .score-badge {
+            padding: 0.25rem 0.75rem;
+            border-radius: 12px;
+            font-size: 0.875rem;
+            font-weight: 500;
+            color: white;
+        }
+
+        .score-high { background: #27ae60; }
+        .score-medium { background: #f39c12; }
+        .score-low { background: #e74c3c; }
+
+        .stakeholder-map {
+            margin-top: 1rem;
+        }
+
+        .stakeholder-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0.5rem;
+            background: #f8f9fa;
+            border-radius: 4px;
+            margin-bottom: 0.5rem;
+        }
+
+        .stakeholder-name {
+            font-weight: 600;
+            color: #2c3e50;
+            font-size: 0.875rem;
+        }
+
+        .stakeholder-role {
+            font-size: 0.75rem;
+            color: #7f8c8d;
+        }
+
+        .engagement-dot {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+        }
+
+        .engagement-high { background: #27ae60; }
+        .engagement-medium { background: #f39c12; }
+        .engagement-low { background: #e74c3c; }
+
+        .filter-controls {
+            display: flex;
+            gap: 1rem;
+            margin-bottom: 1rem;
+            align-items: center;
+        }
+
+        .filter-select {
+            padding: 0.5rem;
+            border: 1px solid #dee2e6;
+            border-radius: 4px;
+            font-size: 0.875rem;
+            cursor: pointer;
+        }
+
         .action-center {
             grid-column: 1;
         }
@@ -246,112 +347,89 @@
             transition: width 0.3s ease;
         }
 
-        .signal-breakdown {
+        .score-editor {
+            grid-column: 1 / -1;
+            margin-top: 2rem;
+        }
+
+        .editor-grid {
             display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 1rem;
+            grid-template-columns: 1fr 1fr 1fr;
+            gap: 2rem;
             margin-top: 1rem;
         }
 
-        .signal-category {
+        .score-comparison {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1rem;
+        }
+
+        .score-display {
             background: #f8f9fa;
             padding: 1rem;
             border-radius: 6px;
         }
 
-        .signal-category h4 {
-            font-size: 0.9rem;
-            color: #2c3e50;
-            margin-bottom: 0.5rem;
-            text-align: center;
+        .score-display.modified {
+            background: #e8f5e8;
+            border-left: 4px solid #27ae60;
         }
 
-        .signal-score {
-            font-size: 1.5rem;
-            font-weight: 600;
-            color: #3498db;
-            text-align: center;
-            margin-bottom: 0.5rem;
-        }
-
-        .signal-details {
-            font-size: 0.75rem;
-            color: #7f8c8d;
-        }
-
-        .signal-item {
+        .slider-group {
             display: flex;
-            justify-content: space-between;
-            margin-bottom: 0.25rem;
+            align-items: center;
+            gap: 1rem;
+            margin-bottom: 0.75rem;
         }
 
-        .filter-controls {
+        .slider-label {
+            min-width: 120px;
+            font-size: 0.875rem;
+            color: #2c3e50;
+        }
+
+        .slider {
+            flex: 1;
+        }
+
+        .slider-value {
+            min-width: 40px;
+            font-weight: 600;
+            color: #2c3e50;
+        }
+
+        .editor-buttons {
+            margin-top: 1rem;
             display: flex;
             gap: 1rem;
-            margin-bottom: 1rem;
-            align-items: center;
         }
 
-        .filter-select {
-            padding: 0.5rem;
-            border: 1px solid #dee2e6;
-            border-radius: 4px;
-            font-size: 0.875rem;
-            cursor: pointer;
-        }
-
-        .score-badge {
-            padding: 0.25rem 0.75rem;
-            border-radius: 12px;
-            font-size: 0.875rem;
-            font-weight: 500;
+        .btn-secondary {
+            background: #6c757d;
             color: white;
         }
 
-        .score-high { background: #27ae60; }
-        .score-medium { background: #f39c12; }
-        .score-low { background: #e74c3c; }
+        .btn-success {
+            background: #28a745;
+            color: white;
+        }
 
-        .stakeholder-map {
+        .change-indicator {
             margin-top: 1rem;
-        }
-
-        .stakeholder-item {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 0.5rem;
-            background: #f8f9fa;
+            padding: 0.75rem;
+            background: #fff3cd;
             border-radius: 4px;
-            margin-bottom: 0.5rem;
-        }
-
-        .stakeholder-name {
-            font-weight: 600;
-            color: #2c3e50;
-            font-size: 0.875rem;
-        }
-
-        .stakeholder-role {
-            font-size: 0.75rem;
-            color: #7f8c8d;
-        }
-
-        .engagement-dot {
-            width: 8px;
-            height: 8px;
-            border-radius: 50%;
-        }
-
-        .engagement-high { background: #27ae60; }
-        .engagement-medium { background: #f39c12; }
-        .engagement-low { background: #e74c3c; }
-
-        .no-results {
             text-align: center;
-            padding: 2rem;
-            color: #7f8c8d;
-            font-style: italic;
+        }
+
+        .search-box {
+            width: 100%;
+            padding: 0.5rem;
+            border: 1px solid #dee2e6;
+            border-radius: 4px;
+            margin-bottom: 1rem;
+            font-size: 0.875rem;
         }
     </style>
 </head>
@@ -370,23 +448,24 @@
             <h2>📊 High Potential Account Overview</h2>
             <div class="metrics-grid">
                 <div class="metric-card">
-                    <div class="metric-value" id="totalAccounts">15</div>
+                    <div class="metric-value" id="totalAccounts">30</div>
                     <div class="metric-label">Total High Potential Accounts</div>
                 </div>
                 <div class="metric-card">
-                    <div class="metric-value" id="pipelineValue">€3.8M</div>
+                    <div class="metric-value" id="totalPipeline">€1.2M</div>
                     <div class="metric-label">Potential Pipeline Value</div>
                 </div>
                 <div class="metric-card">
-                    <div class="metric-value" id="highPotentialCount">3</div>
+                    <div class="metric-value" id="highScoreAccounts">18</div>
                     <div class="metric-label">High Potential Accounts (>75)</div>
                 </div>
                 <div class="metric-card">
-                    <div class="metric-value" id="averageScore">72</div>
+                    <div class="metric-value" id="averageScore">78</div>
                     <div class="metric-label">Average Score</div>
                 </div>
             </div>
             <div class="filter-controls">
+                <input type="text" class="search-box" id="searchBox" placeholder="Search accounts...">
                 <label>Filter by Score:</label>
                 <select class="filter-select" id="scoreFilter">
                     <option value="all">All Accounts</option>
@@ -407,10 +486,7 @@
         <div class="card hot-opportunities">
             <h2>🔥 Potential Expansion Accounts & Opportunities</h2>
             <div id="opportunitiesList">
-                <!-- Opportunities will be populated by JavaScript -->
-            </div>
-            <div id="noResults" class="no-results" style="display: none;">
-                No accounts match your current filters.
+                <!-- Accounts will be dynamically populated -->
             </div>
         </div>
 
@@ -420,115 +496,114 @@
             <div id="accountDetails">
                 <div style="margin-bottom: 1rem;">
                     <div style="display: flex; justify-content: space-between; align-items: center;">
-                        <h3 id="selectedAccountName">TechCorp Solutions</h3>
-                        <span class="score-badge score-high" id="selectedAccountScore">92/100</span>
+                        <h3 id="accountName">Select an account</h3>
+                        <span class="score-badge score-high" id="accountScore">--/100</span>
                     </div>
-                    <p style="color: #7f8c8d; font-size: 0.875rem;" id="selectedAccountInfo">Technology • 450 employees</p>
+                    <p style="color: #7f8c8d; font-size: 0.875rem;" id="accountInfo">Select an account to view details</p>
                 </div>
                 <div class="signal-breakdown">
                     <div class="signal-category">
                         <h4>Account Health</h4>
-                        <div class="signal-score">85</div>
-                        <div class="signal-details">
-                            <div class="signal-item">
-                                <span>Licence Util:</span>
-                                <span>89%</span>
-                            </div>
-                            <div class="signal-item">
-                                <span>Support Tickets:</span>
-                                <span>2</span>
-                            </div>
-                            <div class="signal-item">
-                                <span>User Logins:</span>
-                                <span>94%</span>
-                            </div>
-                            <div class="signal-item">
-                                <span>Training:</span>
-                                <span>78%</span>
-                            </div>
+                        <div class="signal-score" id="healthScore">--</div>
+                        <div class="signal-details" id="healthDetails">
+                            <div>Select an account to view details</div>
                         </div>
                     </div>
                     <div class="signal-category">
                         <h4>Contact Intent</h4>
-                        <div class="signal-score">82</div>
-                        <div class="signal-details">
-                            <div class="signal-item">
-                                <span>Comm Engage:</span>
-                                <span>85%</span>
-                            </div>
-                            <div class="signal-item">
-                                <span>Demo Requests:</span>
-                                <span>3</span>
-                            </div>
-                            <div class="signal-item">
-                                <span>Content Eng:</span>
-                                <span>76%</span>
-                            </div>
-                            <div class="signal-item">
-                                <span>Feature Req:</span>
-                                <span>2</span>
-                            </div>
+                        <div class="signal-score" id="intentScore">--</div>
+                        <div class="signal-details" id="intentDetails">
+                            <div>Select an account to view details</div>
                         </div>
                     </div>
                     <div class="signal-category">
                         <h4>Growth Capacity</h4>
-                        <div class="signal-score">81</div>
-                        <div class="signal-details">
-                            <div class="signal-item">
-                                <span>New Users:</span>
-                                <span>+18</span>
-                            </div>
-                            <div class="signal-item">
-                                <span>Hiring:</span>
-                                <span>+15%</span>
-                            </div>
-                            <div class="signal-item">
-                                <span>Funding:</span>
-                                <span>Recent</span>
-                            </div>
-                            <div class="signal-item">
-                                <span>Leadership:</span>
-                                <span>Changes</span>
-                            </div>
+                        <div class="signal-score" id="growthScore">--</div>
+                        <div class="signal-details" id="growthDetails">
+                            <div>Select an account to view details</div>
                         </div>
                     </div>
                     <div class="signal-category">
                         <h4>Timing & Product Fit</h4>
-                        <div class="signal-score">88</div>
-                        <div class="signal-details">
-                            <div class="signal-item">
-                                <span>Renewal:</span>
-                                <span>90%</span>
-                            </div>
-                            <div class="signal-item">
-                                <span>Usage Mat:</span>
-                                <span>85%</span>
-                            </div>
+                        <div class="signal-score" id="timingScore">--</div>
+                        <div class="signal-details" id="timingDetails">
+                            <div>Select an account to view details</div>
                         </div>
                     </div>
                 </div>
                 <div class="stakeholder-map">
                     <h4 style="font-size: 1rem; margin-bottom: 0.5rem;">Key Stakeholders</h4>
-                    <div class="stakeholder-item">
-                        <div>
-                            <div class="stakeholder-name">Marcus Chen</div>
-                            <div class="stakeholder-role">HR Director</div>
-                        </div>
-                        <div class="engagement-dot engagement-high"></div>
+                    <div id="stakeholderList">
+                        <div style="color: #7f8c8d; font-style: italic; text-align: center; padding: 1rem;">Select an account to view stakeholders</div>
                     </div>
-                    <div class="stakeholder-item">
-                        <div>
-                            <div class="stakeholder-name">Lisa Park</div>
-                            <div class="stakeholder-role">CHRO</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Live Score Editor -->
+        <div class="card score-editor">
+            <h2>⚙️ Live Score Editor</h2>
+            
+            <div class="editor-grid">
+                <!-- Account Selector -->
+                <div>
+                    <h3 style="font-size: 1rem; margin-bottom: 1rem; color: #2c3e50;">Select Account to Edit</h3>
+                    <select id="editAccountSelect" style="width: 100%; padding: 0.75rem; border: 1px solid #dee2e6; border-radius: 4px; font-size: 0.875rem;">
+                        <option value="">Select an account...</option>
+                    </select>
+                </div>
+
+                <!-- Current vs Modified Scores -->
+                <div id="scoreComparison" style="display: none;">
+                    <h3 style="font-size: 1rem; margin-bottom: 1rem; color: #2c3e50;">Current vs Modified</h3>
+                    <div class="score-comparison">
+                        <div class="score-display">
+                            <h4 style="font-size: 0.9rem; color: #2c3e50; margin-bottom: 0.5rem;">Original</h4>
+                            <div style="font-size: 1.5rem; font-weight: 600; color: #7f8c8d;" id="originalScore">--</div>
+                            <div style="font-size: 0.8rem; color: #7f8c8d;" id="originalBreakdown">-- • -- • -- • --</div>
                         </div>
-                        <div class="engagement-dot engagement-medium"></div>
+                        <div class="score-display modified">
+                            <h4 style="font-size: 0.9rem; color: #2c3e50; margin-bottom: 0.5rem;">Modified</h4>
+                            <div style="font-size: 1.5rem; font-weight: 600; color: #27ae60;" id="modifiedScore">--</div>
+                            <div style="font-size: 0.8rem; color: #7f8c8d;" id="modifiedBreakdown">-- • -- • -- • --</div>
+                        </div>
                     </div>
-                    <div class="stakeholder-item">
-                        <div>
-                            <div class="stakeholder-name">Emma Rodriguez</div>
-                            <div class="stakeholder-role">IT Manager</div>
-                        </div>
-                        <div class="engagement-dot engagement-high"></div>
+                    <div class="change-indicator">
+                        <strong>Score Change: <span id="scoreChange">0</span> points</strong>
+                    </div>
+                </div>
+
+                <!-- Score Editors -->
+                <div id="scoreEditors" style="display: none;">
+                    <h3 style="font-size: 1rem; margin-bottom: 1rem; color: #2c3e50;">Edit Category Scores</h3>
+                    
+                    <div class="slider-group">
+                        <label class="slider-label">Account Health:</label>
+                        <input type="range" id="healthSlider" class="slider" min="0" max="100" value="50">
+                        <span id="healthValue" class="slider-value">50</span>
+                    </div>
+                    
+                    <div class="slider-group">
+                        <label class="slider-label">Contact Intent:</label>
+                        <input type="range" id="intentSlider" class="slider" min="0" max="100" value="50">
+                        <span id="intentValue" class="slider-value">50</span>
+                    </div>
+                    
+                    <div class="slider-group">
+                        <label class="slider-label">Growth Capacity:</label>
+                        <input type="range" id="growthSlider" class="slider" min="0" max="100" value="50">
+                        <span id="growthValue" class="slider-value">50</span>
+                    </div>
+                    
+                    <div class="slider-group">
+                        <label class="slider-label">Timing & Fit:</label>
+                        <input type="range" id="timingSlider" class="slider" min="0" max="100" value="50">
+                        <span id="timingValue" class="slider-value">50</span>
+                    </div>
+                    
+                    <div class="editor-buttons">
+                        <button id="resetScores" class="btn btn-secondary">Reset to Original</button>
+                        <button id="applyChanges" class="btn btn-success">Apply Changes</button>
                     </div>
                 </div>
             </div>
@@ -538,28 +613,26 @@
         <div class="card action-center">
             <h2>⚡ Signal Alerts</h2>
             
-            <!-- Hot Account Alerts -->
             <div class="alert-item">
                 <div class="alert-content">
-                    <h4>TechCorp Solutions → Hot Account (92)</h4>
-                    <p>Account reached critical expansion readiness threshold (≥90 points)</p>
+                    <h4>Tech Pioneers → Hot Account (91)</h4>
+                    <p>Account reached critical expansion readiness threshold (≥85 points)</p>
                 </div>
                 <button class="btn btn-primary">Take Action</button>
             </div>
 
             <div class="alert-item">
                 <div class="alert-content">
-                    <h4>Tech Pioneers → Hot Account (90)</h4>
-                    <p>Account reached critical expansion readiness threshold (≥90 points)</p>
+                    <h4>Global Manufacturing → Hot Account (88)</h4>
+                    <p>Account reached critical expansion readiness threshold (≥85 points)</p>
                 </div>
                 <button class="btn btn-primary">Take Action</button>
             </div>
             
-            <!-- Signal Surge Alerts -->
             <div class="alert-item">
                 <div class="alert-content">
-                    <h4>FinTech Forward → Demo Requests Surge</h4>
-                    <p>Demo requests signal hit maximum performance bracket (3+ requests)</p>
+                    <h4>CloudTech Solutions → Demo Requests Surge</h4>
+                    <p>Demo requests signal hit maximum performance bracket (5+ requests)</p>
                 </div>
                 <button class="btn btn-primary">Take Action</button>
             </div>
@@ -574,42 +647,8 @@
 
             <div class="alert-item">
                 <div class="alert-content">
-                    <h4>TechCorp Solutions → Leadership Changes Detected</h4>
-                    <p>Leadership change signal hit maximum performance bracket</p>
-                </div>
-                <button class="btn btn-primary">Take Action</button>
-            </div>
-            
-            <!-- Category Change Alerts -->
-            <div class="alert-item">
-                <div class="alert-content">
-                    <h4>Growth Dynamics → Growth Capacity Surge</h4>
-                    <p>Significant category movement detected (+18pts over 30 days: 62→80)</p>
-                </div>
-                <button class="btn btn-primary">Take Action</button>
-            </div>
-
-            <div class="alert-item">
-                <div class="alert-content">
-                    <h4>Scale Ventures → Account Health Decline</h4>
-                    <p>Significant category movement detected (-16pts over 30 days: 78→62)</p>
-                </div>
-                <button class="btn btn-primary">Take Action</button>
-            </div>
-            
-            <!-- Signal Change Alerts -->
-            <div class="alert-item">
-                <div class="alert-content">
-                    <h4>Manufacturing Plus → License Utilization Improved</h4>
-                    <p>Signal moved between performance brackets (68%→78%)</p>
-                </div>
-                <button class="btn btn-primary">Take Action</button>
-            </div>
-
-            <div class="alert-item">
-                <div class="alert-content">
-                    <h4>Healthcare Innovators → Communication Engagement Declined</h4>
-                    <p>Signal moved between performance brackets (52%→48%)</p>
+                    <h4>Digital Innovation Lab → Growth Capacity Surge</h4>
+                    <p>Growth signals increased by 25+ points over 30 days</p>
                 </div>
                 <button class="btn btn-primary">Take Action</button>
             </div>
@@ -620,420 +659,565 @@
             <h2>📈 Performance Tracker</h2>
             <div class="metric-row">
                 <div class="metric-row-label">Monthly Quota Progress</div>
-                <div class="metric-row-value">€127K / €200K</div>
+                <div class="metric-row-value">€189K / €300K</div>
             </div>
             <div class="progress-bar">
-                <div class="progress-fill" style="width: 63.5%;"></div>
+                <div class="progress-fill" style="width: 63%;"></div>
             </div>
             <div class="metric-row">
                 <div class="metric-row-label">Pipeline by Product</div>
-                <div class="metric-row-value">€400K Total</div>
+                <div class="metric-row-value">€1.2M Total</div>
             </div>
             <div style="margin-top: 0.5rem;">
                 <div style="display: flex; justify-content: space-between; margin-bottom: 0.25rem;">
-                    <span style="font-size: 0.875rem;">Payroll: €120K</span>
-                    <span style="font-size: 0.875rem;">Talent Acquisition: €110K</span>
+                    <span style="font-size: 0.875rem;">Payroll: €380K</span>
+                    <span style="font-size: 0.875rem;">Talent Acquisition: €340K</span>
                 </div>
                 <div style="display: flex; justify-content: space-between;">
-                    <span style="font-size: 0.875rem;">Talent Management: €95K</span>
-                    <span style="font-size: 0.875rem;">Employee Experience: €75K</span>
+                    <span style="font-size: 0.875rem;">Talent Management: €285K</span>
+                    <span style="font-size: 0.875rem;">Employee Experience: €195K</span>
                 </div>
             </div>
             <div class="metric-row">
                 <div class="metric-row-label">Activity This Week</div>
-                <div class="metric-row-value">47 touchpoints</div>
+                <div class="metric-row-value">73 touchpoints</div>
             </div>
             <div style="margin-top: 0.5rem; font-size: 0.875rem; color: #7f8c8d;">
-                <div>Calls: 12 • Meetings: 8 • Emails: 27</div>
+                <div>Calls: 18 • Meetings: 12 • Emails: 43</div>
             </div>
         </div>
     </div>
 
     <script>
-        // Sample data for opportunities with detailed breakdown
-        const opportunities = [
-            { 
-                name: "TechCorp Solutions", 
-                product: "Conversations – Standard", 
-                score: 84, 
-                value: 45000, 
-                industry: "Technology", 
-                employees: 450,
-                signals: {
-                    accountHealth: { score: 85, licenseUtil: 89, supportTickets: 2, userLogins: 94, training: 78 },
-                    contactIntent: { score: 82, commEngage: 85, demoRequests: 3, contentEng: 76, featureReq: 2 },
-                    growthCapacity: { score: 81, newUsers: 18, hiring: 15, funding: "Recent", leadership: "Changes" },
-                    timingFit: { score: 88, renewal: 90, usageMat: 85 }
-                },
-                stakeholders: [
-                    { name: "Marcus Chen", role: "HR Director", engagement: "high" },
-                    { name: "Lisa Park", role: "CHRO", engagement: "medium" },
-                    { name: "Emma Rodriguez", role: "IT Manager", engagement: "high" }
-                ]
+        // Comprehensive account data - 30 accounts
+        const accounts = {
+            'Tech Pioneers': {
+                name: 'Tech Pioneers', score: 91, industry: 'Technology', employees: 320, scoreCategory: 'high', pipelineValue: 41000,
+                health: { score: 100, details: [['License Utilization:', '92% (High) - 100pts'], ['Support Ticket Volume:', '1/mo (High) - 100pts'], ['User Login Frequency:', '89% (High) - 100pts'], ['Training Completion:', '85% (High) - 100pts'], ['Product Usage Maturity:', '84% (High) - 100pts']] },
+                intent: { score: 100, details: [['Communication Engagement:', '91% (High) - 100pts'], ['Demo Requests:', '4 (High) - 100pts'], ['Content Engagement:', '88% (High) - 100pts'], ['Feature Requests:', '3 (High) - 100pts']] },
+                growth: { score: 63, details: [['New Users Added:', '12 (Medium) - 75pts'], ['Hiring Activity:', '8% (Low) - 50pts'], ['Funding News:', 'Series B (High) - 100pts'], ['Leadership Changes:', 'No changes (Low) - 25pts']] },
+                timing: { score: 100, details: [['Renewal Windows:', '52 days (High) - 100pts'], ['Similar Customer Patterns:', 'Match (High) - 100pts'], ['Tenure Patterns:', 'Optimal (High) - 100pts']] },
+                stakeholders: [{ name: 'Sarah Kim', role: 'VP People', engagement: 'high' }, { name: 'James Wilson', role: 'CTO', engagement: 'high' }, { name: 'Maria Garcia', role: 'Head of Ops', engagement: 'medium' }],
+                product: 'Conversations – Premium'
             },
-            { 
-                name: "Tech Pioneers", 
-                product: "Conversations – Premium", 
-                score: 85, 
-                value: 41000, 
-                industry: "Technology", 
-                employees: 320,
-                signals: {
-                    accountHealth: { score: 88, licenseUtil: 92, supportTickets: 1, userLogins: 89, training: 85 },
-                    contactIntent: { score: 89, commEngage: 91, demoRequests: 4, contentEng: 88, featureReq: 3 },
-                    growthCapacity: { score: 78, newUsers: 12, hiring: 8, funding: "Series B", leadership: "Stable" },
-                    timingFit: { score: 85, renewal: 88, usageMat: 82 }
-                },
-                stakeholders: [
-                    { name: "Sarah Kim", role: "VP People", engagement: "high" },
-                    { name: "James Wilson", role: "CTO", engagement: "high" },
-                    { name: "Maria Garcia", role: "Head of Ops", engagement: "medium" }
-                ]
+            'Global Manufacturing': {
+                name: 'Global Manufacturing', score: 88, industry: 'Manufacturing', employees: 850, scoreCategory: 'high', pipelineValue: 62000,
+                health: { score: 95, details: [['License Utilization:', '88% (High) - 100pts'], ['Support Ticket Volume:', '2/mo (High) - 100pts'], ['User Login Frequency:', '92% (High) - 100pts'], ['Training Completion:', '78% (High) - 100pts'], ['Product Usage Maturity:', '81% (High) - 100pts']] },
+                intent: { score: 88, details: [['Communication Engagement:', '85% (High) - 100pts'], ['Demo Requests:', '3 (High) - 100pts'], ['Content Engagement:', '82% (High) - 100pts'], ['Feature Requests:', '2 (Medium) - 75pts']] },
+                growth: { score: 81, details: [['New Users Added:', '16 (High) - 100pts'], ['Hiring Activity:', '12% (Medium) - 75pts'], ['Funding News:', 'No funding (Low) - 25pts'], ['Leadership Changes:', 'New CHRO (High) - 100pts']] },
+                timing: { score: 88, details: [['Renewal Windows:', '45 days (High) - 100pts'], ['Similar Customer Patterns:', 'Match (High) - 100pts'], ['Tenure Patterns:', 'Optimal (Medium) - 75pts']] },
+                stakeholders: [{ name: 'Robert Chen', role: 'CHRO', engagement: 'high' }, { name: 'Lisa Wang', role: 'Operations Director', engagement: 'high' }, { name: 'Mark Johnson', role: 'IT Director', engagement: 'medium' }],
+                product: 'Talent Management Suite'
             },
-            { 
-                name: "FinTech Forward", 
-                product: "Compensation Management", 
-                score: 79, 
-                value: 38000, 
-                industry: "Financial Services", 
-                employees: 280,
-                signals: {
-                    accountHealth: { score: 76, licenseUtil: 78, supportTickets: 3, userLogins: 82, training: 65 },
-                    contactIntent: { score: 95, commEngage: 94, demoRequests: 5, contentEng: 92, featureReq: 4 },
-                    growthCapacity: { score: 72, newUsers: 8, hiring: 12, funding: "None", leadership: "New CMO" },
-                    timingFit: { score: 74, renewal: 75, usageMat: 73 }
-                },
-                stakeholders: [
-                    { name: "David Chen", role: "CHRO", engagement: "high" },
-                    { name: "Alex Thompson", role: "Finance Director", engagement: "medium" },
-                    { name: "Jennifer Lee", role: "HR Manager", engagement: "high" }
-                ]
+            'CloudTech Solutions': {
+                name: 'CloudTech Solutions', score: 86, industry: 'Technology', employees: 450, scoreCategory: 'high', pipelineValue: 54000,
+                health: { score: 88, details: [['License Utilization:', '86% (High) - 100pts'], ['Support Ticket Volume:', '3/mo (High) - 100pts'], ['User Login Frequency:', '84% (High) - 100pts'], ['Training Completion:', '72% (Medium) - 75pts'], ['Product Usage Maturity:', '89% (High) - 100pts']] },
+                intent: { score: 100, details: [['Communication Engagement:', '94% (High) - 100pts'], ['Demo Requests:', '5 (High) - 100pts'], ['Content Engagement:', '91% (High) - 100pts'], ['Feature Requests:', '4 (High) - 100pts']] },
+                growth: { score: 75, details: [['New Users Added:', '14 (Medium) - 75pts'], ['Hiring Activity:', '15% (Medium) - 75pts'], ['Funding News:', 'Recent Series A (High) - 100pts'], ['Leadership Changes:', 'No changes (Low) - 25pts']] },
+                timing: { score: 81, details: [['Renewal Windows:', '68 days (Medium) - 75pts'], ['Similar Customer Patterns:', 'Match (High) - 100pts'], ['Tenure Patterns:', 'Optimal (Medium) - 75pts']] },
+                stakeholders: [{ name: 'Jennifer Liu', role: 'VP Engineering', engagement: 'high' }, { name: 'David Park', role: 'Head of Talent', engagement: 'high' }, { name: 'Emma Rodriguez', role: 'People Ops', engagement: 'medium' }],
+                product: 'Recruiting Platform'
             },
-            { 
-                name: "Strategy Consultants", 
-                product: "Recruiting - Medium", 
-                score: 78, 
-                value: 29000, 
-                industry: "Consulting", 
-                employees: 150,
-                signals: {
-                    accountHealth: { score: 82, licenseUtil: 85, supportTickets: 1, userLogins: 91, training: 72 },
-                    contactIntent: { score: 71, commEngage: 68, demoRequests: 2, contentEng: 74, featureReq: 1 },
-                    growthCapacity: { score: 85, newUsers: 22, hiring: 25, funding: "Series A", leadership: "Stable" },
-                    timingFit: { score: 74, renewal: 78, usageMat: 70 }
-                },
-                stakeholders: [
-                    { name: "Robert Johnson", role: "Managing Partner", engagement: "medium" },
-                    { name: "Lisa Chang", role: "Head of Talent", engagement: "high" },
-                    { name: "Michael Brown", role: "Operations Lead", engagement: "low" }
-                ]
+            'Digital Innovation Lab': {
+                name: 'Digital Innovation Lab', score: 84, industry: 'Consulting', employees: 220, scoreCategory: 'high', pipelineValue: 48000,
+                health: { score: 81, details: [['License Utilization:', '79% (High) - 100pts'], ['Support Ticket Volume:', '4/mo (Medium) - 75pts'], ['User Login Frequency:', '88% (High) - 100pts'], ['Training Completion:', '69% (Medium) - 75pts'], ['Product Usage Maturity:', '74% (Medium) - 75pts']] },
+                intent: { score: 94, details: [['Communication Engagement:', '92% (High) - 100pts'], ['Demo Requests:', '4 (High) - 100pts'], ['Content Engagement:', '89% (High) - 100pts'], ['Feature Requests:', '3 (High) - 100pts']] },
+                growth: { score: 94, details: [['New Users Added:', '19 (High) - 100pts'], ['Hiring Activity:', '25% (High) - 100pts'], ['Funding News:', 'Growth funding (High) - 100pts'], ['Leadership Changes:', 'New CTO (High) - 100pts']] },
+                timing: { score: 67, details: [['Renewal Windows:', '95 days (Medium) - 75pts'], ['Similar Customer Patterns:', 'Match (High) - 100pts'], ['Tenure Patterns:', 'Sub-optimal (Low) - 25pts']] },
+                stakeholders: [{ name: 'Alex Chen', role: 'Founder & CEO', engagement: 'high' }, { name: 'Sarah Martinez', role: 'Head of Innovation', engagement: 'high' }, { name: 'Tom Wilson', role: 'CTO', engagement: 'medium' }],
+                product: 'Employee Experience Platform'
             },
-            { 
-                name: "Financial Services Co", 
-                product: "Compensation Management", 
-                score: 74, 
-                value: 31000, 
-                industry: "Financial Services", 
-                employees: 520,
-                signals: {
-                    accountHealth: { score: 79, licenseUtil: 82, supportTickets: 2, userLogins: 85, training: 71 },
-                    contactIntent: { score: 68, commEngage: 65, demoRequests: 1, contentEng: 70, featureReq: 2 },
-                    growthCapacity: { score: 69, newUsers: 5, hiring: 3, funding: "None", leadership: "Stable" },
-                    timingFit: { score: 81, renewal: 85, usageMat: 77 }
-                },
-                stakeholders: [
-                    { name: "Amanda Foster", role: "HR Director", engagement: "medium" },
-                    { name: "Kevin Martinez", role: "VP Operations", engagement: "low" },
-                    { name: "Rachel Green", role: "Compliance Lead", engagement: "medium" }
-                ]
+            'Strategy Consultants': {
+                name: 'Strategy Consultants', score: 83, industry: 'Consulting', employees: 150, scoreCategory: 'high', pipelineValue: 39000,
+                health: { score: 95, details: [['License Utilization:', '85% (High) - 100pts'], ['Support Ticket Volume:', '1/mo (High) - 100pts'], ['User Login Frequency:', '91% (High) - 100pts'], ['Training Completion:', '72% (Medium) - 75pts'], ['Product Usage Maturity:', '100% (High) - 100pts']] },
+                intent: { score: 81, details: [['Communication Engagement:', '68% (Medium) - 75pts'], ['Demo Requests:', '2 (Medium) - 75pts'], ['Content Engagement:', '74% (Medium) - 75pts'], ['Feature Requests:', '3 (High) - 100pts']] },
+                growth: { score: 88, details: [['New Users Added:', '22 (High) - 100pts'], ['Hiring Activity:', '25% (High) - 100pts'], ['Funding News:', 'Series A (High) - 100pts'], ['Leadership Changes:', 'No changes (Low) - 25pts']] },
+                timing: { score: 69, details: [['Renewal Windows:', '88 days (Medium) - 75pts'], ['Similar Customer Patterns:', 'Match (High) - 100pts'], ['Tenure Patterns:', 'Sub-optimal (Low) - 25pts']] },
+                stakeholders: [{ name: 'Robert Johnson', role: 'Managing Partner', engagement: 'medium' }, { name: 'Lisa Chang', role: 'Head of Talent', engagement: 'high' }, { name: 'Michael Brown', role: 'Operations Lead', engagement: 'low' }],
+                product: 'Recruiting - Medium'
             },
-            { 
-                name: "Growth Dynamics", 
-                product: "Personio Payroll", 
-                score: 70, 
-                value: 25000, 
-                industry: "Technology", 
-                employees: 180,
-                signals: {
-                    accountHealth: { score: 72, licenseUtil: 75, supportTickets: 4, userLogins: 78, training: 58 },
-                    contactIntent: { score: 65, commEngage: 62, demoRequests: 1, contentEng: 68, featureReq: 1 },
-                    growthCapacity: { score: 80, newUsers: 18, hiring: 22, funding: "Seed", leadership: "New CEO" },
-                    timingFit: { score: 63, renewal: 60, usageMat: 66 }
-                },
-                stakeholders: [
-                    { name: "Tom Wilson", role: "Founder", engagement: "high" },
-                    { name: "Sarah Davis", role: "Head of People", engagement: "medium" },
-                    { name: "Chris Taylor", role: "CFO", engagement: "low" }
-                ]
+            'Financial Services Plus': {
+                name: 'Financial Services Plus', score: 82, industry: 'Financial Services', employees: 680, scoreCategory: 'high', pipelineValue: 56000,
+                health: { score: 88, details: [['License Utilization:', '84% (High) - 100pts'], ['Support Ticket Volume:', '3/mo (High) - 100pts'], ['User Login Frequency:', '86% (High) - 100pts'], ['Training Completion:', '76% (High) - 100pts'], ['Product Usage Maturity:', '82% (High) - 100pts']] },
+                intent: { score: 75, details: [['Communication Engagement:', '72% (Medium) - 75pts'], ['Demo Requests:', '2 (Medium) - 75pts'], ['Content Engagement:', '78% (High) - 100pts'], ['Feature Requests:', '1 (Low) - 50pts']] },
+                growth: { score: 69, details: [['New Users Added:', '11 (Medium) - 75pts'], ['Hiring Activity:', '9% (Low) - 50pts'], ['Funding News:', 'No funding (Low) - 25pts'], ['Leadership Changes:', 'New CFO (High) - 100pts']] },
+                timing: { score: 94, details: [['Renewal Windows:', '42 days (High) - 100pts'], ['Similar Customer Patterns:', 'Match (High) - 100pts'], ['Tenure Patterns:', 'Optimal (High) - 75pts']] },
+                stakeholders: [{ name: 'Amanda Foster', role: 'CHRO', engagement: 'high' }, { name: 'Kevin Martinez', role: 'VP Operations', engagement: 'medium' }, { name: 'Rachel Green', role: 'Compliance Lead', engagement: 'medium' }],
+                product: 'Compensation Management'
             },
-            { 
-                name: "Manufacturing Plus", 
-                product: "Personio Payroll", 
-                score: 68, 
-                value: 22000, 
-                industry: "Manufacturing", 
-                employees: 850,
-                signals: {
-                    accountHealth: { score: 78, licenseUtil: 78, supportTickets: 2, userLogins: 82, training: 72 },
-                    contactIntent: { score: 58, commEngage: 55, demoRequests: 0, contentEng: 61, featureReq: 1 },
-                    growthCapacity: { score: 62, newUsers: 3, hiring: 5, funding: "None", leadership: "Stable" },
-                    timingFit: { score: 74, renewal: 78, usageMat: 70 }
-                },
-                stakeholders: [
-                    { name: "Frank Miller", role: "Plant Manager", engagement: "low" },
-                    { name: "Susan Clark", role: "HR Manager", engagement: "medium" },
-                    { name: "Bob Anderson", role: "Operations Dir", engagement: "medium" }
-                ]
+            'Growth Dynamics': {
+                name: 'Growth Dynamics', score: 81, industry: 'Technology', employees: 180, scoreCategory: 'high', pipelineValue: 35000,
+                health: { score: 75, details: [['License Utilization:', '75% (Medium) - 75pts'], ['Support Ticket Volume:', '8/mo (Low) - 50pts'], ['User Login Frequency:', '78% (High) - 100pts'], ['Training Completion:', '58% (Medium) - 75pts'], ['Product Usage Maturity:', '76% (High) - 100pts']] },
+                intent: { score: 63, details: [['Communication Engagement:', '62% (Medium) - 75pts'], ['Demo Requests:', '1 (Low) - 50pts'], ['Content Engagement:', '68% (Medium) - 75pts'], ['Feature Requests:', '1 (Low) - 50pts']] },
+                growth: { score: 100, details: [['New Users Added:', '18 (High) - 100pts'], ['Hiring Activity:', '22% (High) - 100pts'], ['Funding News:', 'Seed funding (High) - 100pts'], ['Leadership Changes:', 'New CEO (High) - 100pts']] },
+                timing: { score: 83, details: [['Renewal Windows:', '110 days (Medium) - 75pts'], ['Similar Customer Patterns:', 'No Match (Low) - 50pts'], ['Tenure Patterns:', 'Optimal (High) - 100pts']] },
+                stakeholders: [{ name: 'Tom Wilson', role: 'Founder', engagement: 'high' }, { name: 'Sarah Davis', role: 'Head of People', engagement: 'medium' }, { name: 'Chris Taylor', role: 'CFO', engagement: 'low' }],
+                product: 'Personio Payroll'
             },
-            { 
-                name: "Healthcare Innovators", 
-                product: "Employee Experience", 
-                score: 64, 
-                value: 28000, 
-                industry: "Healthcare", 
-                employees: 400,
-                signals: {
-                    accountHealth: { score: 68, licenseUtil: 70, supportTickets: 3, userLogins: 75, training: 55 },
-                    contactIntent: { score: 48, commEngage: 45, demoRequests: 0, contentEng: 51, featureReq: 0 },
-                    growthCapacity: { score: 71, newUsers: 8, hiring: 10, funding: "None", leadership: "Stable" },
-                    timingFit: { score: 69, renewal: 75, usageMat: 63 }
-                },
-                stakeholders: [
-                    { name: "Dr. Emily White", role: "Chief Medical Officer", engagement: "low" },
-                    { name: "Nancy Rodriguez", role: "HR Director", engagement: "medium" },
-                    { name: "Paul Jackson", role: "Administrator", engagement: "low" }
-                ]
+            'FinTech Forward': {
+                name: 'FinTech Forward', score: 79, industry: 'Financial Services', employees: 280, scoreCategory: 'high', pipelineValue: 42000,
+                health: { score: 80, details: [['License Utilization:', '78% (High) - 100pts'], ['Support Ticket Volume:', '5/mo (Medium) - 75pts'], ['User Login Frequency:', '72% (Medium) - 75pts'], ['Training Completion:', '65% (Medium) - 75pts'], ['Product Usage Maturity:', '76% (High) - 100pts']] },
+                intent: { score: 100, details: [['Communication Engagement:', '94% (High) - 100pts'], ['Demo Requests:', '5 (High) - 100pts'], ['Content Engagement:', '92% (High) - 100pts'], ['Feature Requests:', '4 (High) - 100pts']] },
+                growth: { score: 69, details: [['New Users Added:', '8 (Low) - 50pts'], ['Hiring Activity:', '12% (Medium) - 75pts'], ['Funding News:', 'No funding (Low) - 25pts'], ['Leadership Changes:', 'New CMO (High) - 100pts']] },
+                timing: { score: 67, details: [['Renewal Windows:', '75 days (Medium) - 75pts'], ['Similar Customer Patterns:', 'Match (High) - 100pts'], ['Tenure Patterns:', 'Sub-optimal (Low) - 25pts']] },
+                stakeholders: [{ name: 'David Chen', role: 'CHRO', engagement: 'high' }, { name: 'Alex Thompson', role: 'Finance Director', engagement: 'medium' }, { name: 'Jennifer Lee', role: 'HR Manager', engagement: 'high' }],
+                product: 'Compensation Management'
+            },
+            'Healthcare Innovation': {
+                name: 'Healthcare Innovation', score: 78, industry: 'Healthcare', employees: 420, scoreCategory: 'high', pipelineValue: 51000,
+                health: { score: 85, details: [['License Utilization:', '82% (High) - 100pts'], ['Support Ticket Volume:', '4/mo (Medium) - 75pts'], ['User Login Frequency:', '81% (High) - 100pts'], ['Training Completion:', '73% (Medium) - 75pts'], ['Product Usage Maturity:', '79% (High) - 100pts']] },
+                intent: { score: 69, details: [['Communication Engagement:', '65% (Medium) - 75pts'], ['Demo Requests:', '2 (Medium) - 75pts'], ['Content Engagement:', '71% (Medium) - 75pts'], ['Feature Requests:', '1 (Low) - 50pts']] },
+                growth: { score: 75, details: [['New Users Added:', '13 (Medium) - 75pts'], ['Hiring Activity:', '14% (Medium) - 75pts'], ['Funding News:', 'No funding (Low) - 25pts'], ['Leadership Changes:', 'New CHRO (High) - 100pts']] },
+                timing: { score: 81, details: [['Renewal Windows:', '64 days (Medium) - 75pts'], ['Similar Customer Patterns:', 'Match (High) - 100pts'], ['Tenure Patterns:', 'Optimal (Medium) - 75pts']] },
+                stakeholders: [{ name: 'Dr. Sarah Johnson', role: 'Chief Medical Officer', engagement: 'medium' }, { name: 'Mark Stevens', role: 'Head of HR', engagement: 'high' }, { name: 'Lisa Park', role: 'Operations Manager', engagement: 'medium' }],
+                product: 'Employee Experience Platform'
+            },
+            'Retail Revolution': {
+                name: 'Retail Revolution', score: 77, industry: 'Retail', employees: 920, scoreCategory: 'high', pipelineValue: 68000,
+                health: { score: 78, details: [['License Utilization:', '76% (High) - 100pts'], ['Support Ticket Volume:', '6/mo (Medium) - 75pts'], ['User Login Frequency:', '74% (Medium) - 75pts'], ['Training Completion:', '68% (Medium) - 75pts'], ['Product Usage Maturity:', '71% (Medium) - 75pts']] },
+                intent: { score: 81, details: [['Communication Engagement:', '79% (High) - 100pts'], ['Demo Requests:', '3 (High) - 100pts'], ['Content Engagement:', '76% (High) - 100pts'], ['Feature Requests:', '1 (Low) - 50pts']] },
+                growth: { score: 69, details: [['New Users Added:', '15 (Medium) - 75pts'], ['Hiring Activity:', '7% (Low) - 50pts'], ['Funding News:', 'No funding (Low) - 25pts'], ['Leadership Changes:', 'New VP Retail (High) - 100pts']] },
+                timing: { score: 81, details: [['Renewal Windows:', '72 days (Medium) - 75pts'], ['Similar Customer Patterns:', 'Match (High) - 100pts'], ['Tenure Patterns:', 'Optimal (Medium) - 75pts']] },
+                stakeholders: [{ name: 'Michelle Wong', role: 'VP People', engagement: 'high' }, { name: 'James Miller', role: 'Store Operations Director', engagement: 'medium' }, { name: 'Anna Rodriguez', role: 'HR Business Partner', engagement: 'medium' }],
+                product: 'Talent Management Suite'
+            },
+            'Enterprise Solutions': {
+                name: 'Enterprise Solutions', score: 76, industry: 'Technology', employees: 650, scoreCategory: 'high', pipelineValue: 58000,
+                health: { score: 81, details: [['License Utilization:', '79% (High) - 100pts'], ['Support Ticket Volume:', '5/mo (Medium) - 75pts'], ['User Login Frequency:', '77% (High) - 100pts'], ['Training Completion:', '71% (Medium) - 75pts'], ['Product Usage Maturity:', '73% (Medium) - 75pts']] },
+                intent: { score: 75, details: [['Communication Engagement:', '73% (Medium) - 75pts'], ['Demo Requests:', '2 (Medium) - 75pts'], ['Content Engagement:', '74% (Medium) - 75pts'], ['Feature Requests:', '2 (Medium) - 75pts']] },
+                growth: { score: 63, details: [['New Users Added:', '9 (Low) - 50pts'], ['Hiring Activity:', '11% (Medium) - 75pts'], ['Funding News:', 'No funding (Low) - 25pts'], ['Leadership Changes:', 'New CTO (High) - 100pts']] },
+                timing: { score: 85, details: [['Renewal Windows:', '56 days (High) - 100pts'], ['Similar Customer Patterns:', 'Match (High) - 100pts'], ['Tenure Patterns:', 'Optimal (Low) - 50pts']] },
+                stakeholders: [{ name: 'Robert Kim', role: 'CTO', engagement: 'high' }, { name: 'Sarah Chen', role: 'VP Engineering', engagement: 'medium' }, { name: 'David Wong', role: 'People Director', engagement: 'high' }],
+                product: 'Recruiting Platform'
+            },
+            'Media Innovators': {
+                name: 'Media Innovators', score: 74, industry: 'Media', employees: 340, scoreCategory: 'medium', pipelineValue: 46000,
+                health: { score: 75, details: [['License Utilization:', '73% (Medium) - 75pts'], ['Support Ticket Volume:', '7/mo (Low) - 50pts'], ['User Login Frequency:', '76% (High) - 100pts'], ['Training Completion:', '64% (Medium) - 75pts'], ['Product Usage Maturity:', '72% (Medium) - 75pts']] },
+                intent: { score: 88, details: [['Communication Engagement:', '86% (High) - 100pts'], ['Demo Requests:', '4 (High) - 100pts'], ['Content Engagement:', '82% (High) - 100pts'], ['Feature Requests:', '2 (Medium) - 75pts']] },
+                growth: { score: 56, details: [['New Users Added:', '7 (Low) - 50pts'], ['Hiring Activity:', '6% (Low) - 50pts'], ['Funding News:', 'No funding (Low) - 25pts'], ['Leadership Changes:', 'New Creative Director (High) - 100pts']] },
+                timing: { score: 75, details: [['Renewal Windows:', '89 days (Medium) - 75pts'], ['Similar Customer Patterns:', 'Match (High) - 100pts'], ['Tenure Patterns:', 'Sub-optimal (Low) - 25pts']] },
+                stakeholders: [{ name: 'Creative Director Maya', role: 'Creative Director', engagement: 'high' }, { name: 'John Martinez', role: 'Head of Talent', engagement: 'medium' }, { name: 'Linda Park', role: 'HR Manager', engagement: 'medium' }],
+                product: 'Employee Experience Platform'
+            },
+            'Construction Leaders': {
+                name: 'Construction Leaders', score: 72, industry: 'Construction', employees: 540, scoreCategory: 'medium', pipelineValue: 49000,
+                health: { score: 69, details: [['License Utilization:', '68% (Medium) - 75pts'], ['Support Ticket Volume:', '9/mo (Low) - 50pts'], ['User Login Frequency:', '71% (Medium) - 75pts'], ['Training Completion:', '59% (Medium) - 75pts'], ['Product Usage Maturity:', '66% (Medium) - 75pts']] },
+                intent: { score: 69, details: [['Communication Engagement:', '67% (Medium) - 75pts'], ['Demo Requests:', '2 (Medium) - 75pts'], ['Content Engagement:', '69% (Medium) - 75pts'], ['Feature Requests:', '1 (Low) - 50pts']] },
+                growth: { score: 81, details: [['New Users Added:', '17 (High) - 100pts'], ['Hiring Activity:', '18% (High) - 100pts'], ['Funding News:', 'No funding (Low) - 25pts'], ['Leadership Changes:', 'New Operations Director (High) - 100pts']] },
+                timing: { score: 69, details: [['Renewal Windows:', '94 days (Medium) - 75pts'], ['Similar Customer Patterns:', 'Match (High) - 100pts'], ['Tenure Patterns:', 'Sub-optimal (Low) - 25pts']] },
+                stakeholders: [{ name: 'Mike Thompson', role: 'Operations Director', engagement: 'high' }, { name: 'Susan Lee', role: 'HR Director', engagement: 'medium' }, { name: 'Carlos Rivera', role: 'Safety Manager', engagement: 'low' }],
+                product: 'Talent Management Suite'
+            },
+            'Financial Services Co': {
+                name: 'Financial Services Co', score: 71, industry: 'Financial Services', employees: 520, scoreCategory: 'medium', pipelineValue: 47000,
+                health: { score: 85, details: [['License Utilization:', '82% (High) - 100pts'], ['Support Ticket Volume:', '6/mo (Medium) - 75pts'], ['User Login Frequency:', '85% (High) - 100pts'], ['Training Completion:', '71% (Medium) - 75pts'], ['Product Usage Maturity:', '76% (High) - 100pts']] },
+                intent: { score: 69, details: [['Communication Engagement:', '65% (Medium) - 75pts'], ['Demo Requests:', '1 (Low) - 50pts'], ['Content Engagement:', '70% (Medium) - 75pts'], ['Feature Requests:', '2 (Medium) - 75pts']] },
+                growth: { score: 38, details: [['New Users Added:', '5 (Low) - 50pts'], ['Hiring Activity:', '3% (Low) - 50pts'], ['Funding News:', 'No funding (Low) - 25pts'], ['Leadership Changes:', 'No changes (Low) - 25pts']] },
+                timing: { score: 92, details: [['Renewal Windows:', '35 days (High) - 100pts'], ['Similar Customer Patterns:', 'Match (High) - 100pts'], ['Tenure Patterns:', 'Optimal (High) - 75pts']] },
+                stakeholders: [{ name: 'Amanda Foster', role: 'HR Director', engagement: 'medium' }, { name: 'Kevin Martinez', role: 'VP Operations', engagement: 'low' }, { name: 'Rachel Green', role: 'Compliance Lead', engagement: 'medium' }],
+                product: 'Compensation Management'
+            },
+            'Education Excellence': {
+                name: 'Education Excellence', score: 69, industry: 'Education', employees: 780, scoreCategory: 'medium', pipelineValue: 52000,
+                health: { score: 72, details: [['License Utilization:', '70% (Medium) - 75pts'], ['Support Ticket Volume:', '8/mo (Low) - 50pts'], ['User Login Frequency:', '73% (Medium) - 75pts'], ['Training Completion:', '75% (Medium) - 75pts'], ['Product Usage Maturity:', '68% (Medium) - 75pts']] },
+                intent: { score: 63, details: [['Communication Engagement:', '61% (Medium) - 75pts'], ['Demo Requests:', '1 (Low) - 50pts'], ['Content Engagement:', '64% (Medium) - 75pts'], ['Feature Requests:', '1 (Low) - 50pts']] },
+                growth: { score: 75, details: [['New Users Added:', '14 (Medium) - 75pts'], ['Hiring Activity:', '16% (High) - 100pts'], ['Funding News:', 'Grant funding (High) - 100pts'], ['Leadership Changes:', 'No changes (Low) - 25pts']] },
+                timing: { score: 67, details: [['Renewal Windows:', '86 days (Medium) - 75pts'], ['Similar Customer Patterns:', 'Match (High) - 100pts'], ['Tenure Patterns:', 'Sub-optimal (Low) - 25pts']] },
+                stakeholders: [{ name: 'Dr. Patricia Wilson', role: 'VP Academic Affairs', engagement: 'medium' }, { name: 'Thomas Brown', role: 'HR Director', engagement: 'medium' }, { name: 'Maria Santos', role: 'Operations Manager', engagement: 'low' }],
+                product: 'Employee Experience Platform'
+            },
+            'Logistics Pro': {
+                name: 'Logistics Pro', score: 68, industry: 'Logistics', employees: 890, scoreCategory: 'medium', pipelineValue: 61000,
+                health: { score: 63, details: [['License Utilization:', '62% (Medium) - 75pts'], ['Support Ticket Volume:', '11/mo (Low) - 25pts'], ['User Login Frequency:', '65% (Medium) - 75pts'], ['Training Completion:', '58% (Medium) - 75pts'], ['Product Usage Maturity:', '63% (Medium) - 75pts']] },
+                intent: { score: 75, details: [['Communication Engagement:', '74% (Medium) - 75pts'], ['Demo Requests:', '3 (High) - 100pts'], ['Content Engagement:', '72% (Medium) - 75pts'], ['Feature Requests:', '1 (Low) - 50pts']] },
+                growth: { score: 69, details: [['New Users Added:', '12 (Medium) - 75pts'], ['Hiring Activity:', '13% (Medium) - 75pts'], ['Funding News:', 'No funding (Low) - 25pts'], ['Leadership Changes:', 'New COO (High) - 100pts']] },
+                timing: { score: 63, details: [['Renewal Windows:', '102 days (Medium) - 75pts'], ['Similar Customer Patterns:', 'No Match (Low) - 50pts'], ['Tenure Patterns:', 'Sub-optimal (Low) - 25pts']] },
+                stakeholders: [{ name: 'Jennifer Chang', role: 'COO', engagement: 'high' }, { name: 'Robert Kim', role: 'Logistics Director', engagement: 'medium' }, { name: 'Emily Davis', role: 'HR Manager', engagement: 'low' }],
+                product: 'Talent Management Suite'
+            },
+            'Energy Solutions': {
+                name: 'Energy Solutions', score: 66, industry: 'Energy', employees: 1200, scoreCategory: 'medium', pipelineValue: 78000,
+                health: { score: 69, details: [['License Utilization:', '67% (Medium) - 75pts'], ['Support Ticket Volume:', '10/mo (Low) - 25pts'], ['User Login Frequency:', '69% (Medium) - 75pts'], ['Training Completion:', '72% (Medium) - 75pts'], ['Product Usage Maturity:', '64% (Medium) - 75pts']] },
+                intent: { score: 56, details: [['Communication Engagement:', '54% (Medium) - 75pts'], ['Demo Requests:', '1 (Low) - 50pts'], ['Content Engagement:', '58% (Medium) - 75pts'], ['Feature Requests:', '0 (Low) - 25pts']] },
+                growth: { score: 75, details: [['New Users Added:', '16 (High) - 100pts'], ['Hiring Activity:', '15% (Medium) - 75pts'], ['Funding News:', 'No funding (Low) - 25pts'], ['Leadership Changes:', 'New CEO (High) - 100pts']] },
+                timing: { score: 63, details: [['Renewal Windows:', '115 days (Medium) - 75pts'], ['Similar Customer Patterns:', 'No Match (Low) - 50pts'], ['Tenure Patterns:', 'Sub-optimal (Low) - 25pts']] },
+                stakeholders: [{ name: 'Michael Chen', role: 'CEO', engagement: 'medium' }, { name: 'Anna Rodriguez', role: 'VP Operations', engagement: 'low' }, { name: 'David Park', role: 'HR Director', engagement: 'medium' }],
+                product: 'Recruiting Platform'
+            },
+            'Insurance Innovators': {
+                name: 'Insurance Innovators', score: 64, industry: 'Insurance', employees: 420, scoreCategory: 'medium', pipelineValue: 38000,
+                health: { score: 75, details: [['License Utilization:', '73% (Medium) - 75pts'], ['Support Ticket Volume:', '7/mo (Low) - 50pts'], ['User Login Frequency:', '76% (High) - 100pts'], ['Training Completion:', '68% (Medium) - 75pts'], ['Product Usage Maturity:', '71% (Medium) - 75pts']] },
+                intent: { score: 50, details: [['Communication Engagement:', '48% (Low) - 25pts'], ['Demo Requests:', '1 (Low) - 50pts'], ['Content Engagement:', '52% (Medium) - 75pts'], ['Feature Requests:', '1 (Low) - 50pts']] },
+                growth: { score: 63, details: [['New Users Added:', '8 (Low) - 50pts'], ['Hiring Activity:', '12% (Medium) - 75pts'], ['Funding News:', 'No funding (Low) - 25pts'], ['Leadership Changes:', 'New Claims Director (High) - 100pts']] },
+                timing: { score: 69, details: [['Renewal Windows:', '91 days (Medium) - 75pts'], ['Similar Customer Patterns:', 'Match (High) - 100pts'], ['Tenure Patterns:', 'Sub-optimal (Low) - 25pts']] },
+                stakeholders: [{ name: 'Lisa Wang', role: 'Claims Director', engagement: 'medium' }, { name: 'Mark Johnson', role: 'Underwriting Manager', engagement: 'low' }, { name: 'Sarah Kim', role: 'HR Specialist', engagement: 'medium' }],
+                product: 'Compensation Management'
+            },
+            'Real Estate Pros': {
+                name: 'Real Estate Pros', score: 63, industry: 'Real Estate', employees: 280, scoreCategory: 'medium', pipelineValue: 32000,
+                health: { score: 63, details: [['License Utilization:', '61% (Medium) - 75pts'], ['Support Ticket Volume:', '12/mo (Low) - 25pts'], ['User Login Frequency:', '64% (Medium) - 75pts'], ['Training Completion:', '55% (Medium) - 75pts'], ['Product Usage Maturity:', '59% (Medium) - 75pts']] },
+                intent: { score: 69, details: [['Communication Engagement:', '67% (Medium) - 75pts'], ['Demo Requests:', '2 (Medium) - 75pts'], ['Content Engagement:', '65% (Medium) - 75pts'], ['Feature Requests:', '2 (Medium) - 75pts']] },
+                growth: { score: 56, details: [['New Users Added:', '6 (Low) - 50pts'], ['Hiring Activity:', '8% (Low) - 50pts'], ['Funding News:', 'No funding (Low) - 25pts'], ['Leadership Changes:', 'New Sales Director (High) - 100pts']] },
+                timing: { score: 63, details: [['Renewal Windows:', '98 days (Medium) - 75pts'], ['Similar Customer Patterns:', 'No Match (Low) - 50pts'], ['Tenure Patterns:', 'Sub-optimal (Low) - 25pts']] },
+                stakeholders: [{ name: 'Amanda Johnson', role: 'Sales Director', engagement: 'high' }, { name: 'Robert Chen', role: 'Property Manager', engagement: 'medium' }, { name: 'Emily Rodriguez', role: 'Office Manager', engagement: 'low' }],
+                product: 'Employee Experience Platform'
+            },
+            'Legal Eagles': {
+                name: 'Legal Eagles', score: 61, industry: 'Legal', employees: 120, scoreCategory: 'medium', pipelineValue: 28000,
+                health: { score: 69, details: [['License Utilization:', '67% (Medium) - 75pts'], ['Support Ticket Volume:', '8/mo (Low) - 50pts'], ['User Login Frequency:', '70% (Medium) - 75pts'], ['Training Completion:', '65% (Medium) - 75pts'], ['Product Usage Maturity:', '63% (Medium) - 75pts']] },
+                intent: { score: 56, details: [['Communication Engagement:', '54% (Medium) - 75pts'], ['Demo Requests:', '1 (Low) - 50pts'], ['Content Engagement:', '56% (Medium) - 75pts'], ['Feature Requests:', '0 (Low) - 25pts']] },
+                growth: { score: 50, details: [['New Users Added:', '4 (Low) - 50pts'], ['Hiring Activity:', '5% (Low) - 50pts'], ['Funding News:', 'No funding (Low) - 25pts'], ['Leadership Changes:', 'New Managing Partner (High) - 100pts']] },
+                timing: { score: 69, details: [['Renewal Windows:', '87 days (Medium) - 75pts'], ['Similar Customer Patterns:', 'Match (High) - 100pts'], ['Tenure Patterns:', 'Sub-optimal (Low) - 25pts']] },
+                stakeholders: [{ name: 'James Wilson', role: 'Managing Partner', engagement: 'medium' }, { name: 'Sarah Martinez', role: 'Office Administrator', engagement: 'low' }, { name: 'David Kim', role: 'Associate', engagement: 'low' }],
+                product: 'Talent Management Suite'
+            },
+            'Automotive Future': {
+                name: 'Automotive Future', score: 59, industry: 'Automotive', employees: 1100, scoreCategory: 'medium', pipelineValue: 72000,
+                health: { score: 56, details: [['License Utilization:', '54% (Medium) - 75pts'], ['Support Ticket Volume:', '15/mo (Low) - 25pts'], ['User Login Frequency:', '57% (Medium) - 75pts'], ['Training Completion:', '51% (Medium) - 75pts'], ['Product Usage Maturity:', '48% (Low) - 25pts']] },
+                intent: { score: 63, details: [['Communication Engagement:', '61% (Medium) - 75pts'], ['Demo Requests:', '2 (Medium) - 75pts'], ['Content Engagement:', '59% (Medium) - 75pts'], ['Feature Requests:', '1 (Low) - 50pts']] },
+                growth: { score: 63, details: [['New Users Added:', '10 (Low) - 50pts'], ['Hiring Activity:', '11% (Medium) - 75pts'], ['Funding News:', 'No funding (Low) - 25pts'], ['Leadership Changes:', 'New Plant Manager (High) - 100pts']] },
+                timing: { score: 56, details: [['Renewal Windows:', '125 days (Medium) - 75pts'], ['Similar Customer Patterns:', 'No Match (Low) - 50pts'], ['Tenure Patterns:', 'Sub-optimal (Low) - 25pts']] },
+                stakeholders: [{ name: 'Carlos Rivera', role: 'Plant Manager', engagement: 'high' }, { name: 'Michelle Wong', role: 'Manufacturing Director', engagement: 'medium' }, { name: 'Alex Park', role: 'HR Coordinator', engagement: 'low' }],
+                product: 'Recruiting Platform'
+            },
+            'Travel Experts': {
+                name: 'Travel Experts', score: 57, industry: 'Travel', employees: 190, scoreCategory: 'medium', pipelineValue: 25000,
+                health: { score: 63, details: [['License Utilization:', '61% (Medium) - 75pts'], ['Support Ticket Volume:', '9/mo (Low) - 50pts'], ['User Login Frequency:', '63% (Medium) - 75pts'], ['Training Completion:', '59% (Medium) - 75pts'], ['Product Usage Maturity:', '56% (Medium) - 75pts']] },
+                intent: { score: 50, details: [['Communication Engagement:', '48% (Low) - 25pts'], ['Demo Requests:', '1 (Low) - 50pts'], ['Content Engagement:', '52% (Medium) - 75pts'], ['Feature Requests:', '1 (Low) - 50pts']] },
+                growth: { score: 56, details: [['New Users Added:', '5 (Low) - 50pts'], ['Hiring Activity:', '7% (Low) - 50pts'], ['Funding News:', 'No funding (Low) - 25pts'], ['Leadership Changes:', 'New Operations Head (High) - 100pts']] },
+                timing: { score: 56, details: [['Renewal Windows:', '132 days (Medium) - 75pts'], ['Similar Customer Patterns:', 'No Match (Low) - 50pts'], ['Tenure Patterns:', 'Sub-optimal (Low) - 25pts']] },
+                stakeholders: [{ name: 'Lisa Chen', role: 'Operations Head', engagement: 'medium' }, { name: 'Tom Wilson', role: 'Customer Service Manager', engagement: 'low' }, { name: 'Anna Martinez', role: 'HR Assistant', engagement: 'low' }],
+                product: 'Employee Experience Platform'
+            },
+            'Food Services United': {
+                name: 'Food Services United', score: 55, industry: 'Food Service', employees: 850, scoreCategory: 'medium', pipelineValue: 43000,
+                health: { score: 50, details: [['License Utilization:', '48% (Low) - 25pts'], ['Support Ticket Volume:', '18/mo (Low) - 25pts'], ['User Login Frequency:', '52% (Medium) - 75pts'], ['Training Completion:', '46% (Low) - 25pts'], ['Product Usage Maturity:', '49% (Low) - 25pts']] },
+                intent: { score: 63, details: [['Communication Engagement:', '61% (Medium) - 75pts'], ['Demo Requests:', '2 (Medium) - 75pts'], ['Content Engagement:', '59% (Medium) - 75pts'], ['Feature Requests:', '1 (Low) - 50pts']] },
+                growth: { score: 56, details: [['New Users Added:', '7 (Low) - 50pts'], ['Hiring Activity:', '9% (Low) - 50pts'], ['Funding News:', 'No funding (Low) - 25pts'], ['Leadership Changes:', 'New Regional Manager (High) - 100pts']] },
+                timing: { score: 50, details: [['Renewal Windows:', '148 days (Low) - 25pts'], ['Similar Customer Patterns:', 'Match (High) - 100pts'], ['Tenure Patterns:', 'Sub-optimal (Low) - 25pts']] },
+                stakeholders: [{ name: 'Maria Santos', role: 'Regional Manager', engagement: 'high' }, { name: 'John Davis', role: 'Operations Supervisor', engagement: 'medium' }, { name: 'Rachel Kim', role: 'Staff Coordinator', engagement: 'low' }],
+                product: 'Talent Management Suite'
+            },
+            'Textile Innovations': {
+                name: 'Textile Innovations', score: 53, industry: 'Manufacturing', employees: 320, scoreCategory: 'medium', pipelineValue: 31000,
+                health: { score: 56, details: [['License Utilization:', '54% (Medium) - 75pts'], ['Support Ticket Volume:', '14/mo (Low) - 25pts'], ['User Login Frequency:', '56% (Medium) - 75pts'], ['Training Completion:', '48% (Low) - 25pts'], ['Product Usage Maturity:', '52% (Medium) - 75pts']] },
+                intent: { score: 44, details: [['Communication Engagement:', '42% (Low) - 25pts'], ['Demo Requests:', '1 (Low) - 50pts'], ['Content Engagement:', '46% (Low) - 25pts'], ['Feature Requests:', '1 (Low) - 50pts']] },
+                growth: { score: 56, details: [['New Users Added:', '6 (Low) - 50pts'], ['Hiring Activity:', '8% (Low) - 50pts'], ['Funding News:', 'No funding (Low) - 25pts'], ['Leadership Changes:', 'New Production Manager (High) - 100pts']] },
+                timing: { score: 56, details: [['Renewal Windows:', '142 days (Low) - 25pts'], ['Similar Customer Patterns:', 'Match (High) - 100pts'], ['Tenure Patterns:', 'Sub-optimal (Low) - 25pts']] },
+                stakeholders: [{ name: 'Michael Brown', role: 'Production Manager', engagement: 'medium' }, { name: 'Susan Lee', role: 'Quality Control', engagement: 'low' }, { name: 'David Rodriguez', role: 'HR Generalist', engagement: 'low' }],
+                product: 'Compensation Management'
+            },
+            'Agricultural Advances': {
+                name: 'Agricultural Advances', score: 51, industry: 'Agriculture', employees: 240, scoreCategory: 'medium', pipelineValue: 26000,
+                health: { score: 50, details: [['License Utilization:', '48% (Low) - 25pts'], ['Support Ticket Volume:', '16/mo (Low) - 25pts'], ['User Login Frequency:', '51% (Medium) - 75pts'], ['Training Completion:', '44% (Low) - 25pts'], ['Product Usage Maturity:', '46% (Low) - 25pts']] },
+                intent: { score: 56, details: [['Communication Engagement:', '54% (Medium) - 75pts'], ['Demo Requests:', '1 (Low) - 50pts'], ['Content Engagement:', '56% (Medium) - 75pts'], ['Feature Requests:', '1 (Low) - 50pts']] },
+                growth: { score: 44, details: [['New Users Added:', '3 (Low) - 50pts'], ['Hiring Activity:', '4% (Low) - 50pts'], ['Funding News:', 'No funding (Low) - 25pts'], ['Leadership Changes:', 'No changes (Low) - 25pts']] },
+                timing: { score: 56, details: [['Renewal Windows:', '156 days (Low) - 25pts'], ['Similar Customer Patterns:', 'Match (High) - 100pts'], ['Tenure Patterns:', 'Sub-optimal (Low) - 25pts']] },
+                stakeholders: [{ name: 'Robert Johnson', role: 'Farm Operations Manager', engagement: 'medium' }, { name: 'Emily Davis', role: 'Agricultural Specialist', engagement: 'low' }, { name: 'Mark Wilson', role: 'Admin Coordinator', engagement: 'low' }],
+                product: 'Employee Experience Platform'
+            },
+            'Mining Solutions': {
+                name: 'Mining Solutions', score: 49, industry: 'Mining', employees: 680, scoreCategory: 'low', pipelineValue: 38000,
+                health: { score: 44, details: [['License Utilization:', '42% (Low) - 25pts'], ['Support Ticket Volume:', '20/mo (Low) - 25pts'], ['User Login Frequency:', '45% (Low) - 25pts'], ['Training Completion:', '41% (Low) - 25pts'], ['Product Usage Maturity:', '43% (Low) - 25pts']] },
+                intent: { score: 50, details: [['Communication Engagement:', '48% (Low) - 25pts'], ['Demo Requests:', '1 (Low) - 50pts'], ['Content Engagement:', '52% (Medium) - 75pts'], ['Feature Requests:', '1 (Low) - 50pts']] },
+                growth: { score: 56, details: [['New Users Added:', '8 (Low) - 50pts'], ['Hiring Activity:', '10% (Low) - 50pts'], ['Funding News:', 'No funding (Low) - 25pts'], ['Leadership Changes:', 'New Safety Director (High) - 100pts']] },
+                timing: { score: 44, details: [['Renewal Windows:', '178 days (Low) - 25pts'], ['Similar Customer Patterns:', 'No Match (Low) - 50pts'], ['Tenure Patterns:', 'Sub-optimal (Low) - 25pts']] },
+                stakeholders: [{ name: 'James Chen', role: 'Safety Director', engagement: 'high' }, { name: 'Patricia Williams', role: 'Site Supervisor', engagement: 'low' }, { name: 'Carlos Martinez', role: 'HR Specialist', engagement: 'low' }],
+                product: 'Recruiting Platform'
+            },
+            'Chemical Dynamics': {
+                name: 'Chemical Dynamics', score: 47, industry: 'Chemical', employees: 420, scoreCategory: 'low', pipelineValue: 35000,
+                health: { score: 44, details: [['License Utilization:', '42% (Low) - 25pts'], ['Support Ticket Volume:', '22/mo (Low) - 25pts'], ['User Login Frequency:', '44% (Low) - 25pts'], ['Training Completion:', '39% (Low) - 25pts'], ['Product Usage Maturity:', '41% (Low) - 25pts']] },
+                intent: { score: 38, details: [['Communication Engagement:', '36% (Low) - 25pts'], ['Demo Requests:', '0 (Low) - 25pts'], ['Content Engagement:', '40% (Low) - 25pts'], ['Feature Requests:', '1 (Low) - 50pts']] },
+                growth: { score: 56, details: [['New Users Added:', '6 (Low) - 50pts'], ['Hiring Activity:', '8% (Low) - 50pts'], ['Funding News:', 'No funding (Low) - 25pts'], ['Leadership Changes:', 'New Plant Director (High) - 100pts']] },
+                timing: { score: 50, details: [['Renewal Windows:', '165 days (Low) - 25pts'], ['Similar Customer Patterns:', 'Match (High) - 100pts'], ['Tenure Patterns:', 'Sub-optimal (Low) - 25pts']] },
+                stakeholders: [{ name: 'Dr. Sarah Kim', role: 'Plant Director', engagement: 'medium' }, { name: 'Michael Park', role: 'Quality Assurance', engagement: 'low' }, { name: 'Linda Rodriguez', role: 'Environmental Specialist', engagement: 'low' }],
+                product: 'Talent Management Suite'
+            },
+            'Utilities Corp': {
+                name: 'Utilities Corp', score: 45, industry: 'Utilities', employees: 950, scoreCategory: 'low', pipelineValue: 52000,
+                health: { score: 38, details: [['License Utilization:', '36% (Low) - 25pts'], ['Support Ticket Volume:', '25/mo (Low) - 25pts'], ['User Login Frequency:', '39% (Low) - 25pts'], ['Training Completion:', '35% (Low) - 25pts'], ['Product Usage Maturity:', '37% (Low) - 25pts']] },
+                intent: { score: 44, details: [['Communication Engagement:', '42% (Low) - 25pts'], ['Demo Requests:', '1 (Low) - 50pts'], ['Content Engagement:', '46% (Low) - 25pts'], ['Feature Requests:', '1 (Low) - 50pts']] },
+                growth: { score: 50, details: [['New Users Added:', '5 (Low) - 50pts'], ['Hiring Activity:', '6% (Low) - 50pts'], ['Funding News:', 'No funding (Low) - 25pts'], ['Leadership Changes:', 'New Operations Chief (High) - 100pts']] },
+                timing: { score: 50, details: [['Renewal Windows:', '185 days (Low) - 25pts'], ['Similar Customer Patterns:', 'Match (High) - 100pts'], ['Tenure Patterns:', 'Sub-optimal (Low) - 25pts']] },
+                stakeholders: [{ name: 'Thomas Wilson', role: 'Operations Chief', engagement: 'medium' }, { name: 'Jennifer Brown', role: 'Service Manager', engagement: 'low' }, { name: 'Robert Davis', role: 'Field Supervisor', engagement: 'low' }],
+                product: 'Compensation Management'
+            },
+            'Aerospace Technologies': {
+                name: 'Aerospace Technologies', score: 43, industry: 'Aerospace', employees: 760, scoreCategory: 'low', pipelineValue: 48000,
+                health: { score: 38, details: [['License Utilization:', '36% (Low) - 25pts'], ['Support Ticket Volume:', '28/mo (Low) - 25pts'], ['User Login Frequency:', '37% (Low) - 25pts'], ['Training Completion:', '33% (Low) - 25pts'], ['Product Usage Maturity:', '35% (Low) - 25pts']] },
+                intent: { score: 31, details: [['Communication Engagement:', '29% (Low) - 25pts'], ['Demo Requests:', '0 (Low) - 25pts'], ['Content Engagement:', '33% (Low) - 25pts'], ['Feature Requests:', '0 (Low) - 25pts']] },
+                growth: { score: 56, details: [['New Users Added:', '7 (Low) - 50pts'], ['Hiring Activity:', '9% (Low) - 50pts'], ['Funding News:', 'No funding (Low) - 25pts'], ['Leadership Changes:', 'New Engineering Director (High) - 100pts']] },
+                timing: { score: 44, details: [['Renewal Windows:', '192 days (Low) - 25pts'], ['Similar Customer Patterns:', 'No Match (Low) - 50pts'], ['Tenure Patterns:', 'Sub-optimal (Low) - 25pts']] },
+                stakeholders: [{ name: 'Dr. Michael Johnson', role: 'Engineering Director', engagement: 'medium' }, { name: 'Sarah Lee', role: 'Project Manager', engagement: 'low' }, { name: 'David Kim', role: 'Quality Engineer', engagement: 'low' }],
+                product: 'Employee Experience Platform'
             }
-        ];
+        };
 
-        let filteredOpportunities = [...opportunities];
-        let selectedAccount = opportunities[0];
+        // Live Score Editor Variables
+        let editingAccountName = null;
+        let originalScores = {};
+        let modifiedScores = {};
+        let filteredAccounts = [];
 
-        function getScoreCategory(score) {
-            if (score >= 76) return 'high';
-            if (score >= 51) return 'medium';
-            return 'low';
+        function initializeScoreEditor() {
+            const select = document.getElementById('editAccountSelect');
+            Object.keys(accounts).forEach(accountName => {
+                const option = document.createElement('option');
+                option.value = accountName;
+                option.textContent = accountName;
+                select.appendChild(option);
+            });
+
+            select.addEventListener('change', (e) => {
+                editingAccountName = e.target.value;
+                if (editingAccountName) {
+                    const account = accounts[editingAccountName];
+                    originalScores = {
+                        health: account.health.score,
+                        intent: account.intent.score,
+                        growth: account.growth.score,
+                        timing: account.timing.score,
+                        overall: account.score
+                    };
+                    modifiedScores = { ...originalScores };
+                    
+                    setupSliders();
+                    updateScoreComparison();
+                    document.getElementById('scoreComparison').style.display = 'block';
+                    document.getElementById('scoreEditors').style.display = 'block';
+                } else {
+                    document.getElementById('scoreComparison').style.display = 'none';
+                    document.getElementById('scoreEditors').style.display = 'none';
+                }
+            });
+
+            // Add slider event listeners
+            ['health', 'intent', 'growth', 'timing'].forEach(category => {
+                const slider = document.getElementById(category + 'Slider');
+                const valueSpan = document.getElementById(category + 'Value');
+                
+                slider.addEventListener('input', (e) => {
+                    const value = parseInt(e.target.value);
+                    valueSpan.textContent = value;
+                    modifiedScores[category] = value;
+                    
+                    modifiedScores.overall = Math.round(
+                        (modifiedScores.health + modifiedScores.intent + modifiedScores.growth + modifiedScores.timing) / 4
+                    );
+                    
+                    updateScoreComparison();
+                });
+            });
+
+            document.getElementById('resetScores').addEventListener('click', () => {
+                modifiedScores = { ...originalScores };
+                setupSliders();
+                updateScoreComparison();
+            });
+
+            document.getElementById('applyChanges').addEventListener('click', () => {
+                applyScoreChanges();
+            });
         }
 
-        function formatCurrency(value) {
-            return `€${(value / 1000).toFixed(0)}K`;
+        function setupSliders() {
+            document.getElementById('healthSlider').value = modifiedScores.health;
+            document.getElementById('healthValue').textContent = modifiedScores.health;
+            
+            document.getElementById('intentSlider').value = modifiedScores.intent;
+            document.getElementById('intentValue').textContent = modifiedScores.intent;
+            
+            document.getElementById('growthSlider').value = modifiedScores.growth;
+            document.getElementById('growthValue').textContent = modifiedScores.growth;
+            
+            document.getElementById('timingSlider').value = modifiedScores.timing;
+            document.getElementById('timingValue').textContent = modifiedScores.timing;
         }
 
-        function updateMetrics() {
-            const totalAccounts = filteredOpportunities.length;
-            const totalValue = filteredOpportunities.reduce((sum, opp) => sum + opp.value, 0);
-            const highPotentialCount = filteredOpportunities.filter(opp => opp.score > 75).length;
-            const averageScore = Math.round(filteredOpportunities.reduce((sum, opp) => sum + opp.score, 0) / totalAccounts) || 0;
+        function updateScoreComparison() {
+            if (!editingAccountName) return;
+            
+            document.getElementById('originalScore').textContent = originalScores.overall;
+            document.getElementById('originalBreakdown').textContent = 
+                `${originalScores.health} • ${originalScores.intent} • ${originalScores.growth} • ${originalScores.timing}`;
+            
+            document.getElementById('modifiedScore').textContent = modifiedScores.overall;
+            document.getElementById('modifiedBreakdown').textContent = 
+                `${modifiedScores.health} • ${modifiedScores.intent} • ${modifiedScores.growth} • ${modifiedScores.timing}`;
+            
+            const change = modifiedScores.overall - originalScores.overall;
+            const changeElement = document.getElementById('scoreChange');
+            changeElement.textContent = change > 0 ? `+${change}` : change.toString();
+            
+            if (change > 0) {
+                changeElement.style.color = '#28a745';
+            } else if (change < 0) {
+                changeElement.style.color = '#dc3545';
+            } else {
+                changeElement.style.color = '#6c757d';
+            }
+        }
 
-            document.getElementById('totalAccounts').textContent = totalAccounts;
-            document.getElementById('pipelineValue').textContent = formatCurrency(totalValue);
-            document.getElementById('highPotentialCount').textContent = highPotentialCount;
-            document.getElementById('averageScore').textContent = averageScore;
+        function applyScoreChanges() {
+            if (!editingAccountName) return;
+            
+            const account = accounts[editingAccountName];
+            account.health.score = modifiedScores.health;
+            account.intent.score = modifiedScores.intent;
+            account.growth.score = modifiedScores.growth;
+            account.timing.score = modifiedScores.timing;
+            account.score = modifiedScores.overall;
+            
+            updateAccountDetails(account);
+            renderOpportunities();
+            updateMetrics();
+            
+            alert(`✅ Applied changes to ${editingAccountName}!\nNew overall score: ${modifiedScores.overall} (${modifiedScores.overall > originalScores.overall ? '+' : ''}${modifiedScores.overall - originalScores.overall})`);
+            
+            originalScores = { ...modifiedScores };
+        }
+
+        function selectAccount(accountName) {
+            document.querySelectorAll('.opportunity-item').forEach(item => {
+                item.classList.remove('selected');
+            });
+            
+            event.target.closest('.opportunity-item').classList.add('selected');
+            
+            const account = accounts[accountName];
+            if (account) {
+                updateAccountDetails(account);
+            }
+        }
+
+        function updateAccountDetails(account) {
+            document.getElementById('accountName').textContent = account.name;
+            document.getElementById('accountScore').textContent = `${account.score}/100`;
+            document.getElementById('accountInfo').textContent = `${account.industry} • ${account.employees} employees`;
+            
+            const badge = document.getElementById('accountScore');
+            badge.className = `score-badge score-${account.scoreCategory}`;
+            
+            document.getElementById('healthScore').textContent = account.health.score;
+            document.getElementById('intentScore').textContent = account.intent.score;
+            document.getElementById('growthScore').textContent = account.growth.score;
+            document.getElementById('timingScore').textContent = account.timing.score;
+            
+            updateSignalDetails('healthDetails', account.health.details);
+            updateSignalDetails('intentDetails', account.intent.details);
+            updateSignalDetails('growthDetails', account.growth.details);
+            updateSignalDetails('timingDetails', account.timing.details);
+            
+            updateStakeholders(account.stakeholders);
+        }
+
+        function updateSignalDetails(elementId, details) {
+            const element = document.getElementById(elementId);
+            element.innerHTML = details.map(([label, value]) => 
+                `<div class="signal-item"><span>${label}</span><span>${value}</span></div>`
+            ).join('');
+        }
+
+        function updateStakeholders(stakeholders) {
+            const container = document.getElementById('stakeholderList');
+            container.innerHTML = stakeholders.map(stakeholder => `
+                <div class="stakeholder-item">
+                    <div>
+                        <div class="stakeholder-name">${stakeholder.name}</div>
+                        <div class="stakeholder-role">${stakeholder.role}</div>
+                    </div>
+                    <div class="engagement-dot engagement-${stakeholder.engagement}"></div>
+                </div>
+            `).join('');
         }
 
         function renderOpportunities() {
             const container = document.getElementById('opportunitiesList');
-            const noResults = document.getElementById('noResults');
+            const sortedAccounts = filteredAccounts.length > 0 ? filteredAccounts : Object.values(accounts).sort((a, b) => b.score - a.score);
             
-            if (filteredOpportunities.length === 0) {
-                container.innerHTML = '';
-                noResults.style.display = 'block';
-                return;
-            }
-
-            noResults.style.display = 'none';
-            
-            container.innerHTML = filteredOpportunities.map((opp, index) => `
-                <div class="opportunity-item ${index === 0 ? 'selected' : ''}" data-account="${opp.name}">
+            container.innerHTML = sortedAccounts.map(account => `
+                <div class="opportunity-item" onclick="selectAccount('${account.name}')">
                     <div class="opportunity-info">
-                        <h3>${opp.name}</h3>
-                        <p>${opp.product} • Score: ${opp.score}</p>
+                        <h3>${account.name}</h3>
+                        <p>${account.product} • Score: ${account.score}</p>
                     </div>
                     <div class="opportunity-value">
-                        <div class="score">${opp.score}</div>
-                        <div class="amount">Potential Value: ${formatCurrency(opp.value)}</div>
+                        <div class="score">${account.score}</div>
+                        <div class="amount">Potential Value: €${(account.pipelineValue / 1000).toFixed(0)}K</div>
                     </div>
                 </div>
             `).join('');
-
-            // Add click handlers
-            container.querySelectorAll('.opportunity-item').forEach(item => {
-                item.addEventListener('click', () => {
-                    // Remove selected class from all items
-                    container.querySelectorAll('.opportunity-item').forEach(i => i.classList.remove('selected'));
-                    // Add selected class to clicked item
-                    item.classList.add('selected');
-                    
-                    // Update account details
-                    const accountName = item.dataset.account;
-                    selectedAccount = opportunities.find(opp => opp.name === accountName);
-                    updateAccountDetails();
-                });
-            });
-
-            // Update selected account if it's not in filtered results
-            if (!filteredOpportunities.find(opp => opp.name === selectedAccount.name)) {
-                selectedAccount = filteredOpportunities[0];
-                updateAccountDetails();
-            }
         }
 
-        function updateAccountDetails() {
-            if (!selectedAccount) return;
-
-            document.getElementById('selectedAccountName').textContent = selectedAccount.name;
-            document.getElementById('selectedAccountScore').textContent = `${selectedAccount.score}/100`;
-            document.getElementById('selectedAccountInfo').textContent = `${selectedAccount.industry} • ${selectedAccount.employees} employees`;
-            
-            // Update score badge color
-            const scoreBadge = document.getElementById('selectedAccountScore');
-            scoreBadge.className = `score-badge score-${getScoreCategory(selectedAccount.score)}`;
-
-            // Update signal breakdown
-            const signals = selectedAccount.signals;
-            if (signals) {
-                // Update Account Health
-                const accountHealthSection = document.querySelector('.signal-category:nth-child(1)');
-                accountHealthSection.querySelector('.signal-score').textContent = signals.accountHealth.score;
-                const healthDetails = accountHealthSection.querySelector('.signal-details');
-                healthDetails.innerHTML = `
-                    <div class="signal-item">
-                        <span>Licence Util:</span>
-                        <span>${signals.accountHealth.licenseUtil}%</span>
-                    </div>
-                    <div class="signal-item">
-                        <span>Support Tickets:</span>
-                        <span>${signals.accountHealth.supportTickets}</span>
-                    </div>
-                    <div class="signal-item">
-                        <span>User Logins:</span>
-                        <span>${signals.accountHealth.userLogins}%</span>
-                    </div>
-                    <div class="signal-item">
-                        <span>Training:</span>
-                        <span>${signals.accountHealth.training}%</span>
-                    </div>
-                `;
-
-                // Update Contact Intent
-                const contactIntentSection = document.querySelector('.signal-category:nth-child(2)');
-                contactIntentSection.querySelector('.signal-score').textContent = signals.contactIntent.score;
-                const intentDetails = contactIntentSection.querySelector('.signal-details');
-                intentDetails.innerHTML = `
-                    <div class="signal-item">
-                        <span>Comm Engage:</span>
-                        <span>${signals.contactIntent.commEngage}%</span>
-                    </div>
-                    <div class="signal-item">
-                        <span>Demo Requests:</span>
-                        <span>${signals.contactIntent.demoRequests}</span>
-                    </div>
-                    <div class="signal-item">
-                        <span>Content Eng:</span>
-                        <span>${signals.contactIntent.contentEng}%</span>
-                    </div>
-                    <div class="signal-item">
-                        <span>Feature Req:</span>
-                        <span>${signals.contactIntent.featureReq}</span>
-                    </div>
-                `;
-
-                // Update Growth Capacity
-                const growthCapacitySection = document.querySelector('.signal-category:nth-child(3)');
-                growthCapacitySection.querySelector('.signal-score').textContent = signals.growthCapacity.score;
-                const growthDetails = growthCapacitySection.querySelector('.signal-details');
-                growthDetails.innerHTML = `
-                    <div class="signal-item">
-                        <span>New Users:</span>
-                        <span>+${signals.growthCapacity.newUsers}</span>
-                    </div>
-                    <div class="signal-item">
-                        <span>Hiring:</span>
-                        <span>+${signals.growthCapacity.hiring}%</span>
-                    </div>
-                    <div class="signal-item">
-                        <span>Funding:</span>
-                        <span>${signals.growthCapacity.funding}</span>
-                    </div>
-                    <div class="signal-item">
-                        <span>Leadership:</span>
-                        <span>${signals.growthCapacity.leadership}</span>
-                    </div>
-                `;
-
-                // Update Timing & Product Fit
-                const timingFitSection = document.querySelector('.signal-category:nth-child(4)');
-                timingFitSection.querySelector('.signal-score').textContent = signals.timingFit.score;
-                const timingDetails = timingFitSection.querySelector('.signal-details');
-                timingDetails.innerHTML = `
-                    <div class="signal-item">
-                        <span>Renewal:</span>
-                        <span>${signals.timingFit.renewal}%</span>
-                    </div>
-                    <div class="signal-item">
-                        <span>Usage Mat:</span>
-                        <span>${signals.timingFit.usageMat}%</span>
-                    </div>
-                `;
-
-                // Update stakeholders
-                const stakeholderMap = document.querySelector('.stakeholder-map');
-                const stakeholderContainer = stakeholderMap.querySelector('div:last-child').parentNode;
-                
-                // Remove existing stakeholder items (keep the h4)
-                const existingItems = stakeholderContainer.querySelectorAll('.stakeholder-item');
-                existingItems.forEach(item => item.remove());
-                
-                // Add new stakeholder items
-                selectedAccount.stakeholders.forEach(stakeholder => {
-                    const stakeholderItem = document.createElement('div');
-                    stakeholderItem.className = 'stakeholder-item';
-                    stakeholderItem.innerHTML = `
-                        <div>
-                            <div class="stakeholder-name">${stakeholder.name}</div>
-                            <div class="stakeholder-role">${stakeholder.role}</div>
-                        </div>
-                        <div class="engagement-dot engagement-${stakeholder.engagement}"></div>
-                    `;
-                    stakeholderContainer.appendChild(stakeholderItem);
-                });
-            }
-        }
-
-        function applyFilters() {
+        function filterAndSortAccounts() {
+            const searchTerm = document.getElementById('searchBox').value.toLowerCase();
             const scoreFilter = document.getElementById('scoreFilter').value;
-            const sortFilter = document.getElementById('sortFilter').value;
-
+            const sortBy = document.getElementById('sortFilter').value;
+            
+            let filtered = Object.values(accounts);
+            
+            // Apply search filter
+            if (searchTerm) {
+                filtered = filtered.filter(account => 
+                    account.name.toLowerCase().includes(searchTerm) ||
+                    account.industry.toLowerCase().includes(searchTerm) ||
+                    account.product.toLowerCase().includes(searchTerm)
+                );
+            }
+            
             // Apply score filter
-            filteredOpportunities = opportunities.filter(opp => {
-                if (scoreFilter === 'all') return true;
-                return getScoreCategory(opp.score) === scoreFilter;
-            });
-
+            if (scoreFilter !== 'all') {
+                filtered = filtered.filter(account => {
+                    if (scoreFilter === 'high') return account.score >= 76;
+                    if (scoreFilter === 'medium') return account.score >= 51 && account.score <= 75;
+                    if (scoreFilter === 'low') return account.score <= 50;
+                    return true;
+                });
+            }
+            
             // Apply sorting
-            filteredOpportunities.sort((a, b) => {
-                switch (sortFilter) {
-                    case 'name':
-                        return a.name.localeCompare(b.name);
-                    case 'pipeline':
-                        return b.value - a.value;
-                    case 'score':
-                    default:
-                        return b.score - a.score;
-                }
+            filtered.sort((a, b) => {
+                if (sortBy === 'score') return b.score - a.score;
+                if (sortBy === 'name') return a.name.localeCompare(b.name);
+                if (sortBy === 'pipeline') return b.pipelineValue - a.pipelineValue;
+                return 0;
             });
-
-            updateMetrics();
+            
+            filteredAccounts = filtered;
             renderOpportunities();
+            updateMetrics();
         }
 
-        // Initialize
+        function updateMetrics() {
+            const displayedAccounts = filteredAccounts.length > 0 ? filteredAccounts : Object.values(accounts);
+            
+            document.getElementById('totalAccounts').textContent = displayedAccounts.length;
+            
+            const totalPipeline = displayedAccounts.reduce((sum, account) => sum + account.pipelineValue, 0);
+            document.getElementById('totalPipeline').textContent = `€${(totalPipeline / 1000000).toFixed(1)}M`;
+            
+            const highScoreCount = displayedAccounts.filter(account => account.score >= 76).length;
+            document.getElementById('highScoreAccounts').textContent = highScoreCount;
+            
+            const avgScore = Math.round(displayedAccounts.reduce((sum, account) => sum + account.score, 0) / displayedAccounts.length);
+            document.getElementById('averageScore').textContent = avgScore;
+        }
+
+        // Initialize everything when page loads
         document.addEventListener('DOMContentLoaded', () => {
-            applyFilters();
+            initializeScoreEditor();
+            renderOpportunities();
+            updateMetrics();
+            
+            // Set up first account as selected
+            const firstAccount = Object.values(accounts)[0];
+            updateAccountDetails(firstAccount);
             
             // Add event listeners for filters
-            document.getElementById('scoreFilter').addEventListener('change', applyFilters);
-            document.getElementById('sortFilter').addEventListener('change', applyFilters);
+            document.getElementById('searchBox').addEventListener('input', filterAndSortAccounts);
+            document.getElementById('scoreFilter').addEventListener('change', filterAndSortAccounts);
+            document.getElementById('sortFilter').addEventListener('change', filterAndSortAccounts);
         });
     </script>
 </body>
