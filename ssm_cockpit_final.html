@@ -42,7 +42,7 @@
         .main-container {
             display: grid;
             grid-template-columns: 1fr 1fr;
-            grid-template-rows: auto auto auto auto;
+            grid-template-rows: auto auto auto auto auto;
             gap: 1.5rem;
             padding: 2rem;
             max-width: 1600px;
@@ -63,6 +63,10 @@
             margin-bottom: 1rem;
             border-bottom: 2px solid #3498db;
             padding-bottom: 0.5rem;
+        }
+
+        .full-width {
+            grid-column: 1 / -1;
         }
 
         .portfolio-overview {
@@ -349,7 +353,6 @@
 
         .score-editor {
             grid-column: 1 / -1;
-            margin-top: 2rem;
         }
 
         .editor-grid {
@@ -540,75 +543,6 @@
             </div>
         </div>
 
-        <!-- Live Score Editor -->
-        <div class="card score-editor">
-            <h2>⚙️ Live Score Editor</h2>
-            
-            <div class="editor-grid">
-                <!-- Account Selector -->
-                <div>
-                    <h3 style="font-size: 1rem; margin-bottom: 1rem; color: #2c3e50;">Select Account to Edit</h3>
-                    <select id="editAccountSelect" style="width: 100%; padding: 0.75rem; border: 1px solid #dee2e6; border-radius: 4px; font-size: 0.875rem;">
-                        <option value="">Select an account...</option>
-                    </select>
-                </div>
-
-                <!-- Current vs Modified Scores -->
-                <div id="scoreComparison" style="display: none;">
-                    <h3 style="font-size: 1rem; margin-bottom: 1rem; color: #2c3e50;">Current vs Modified</h3>
-                    <div class="score-comparison">
-                        <div class="score-display">
-                            <h4 style="font-size: 0.9rem; color: #2c3e50; margin-bottom: 0.5rem;">Original</h4>
-                            <div style="font-size: 1.5rem; font-weight: 600; color: #7f8c8d;" id="originalScore">--</div>
-                            <div style="font-size: 0.8rem; color: #7f8c8d;" id="originalBreakdown">-- • -- • -- • --</div>
-                        </div>
-                        <div class="score-display modified">
-                            <h4 style="font-size: 0.9rem; color: #2c3e50; margin-bottom: 0.5rem;">Modified</h4>
-                            <div style="font-size: 1.5rem; font-weight: 600; color: #27ae60;" id="modifiedScore">--</div>
-                            <div style="font-size: 0.8rem; color: #7f8c8d;" id="modifiedBreakdown">-- • -- • -- • --</div>
-                        </div>
-                    </div>
-                    <div class="change-indicator">
-                        <strong>Score Change: <span id="scoreChange">0</span> points</strong>
-                    </div>
-                </div>
-
-                <!-- Score Editors -->
-                <div id="scoreEditors" style="display: none;">
-                    <h3 style="font-size: 1rem; margin-bottom: 1rem; color: #2c3e50;">Edit Category Scores</h3>
-                    
-                    <div class="slider-group">
-                        <label class="slider-label">Account Health:</label>
-                        <input type="range" id="healthSlider" class="slider" min="0" max="100" value="50">
-                        <span id="healthValue" class="slider-value">50</span>
-                    </div>
-                    
-                    <div class="slider-group">
-                        <label class="slider-label">Contact Intent:</label>
-                        <input type="range" id="intentSlider" class="slider" min="0" max="100" value="50">
-                        <span id="intentValue" class="slider-value">50</span>
-                    </div>
-                    
-                    <div class="slider-group">
-                        <label class="slider-label">Growth Capacity:</label>
-                        <input type="range" id="growthSlider" class="slider" min="0" max="100" value="50">
-                        <span id="growthValue" class="slider-value">50</span>
-                    </div>
-                    
-                    <div class="slider-group">
-                        <label class="slider-label">Timing & Fit:</label>
-                        <input type="range" id="timingSlider" class="slider" min="0" max="100" value="50">
-                        <span id="timingValue" class="slider-value">50</span>
-                    </div>
-                    
-                    <div class="editor-buttons">
-                        <button id="resetScores" class="btn btn-secondary">Reset to Original</button>
-                        <button id="applyChanges" class="btn btn-success">Apply Changes</button>
-                    </div>
-                </div>
-            </div>
-        </div>
-
         <!-- Action Center -->
         <div class="card action-center">
             <h2>⚡ Signal Alerts</h2>
@@ -684,6 +618,75 @@
             </div>
             <div style="margin-top: 0.5rem; font-size: 0.875rem; color: #7f8c8d;">
                 <div>Calls: 18 • Meetings: 12 • Emails: 43</div>
+            </div>
+        </div>
+
+        <!-- Live Score Editor - AT THE END -->
+        <div class="card score-editor">
+            <h2>⚙️ Live Score Editor</h2>
+            
+            <div class="editor-grid">
+                <!-- Account Selector -->
+                <div>
+                    <h3 style="font-size: 1rem; margin-bottom: 1rem; color: #2c3e50;">Select Account to Edit</h3>
+                    <select id="editAccountSelect" style="width: 100%; padding: 0.75rem; border: 1px solid #dee2e6; border-radius: 4px; font-size: 0.875rem;">
+                        <option value="">Select an account...</option>
+                    </select>
+                </div>
+
+                <!-- Current vs Modified Scores -->
+                <div id="scoreComparison" style="display: none;">
+                    <h3 style="font-size: 1rem; margin-bottom: 1rem; color: #2c3e50;">Current vs Modified</h3>
+                    <div class="score-comparison">
+                        <div class="score-display">
+                            <h4 style="font-size: 0.9rem; color: #2c3e50; margin-bottom: 0.5rem;">Original</h4>
+                            <div style="font-size: 1.5rem; font-weight: 600; color: #7f8c8d;" id="originalScore">--</div>
+                            <div style="font-size: 0.8rem; color: #7f8c8d;" id="originalBreakdown">-- • -- • -- • --</div>
+                        </div>
+                        <div class="score-display modified">
+                            <h4 style="font-size: 0.9rem; color: #2c3e50; margin-bottom: 0.5rem;">Modified</h4>
+                            <div style="font-size: 1.5rem; font-weight: 600; color: #27ae60;" id="modifiedScore">--</div>
+                            <div style="font-size: 0.8rem; color: #7f8c8d;" id="modifiedBreakdown">-- • -- • -- • --</div>
+                        </div>
+                    </div>
+                    <div class="change-indicator">
+                        <strong>Score Change: <span id="scoreChange">0</span> points</strong>
+                    </div>
+                </div>
+
+                <!-- Score Editors -->
+                <div id="scoreEditors" style="display: none;">
+                    <h3 style="font-size: 1rem; margin-bottom: 1rem; color: #2c3e50;">Edit Category Scores</h3>
+                    
+                    <div class="slider-group">
+                        <label class="slider-label">Account Health:</label>
+                        <input type="range" id="healthSlider" class="slider" min="0" max="100" value="50">
+                        <span id="healthValue" class="slider-value">50</span>
+                    </div>
+                    
+                    <div class="slider-group">
+                        <label class="slider-label">Contact Intent:</label>
+                        <input type="range" id="intentSlider" class="slider" min="0" max="100" value="50">
+                        <span id="intentValue" class="slider-value">50</span>
+                    </div>
+                    
+                    <div class="slider-group">
+                        <label class="slider-label">Growth Capacity:</label>
+                        <input type="range" id="growthSlider" class="slider" min="0" max="100" value="50">
+                        <span id="growthValue" class="slider-value">50</span>
+                    </div>
+                    
+                    <div class="slider-group">
+                        <label class="slider-label">Timing & Fit:</label>
+                        <input type="range" id="timingSlider" class="slider" min="0" max="100" value="50">
+                        <span id="timingValue" class="slider-value">50</span>
+                    </div>
+                    
+                    <div class="editor-buttons">
+                        <button id="resetScores" class="btn btn-secondary">Reset to Original</button>
+                        <button id="applyChanges" class="btn btn-success">Apply Changes</button>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
@@ -951,6 +954,15 @@
                 timing: { score: 44, details: [['Renewal Windows:', '192 days (Low) - 25pts'], ['Similar Customer Patterns:', 'No Match (Low) - 50pts'], ['Tenure Patterns:', 'Sub-optimal (Low) - 25pts']] },
                 stakeholders: [{ name: 'Dr. Michael Johnson', role: 'Engineering Director', engagement: 'medium' }, { name: 'Sarah Lee', role: 'Project Manager', engagement: 'low' }, { name: 'David Kim', role: 'Quality Engineer', engagement: 'low' }],
                 product: 'Employee Experience Platform'
+            },
+            'Energy Solutions': {
+                name: 'Energy Solutions', score: 42, industry: 'Energy', employees: 850, scoreCategory: 'low', pipelineValue: 57000, ssm: 'David Kumar',
+                health: { score: 38, details: [['License Utilization:', '36% (Low) - 25pts'], ['Support Ticket Volume:', '24/mo (Low) - 25pts'], ['User Login Frequency:', '40% (Low) - 25pts'], ['Training Completion:', '32% (Low) - 25pts'], ['Product Usage Maturity:', '38% (Low) - 25pts']] },
+                intent: { score: 25, details: [['Communication Engagement:', '23% (Low) - 25pts'], ['Demo Requests:', '0 (Low) - 25pts'], ['Content Engagement:', '27% (Low) - 25pts'], ['Feature Requests:', '0 (Low) - 25pts']] },
+                growth: { score: 50, details: [['New Users Added:', '4 (Low) - 50pts'], ['Hiring Activity:', '5% (Low) - 50pts'], ['Funding News:', 'No funding (Low) - 25pts'], ['Leadership Changes:', 'New VP Operations (High) - 100pts']] },
+                timing: { score: 50, details: [['Renewal Windows:', '210 days (Low) - 25pts'], ['Similar Customer Patterns:', 'Match (High) - 100pts'], ['Tenure Patterns:', 'Sub-optimal (Low) - 25pts']] },
+                stakeholders: [{ name: 'Janet Wilson', role: 'VP Operations', engagement: 'low' }, { name: 'Mark Chen', role: 'Facilities Manager', engagement: 'low' }, { name: 'Susan Rodriguez', role: 'HR Coordinator', engagement: 'low' }],
+                product: 'Recruiting Platform'
             }
         };
 
@@ -1150,45 +1162,6 @@
             `).join('');
         }
 
-        function filterAndSortAccounts() {
-            const searchTerm = document.getElementById('searchBox').value.toLowerCase();
-            const scoreFilter = document.getElementById('scoreFilter').value;
-            const sortBy = document.getElementById('sortFilter').value;
-            
-            let filtered = Object.values(accounts);
-            
-            // Apply search filter
-            if (searchTerm) {
-                filtered = filtered.filter(account => 
-                    account.name.toLowerCase().includes(searchTerm) ||
-                    account.industry.toLowerCase().includes(searchTerm) ||
-                    account.product.toLowerCase().includes(searchTerm)
-                );
-            }
-            
-            // Apply score filter
-            if (scoreFilter !== 'all') {
-                filtered = filtered.filter(account => {
-                    if (scoreFilter === 'high') return account.score >= 76;
-                    if (scoreFilter === 'medium') return account.score >= 51 && account.score <= 75;
-                    if (scoreFilter === 'low') return account.score <= 50;
-                    return true;
-                });
-            }
-            
-            // Apply sorting
-            filtered.sort((a, b) => {
-                if (sortBy === 'score') return b.score - a.score;
-                if (sortBy === 'name') return a.name.localeCompare(b.name);
-                if (sortBy === 'pipeline') return b.pipelineValue - a.pipelineValue;
-                return 0;
-            });
-            
-            filteredAccounts = filtered;
-            renderOpportunities();
-            updateMetrics();
-        }
-
         function updateMetrics() {
             const displayedAccounts = filteredAccounts.length > 0 ? filteredAccounts : Object.values(accounts);
             
@@ -1212,12 +1185,9 @@
             
             // Set up first account as selected
             const firstAccount = Object.values(accounts)[0];
-            updateAccountDetails(firstAccount);
-            
-            // Add event listeners for filters
-            document.getElementById('searchBox').addEventListener('input', filterAndSortAccounts);
-            document.getElementById('scoreFilter').addEventListener('change', filterAndSortAccounts);
-            document.getElementById('sortFilter').addEventListener('change', filterAndSortAccounts);
+            if (firstAccount) {
+                updateAccountDetails(firstAccount);
+            }
         });
     </script>
 </body>
